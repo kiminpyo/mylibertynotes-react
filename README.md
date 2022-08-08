@@ -31,20 +31,16 @@
 # 세부정보
 ---
 
-###메인
-
+### 메인
 <img src="https://user-images.githubusercontent.com/93189402/183475935-37bb5dc4-2c29-4b09-ace0-b6e26fc41672.gif" style="width: 300px"/>
 
-###해방(글쓰기)
-
+### 해방(글쓰기)
 <img src="https://user-images.githubusercontent.com/93189402/183476508-7f405580-17f4-4f4f-9193-1d2bd8654b91.gif" style="width: 300px"/>
 
-###인트로
-
+### 인트로
 <img src="https://user-images.githubusercontent.com/93189402/183476550-1f650ba9-fad2-40e9-abf0-4573af615fab.gif" style="width: 300px"/>
 
-###명대사모음(crawling)
-
+### 명대사모음(crawling)
 <img src="https://user-images.githubusercontent.com/93189402/183476581-1d1d2d67-2808-4577-9b63-f6cae1f50b3f.gif" style="width: 300px"/>
 
 **컨텐츠**
