@@ -30,6 +30,8 @@
 ---
 # 세부정보
 ---
+
+###메인
 <img src="https://user-images.githubusercontent.com/93189402/183475935-37bb5dc4-2c29-4b09-ace0-b6e26fc41672.gif" style="width: 300px"/>
 
 
