@@ -1,8 +1,11 @@
 
 # 프로젝트 정보
 ---
+
 **Project Name: mylibertyNotes(나의 해방일지)**
+
 **project excution period: 2022.07.01 ~**
+
 **editor: vscode**
 
 ---
