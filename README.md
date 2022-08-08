@@ -6,6 +6,8 @@
 
 **site: <a href="https://myliberationnotes-c95d3.web.app/">나의 해방일지</a>** => serverless라 front의 구조만 살펴볼 수 있습니다.
 
+**project excution period: 2022.07.10~2022.08.09 (현재 진행 중)**
+
 **editor: vscode**
 
 ---
