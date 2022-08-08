@@ -1,0 +1,447 @@
+* {
+    font-family: "Stylish", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.App {
+    width: 100%;
+    overflow: hidden;
+}
+.head-container {
+    color: black;
+    z-index: 2;
+    background: rgb(194, 156, 219);
+    background: linear-gradient(
+        90deg,
+        rgba(194, 156, 219, 1) 0%,
+        rgba(111, 91, 120, 1) 26%,
+        rgba(17, 16, 17, 1) 63%
+    );
+}
+.head-navbar > div > a {
+    color: black;
+}
+.head-navbar > div {
+    color: black;
+    margin-left: 30px;
+    text-align: center;
+}
+.head-navbar #intro-content-wrap {
+    border-radius: 20px;
+}
+.intro-content {
+    background-color: rgba(240, 240, 204, 0.219);
+    border-radius: 20px;
+}
+.intro-content:hover {
+    transition: transform 0.2s linear;
+    transform: translate3d(-3px, -3px, 2px);
+}
+#backToTop {
+    background-color: rgb(12, 12, 12);
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    /* border-radius를 width와 heigth의 중간값으로 하면 원이된다*/
+    border-radius: 20px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition-property: background-color, opacity, visibility;
+    transition-duration: 0.3s, 0.5s, 0.5s;
+    opacity: 0;
+}
+#backToTop::after {
+    content: "\f077";
+    font-family: FontAwesome;
+    font-size: 1.5rem;
+    /* line-height는 height값으로 쓰면 중앙으로 된다. */
+    line-height: 40px;
+    color: rgb(167, 159, 159);
+}
+#backToTop.show {
+    opacity: 1;
+    background-color: rgba(167, 81, 127, 0.384);
+}
+
+.random {
+    margin-top: 20px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.moving-banner {
+    width: 10%;
+    height: 30px;
+    position: absolute;
+}
+.popper {
+    color: red;
+}
+
+/* main */
+
+.main-wrapper {
+    width: 500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 90px;
+}
+.main-content {
+    width: 80%;
+    height: 80%;
+    border: 50px solid rgba(0, 0, 0, 0.911);
+    border-top-color: rgba(121, 77, 162, 0.664);
+    border-radius: 50%;
+    animation: spinner 6s infinite;
+    animation-timing-function: linear;
+}
+.main-text-wrap {
+    position: absolute;
+    margin-left: 130px;
+    margin-top: 150px;
+    z-index: 999;
+}
+.main-text-header {
+    font-size: 3rem;
+    font-weight: bold;
+}
+.main-text {
+    text-align: center;
+}
+.main-text-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-text-picture > * {
+    font-size: 4rem;
+    margin: 4%;
+}
+.heart {
+    font-size: 3rem;
+    color: rgba(231, 93, 93, 0.87);
+    animation: swing 3s infinite;
+    animation-timing-function: linear;
+}
+
+.heart::after {
+    color: black;
+}
+.arrow-left {
+    line-height: 2;
+    font-size: 2rem;
+    color: black;
+    animation: goleft 1s infinite;
+}
+.arrow-right {
+    line-height: 2;
+    font-size: 2rem;
+    color: black;
+    animation: goright 1s infinite;
+}
+.main-text-content {
+    margin-top: 40px;
+    font-size: 1.3rem;
+    visibility: hidden;
+}
+.go-board {
+    animation: godown 2s infinite;
+}
+
+/* 해방 create 페이지 */
+
+.liberty-date {
+    margin-top: 100px;
+    text-align: center;
+    font-size: 3rem;
+}
+.liberty-hashtag {
+    padding: 10px;
+}
+.liberty-hashtag > div > input {
+    border: 2px;
+    border-style: inset;
+}
+.liberty-rating {
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+textarea {
+    font-family: "Nanum Pen Script";
+    font-size: 1rem;
+
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 200px;
+    resize: vertical;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #ececec;
+
+    padding: 20px;
+}
+/* 만든 태그 */
+.hashtag {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 5px;
+}
+/* 푸터 */
+.footer-wrapper {
+    text-align: center;
+    margin-top: 200px;
+    height: 200px;
+}
+
+.footer-icon {
+    display: flex;
+    justify-content: center;
+}
+.footer-icon > div {
+    padding: 10px;
+}
+
+.footer-logo {
+    padding-top: 20px;
+    font-size: 15px;
+}
+.footer-border {
+    margin-top: -130px;
+    width: 20%;
+    /* 박스 중앙정렬 */
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+}
+#hashtagArr {
+    flex-wrap: wrap;
+}
+
+/* 혼자해방 리스트페이지 */
+.addPost {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    bottom: 30px;
+    left: 30px;
+    background-color: black;
+    border-radius: 50%;
+    text-align: center;
+}
+.addPost::after {
+    content: "\2b";
+    font-family: FontAwesome;
+    font-size: 1.5rem;
+    /* line-height는 height값으로 쓰면 중앙으로 된다. */
+    line-height: 40px;
+    color: rgb(212, 203, 203);
+}
+/*  혼재해방 리스트 아이템 */
+.liberty-item-wrapper {
+    width: 22%;
+    margin: auto;
+}
+.liberty-item-content-wrap {
+    margin: auto;
+    margin-top: 50px;
+    width: 100%;
+    height: 180px;
+    opacity: 0.8;
+    border-radius: 20px;
+    background-color: rgba(63, 9, 63, 0.795);
+    box-shadow: 10px 0px 0px rgb(68, 35, 68);
+}
+.liberty-item-content {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+.liberty-item-rating {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+.liberty-item-tail {
+    margin-left: 50%;
+    width: 0px;
+    height: 0px;
+    opacity: 0.8;
+    box-shadow: 5px 0px 0px rgb(68, 35, 68);
+    border-top: 30px solid rgba(63, 9, 63, 0.795);
+    border-bottom: 0px solid yellow;
+    border-left: 30px solid transparent;
+    border-right: 0px solid white;
+}
+
+@media screen and (max-width: 768px) {
+    /* 메인 */
+    .main-wrapper {
+        width: 450px;
+        height: 450px;
+    }
+
+    .main-text-wrap {
+        margin-top: 100px;
+        margin-left: 140px;
+    }
+    .main-text {
+        text-align: center;
+    }
+    .main-text-header {
+        font-size: 2rem;
+    }
+    .main-text-content {
+        text-align: center;
+    }
+    .main-content {
+        width: 80%;
+        height: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 30px solid rgba(0, 0, 0, 0.911);
+        border-top-color: rgba(121, 77, 162, 0.664);
+        border-left-color: rgba(121, 77, 162, 0.664);
+        border-radius: 50%;
+        animation: spinner 12s infinite;
+        animation-timing-function: linear;
+    }
+    /* 소개글 */
+
+    /* 혼자해방리스트 */
+    .liberty-item-wrapper {
+        width: 45%;
+        margin: auto;
+    }
+}
+@media screen and (max-width: 480px) {
+    /* 소개글 */
+
+    /* 메인 */
+
+    .main-wrapper {
+        width: 350px;
+        height: 350px;
+        margin-top: 90px;
+    }
+    .main-content {
+        width: 80%;
+        height: 80%;
+
+        border: 30px solid rgba(0, 0, 0, 0.911);
+        border-top-color: rgba(121, 77, 162, 0.664);
+        border-left-color: rgba(121, 77, 162, 0.664);
+        border-radius: 50%;
+        animation: spinner 6s infinite;
+        animation-timing-function: linear;
+    }
+    .main-text {
+        text-align: center;
+    }
+    .main-text-wrap {
+        position: absolute;
+        z-index: 999;
+        margin-left: 100px;
+    }
+    .main-text-header {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .main-text-picture {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-text-picture > * {
+        font-size: 4rem;
+    }
+    .heart {
+        font-size: 3rem;
+        color: red;
+    }
+    .arrow-left {
+        line-height: 2;
+        font-size: 1.5rem;
+        color: black;
+        animation: goleft 1s infinite;
+    }
+    .arrow-right {
+        line-height: 2;
+        font-size: 1.5rem;
+        color: black;
+        animation: goright 1s infinite;
+    }
+    .main-text-content {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 1.3rem;
+
+        visibility: hidden;
+    }
+    /* 혼자해방리스트 */
+    .liberty-item-wrapper {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    /* 소개글 */
+
+    /* 앱헤더  */
+    .random {
+        font-size: 1rem;
+        color: white;
+    }
+    .head-navbar > div > a {
+        font-size: 0.8rem;
+    }
+    .head-right {
+        display: none;
+    }
+    /* 메인 */
+    .main-wrapper > div > a {
+        width: 220px;
+        height: 220px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .main-text-wrap {
+        margin-top: 60px;
+        margin-left: 55px;
+    }
+
+    .main-text {
+        font-size: 1rem;
+    }
+    .main-text-picture > i {
+        font-size: 1rem;
+    }
+    .main-text-content {
+        text-align: center;
+        font-size: 1rem;
+    }
+    .main-content {
+        width: 80%;
+        height: 80%;
+        border: 20px solid rgba(0, 0, 0, 0.911);
+        border-top-color: rgba(121, 77, 162, 0.664);
+        border-left-color: rgba(121, 77, 162, 0.664);
+        border-radius: 50%;
+        animation: spinner 12s infinite;
+        animation-timing-function: linear;
+    }
+    /* 혼자해방리스트 */
+    .liberty-item-wrapper {
+        width: 80%;
+        margin: auto;
+    }
+}

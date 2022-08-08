@@ -1,0 +1,81 @@
+#intro-content-wrap {
+    animation-name: fadeIn;
+    animation-duration: 4s;
+}
+.moving-banner-wrapper {
+    background-color: black;
+    border-radius: 30px;
+}
+/* .moving-banner {
+    animation-name: movingBanner;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+} */
+@keyframes movingBanner {
+    from {
+        transform: translateX(-50px);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes godown {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(10px);
+    }
+}
+@keyframes goleft {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(-10px);
+    }
+}
+@keyframes goright {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(10px);
+    }
+}
+@keyframes swing {
+    from {
+        font-size: 3rem;
+    }
+    to {
+        font-size: 3.3rem;
+    }
+}
