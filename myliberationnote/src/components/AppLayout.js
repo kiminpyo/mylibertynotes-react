@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import mainImg from "../img/mainImg.png";
-import { Col, Row } from "antd";
+
 import Random from "./Random";
 import Time from "./Time";
+import { useDispatch, useSelector } from "react-redux";
+import { LOG_OUT } from "../reducers/user";
 const AppLayout = () => {
     let i = 0;
+    const dispatch = useDispatch();
+    const { userInfo } = useSelector((state) => state.user);
+    const navigate = useNavigate();
+
     useEffect(() => {
         const banner = document.getElementById("movingBanner");
 
@@ -112,14 +118,44 @@ const AppLayout = () => {
                         marginBottom: "6px",
                         fontSize: "1.4rem",
                     }}>
+                    {userInfo ? (
+                        <div>
+                            {" "}
+                            <Link
+                                to='/'
+                                onClick={() => {
+                                    alert(`반가웠어요. ${userInfo.email}님`);
+                                    dispatch({
+                                        type: LOG_OUT,
+                                    });
+                                }}>
+                                로그아웃
+                            </Link>{" "}
+                        </div>
+                    ) : (
+                        <div>
+                            {" "}
+                            <Link to='/login'>로그인</Link>{" "}
+                        </div>
+                    )}
+
                     <div>
                         <Link to='/intro'>소개</Link>
                     </div>
+                    {/* <div>
+                        <Link to='/liberty'>혼자해방</Link>
+                    </div> */}
                     <div>
-                        <Link to='/liberty'>해방</Link>
-                    </div>
-                    <div>
-                        <Link to='/libertySelf'>혼자해방</Link>
+                        <div
+                            onClick={() => {
+                                if (!userInfo) {
+                                    alert("로그인 이후에 접속이 가능해요");
+                                } else {
+                                    navigate("/libertyself");
+                                }
+                            }}>
+                            해방
+                        </div>
                     </div>
                     <div>
                         <Link to='/scripts'>테스트</Link>

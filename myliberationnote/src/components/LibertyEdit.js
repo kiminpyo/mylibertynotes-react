@@ -31,6 +31,7 @@ const LibertyEdit = () => {
             rating,
             content,
         };
+      window.localStorage.setItem('libertyself', {rating: rating, content: content})
     };
     const onChange = (e) => {
         const nextValue = {

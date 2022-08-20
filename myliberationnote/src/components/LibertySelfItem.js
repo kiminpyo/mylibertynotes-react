@@ -6,6 +6,7 @@ import { Rating } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useNavigate, useParams } from "react-router-dom";
 
 const LibertySelfItem = (item) => {
     const StyledRating = styled(Rating)({
@@ -14,9 +15,18 @@ const LibertySelfItem = (item) => {
         },
     });
 
+    const a = item.item.User;
+    // const writer= Object.values(a)[0];
+    // console.log(writer)
+    const navigate = useNavigate();
+    const onLibertyDetail = () => {
+        navigate(`/libertyself/${item.item.id}`);
+    };
     return (
         <div className='liberty-item-wrapper'>
-            <div className='liberty-item-content-wrap'>
+            <div
+                className='liberty-item-content-wrap'
+                onClick={onLibertyDetail}>
                 <div className='liberty-item-rating'>
                     <StyledRating
                         disabled
@@ -28,6 +38,7 @@ const LibertySelfItem = (item) => {
                         emptyIcon={<FavoriteBorderIcon />}
                     />
                 </div>
+                {/* <div className="liberty-item-writer">{writer? writer : null}</div> */}
                 <div className='liberty-item-content'>{item.item.content}</div>
                 <div className='liberty-item-date'>{item.item.createdAt}</div>
             </div>

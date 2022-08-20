@@ -5,6 +5,7 @@ import LibertySelfItem from "../components/LibertySelfItem";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS } from "../reducers/post";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LibertySelf = () => {
     const dispatch = useDispatch();

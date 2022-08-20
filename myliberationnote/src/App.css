@@ -153,7 +153,11 @@
 }
 
 /* 해방 create 페이지 */
-
+.liberty-wrapper {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
 .liberty-date {
     margin-top: 100px;
     text-align: center;
@@ -172,21 +176,6 @@
     justify-content: space-around;
 }
 
-textarea {
-    font-family: "Nanum Pen Script";
-    font-size: 1rem;
-
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 200px;
-    resize: vertical;
-
-    border: none;
-    border-radius: 5px;
-    background-color: #ececec;
-
-    padding: 20px;
-}
 /* 만든 태그 */
 .hashtag {
     background-color: black;
@@ -259,6 +248,21 @@ textarea {
     border-radius: 20px;
     background-color: rgba(63, 9, 63, 0.795);
     box-shadow: 10px 0px 0px rgb(68, 35, 68);
+}
+.liberty-textarea {
+    font-family: "Nanum Pen Script";
+    font-size: 1rem;
+
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 200px;
+    resize: vertical;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #ececec;
+
+    padding: 20px;
 }
 .liberty-item-content {
     width: 100%;

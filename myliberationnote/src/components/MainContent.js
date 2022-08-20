@@ -1,9 +1,12 @@
 import { Grid } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const MainContent = () => {
+    const {userInfo} = useSelector((state) => state.user)
     const onClickNegative = () => {
+        
         const mainTextContent = document.querySelector("div.main-text-content");
         mainTextContent.style.visibility = "visible";
         const mainTextPicture = document.querySelectorAll(
@@ -36,7 +39,14 @@ const MainContent = () => {
                             <br />
                             <br />
                             <button>
-                                <Link to='/liberty'>가기</Link>
+                            <Link to={userInfo ? '/libertyself' : '/' } onClick={()=>{
+                          
+                          if(!userInfo){
+                           alert('로그인 이후에 접속이 가능해요')
+                          }
+                      
+                     
+                   }}>가기</Link>
                             </button>
                         </div>
                     </div>

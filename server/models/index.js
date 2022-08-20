@@ -3,6 +3,7 @@ const Sequelize = require("sequelize");
 const post = require("./post");
 const user = require("./user");
 const hashtag = require("./hashtag");
+
 /* 업데이트 */
 /*  const comment  = require('./comment') */
 const env = process.env.NODE_ENV || "development";

@@ -3,11 +3,11 @@ import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Rating } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addPost } from "../reducers/post";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost, EDIT_POST, LOAD_POST_DETAIL } from "../reducers/post";
 import axios from "axios";
-import { Grid } from "antd";
+
 const LibertySelfEdit = () => {
     const StyledRating = styled(Rating)({
         "& .MuiRating-iconFilled": {
@@ -18,27 +18,44 @@ const LibertySelfEdit = () => {
         },
     });
 
+    const userEmail = localStorage.getItem("email");
+    const { state } = useLocation();
+    console.log(userEmail);
     const [hashtag, setHashtag] = useState([]);
     const [value, setValue] = useState({
-        rating: 0,
-        content: "",
+        rating: state?.previousrating || 0,
+        content: state?.previouscontent || "",
     });
+
     const contentRef = useRef();
     const { rating, content } = value;
     const today = new Date().toISOString().slice(0, 10);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    // console.log(previouscontent,previoustrating)
     // 해시태그 생성
     const input = document.getElementsByClassName("input");
     const hashtagInput = document.getElementById("hashtagInput");
     const div = document.createElement("div");
     const divLength = document.querySelectorAll("div.hashtag").length;
     div.setAttribute("class", "hashtag");
+    const localEmail = localStorage.getItem("email");
 
     const onClick = useCallback(() => {
-        dispatch(addPost({ content: content, rating: rating }));
-        navigate("/libertySelf");
+        if (state?.id) {
+            dispatch({
+                type: EDIT_POST,
+                data: {
+                    content: content,
+                    rating: rating,
+                    id: state.id,
+                },
+            });
+        } else {
+            dispatch(addPost({ content: content, rating: rating }));
+        }
+
+        navigate("/libertyself");
     }, [rating, content]);
 
     const onChange = (e) => {
@@ -122,6 +139,7 @@ const LibertySelfEdit = () => {
 
             <section className='content'>
                 <textarea
+                    className='liberty-textarea'
                     name='content'
                     ref={contentRef}
                     value={content}
@@ -145,6 +163,7 @@ const LibertySelfEdit = () => {
                         }}>
                         글쓰기
                     </button>
+
                     <button
                         onClick={() => {
                             navigate(-1);
