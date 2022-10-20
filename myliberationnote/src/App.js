@@ -14,22 +14,18 @@ import LibertySelfEdit from "./components/LibertySelfEdit";
 import LibertySelfDetail from "./components/LibertySelfDetail";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import { CookiesProvider } from "react-cookie";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { LOAD_ME } from "./reducers/user";
 function App() {
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch({
-            type: LOAD_ME,
-        });
-    }, []);
-    const { userInfo } = useSelector((state) => state.user);
+  
+
 
     return (
         <div className='App'>
-            <CookiesProvider>
+  
                 <BrowserRouter>
                     <ScrollRestoration />
                     <AppLayout />
@@ -55,7 +51,7 @@ function App() {
                     </Routes>
                     <Footer />
                 </BrowserRouter>
-            </CookiesProvider>
+           
         </div>
     );
 }

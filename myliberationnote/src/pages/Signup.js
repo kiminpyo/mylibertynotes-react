@@ -109,6 +109,11 @@ const Signup = () => {
                                     Forgot password?
                                 </Link>
                             </Grid>
+                            <Grid item>
+                                <Link href='/login' variant='body2'>
+                                    {"back to login"}
+                                </Link>
+                            </Grid>
                         </Grid>
                     </Box>
                 </Box>
