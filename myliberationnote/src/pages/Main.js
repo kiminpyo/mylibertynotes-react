@@ -1,7 +1,6 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
-import AppLayout from "../components/AppLayout";
 import MainContent from "../components/MainContent";
+import Auth from "../HOC/auth";
 
 const Main = () => {
     return (
@@ -11,4 +10,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default Auth(Main);

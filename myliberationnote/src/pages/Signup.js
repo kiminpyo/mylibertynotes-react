@@ -25,29 +25,20 @@ const Signup = () => {
     const onChangePassword = (e) => {
         setPassword(e.target.value);
     };
-
-    const onSignup = () => {
-        console.log(email, password);
-        dispatch({
-            type: SIGNUP,
-            data: { email: email, password: password },
-        });
-    };
-
     const theme = createTheme();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
+        dispatch({
+            type: SIGNUP,
+            data: { email: data.get("email"), password: data.get("password") },
         });
     };
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component='main' maxWidth='xs'>
+            <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
                     sx={{
@@ -59,58 +50,57 @@ const Signup = () => {
                     <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component='h1' variant='h5'>
+                    <Typography component="h1" variant="h5">
                         Sign Up
                     </Typography>
                     <Box
-                        component='form'
+                        component="form"
                         onSubmit={handleSubmit}
                         noValidate
                         sx={{ mt: 1 }}>
                         <TextField
-                            margin='normal'
+                            margin="normal"
                             required
                             fullWidth
-                            id='email'
-                            label='Email Address'
-                            name='email'
-                            autoComplete='email'
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
                             autoFocus
                             onChange={onChangeEmail}
                         />
                         <TextField
-                            margin='normal'
+                            margin="normal"
                             required
                             fullWidth
-                            name='password'
-                            label='Password'
-                            type='password'
-                            id='password'
-                            autoComplete='current-password'
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
                             onChange={onChangePassword}
                         />
                         <FormControlLabel
                             control={
-                                <Checkbox value='remember' color='primary' />
+                                <Checkbox value="remember" color="primary" />
                             }
-                            label='Remember me'
+                            label="Remember me"
                         />
                         <Button
-                            onClick={onSignup}
-                            type='submit'
+                            type="submit"
                             fullWidth
-                            variant='contained'
+                            variant="contained"
                             sx={{ mt: 3, mb: 2 }}>
                             Sign Up
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href='#' variant='body2'>
+                                <Link href="#" variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href='/login' variant='body2'>
+                                <Link href="/login" variant="body2">
                                     {"back to login"}
                                 </Link>
                             </Grid>

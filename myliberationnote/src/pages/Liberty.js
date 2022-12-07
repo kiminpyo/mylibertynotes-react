@@ -1,25 +1,44 @@
-import React from "react";
-import LibertyEdit from "../components/LibertyEdit";
-import { Grid } from "@mui/material";
-import { useSelector } from "react-redux";
-const Liberty = () => {
-    const {userInfo} = useSelector((state)=> state.user)
+import React, { useEffect } from "react";
+
+import LibertySelfItem from "../components/LibertyItem";
+import { useDispatch, useSelector } from "react-redux";
+import { LOAD_POSTS } from "../reducers/post";
+import { useNavigate } from "react-router-dom";
+import Auth from "../HOC/auth";
+
+const LibertySelf = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { posts } = useSelector((state) => state.post);
+
+    useEffect(() => {
+        dispatch({
+            type: LOAD_POSTS,
+        });
+    }, []);
+
+    const onCreateSelf = () => {
+        navigate("/libertyedit");
+    };
     return (
         <>
-        {userInfo 
-        ?   <Grid container>
-                <Grid item xs={1} md={3}></Grid>
-                <Grid item xs={10} md={6}>
-                    <LibertyEdit />
-                </Grid>
-                <Grid item xs={1} md={3}></Grid>
-            </Grid>
-        :
-       null
-             }
-          
+            <div
+                style={{
+                    margin: "auto",
+                    width: " 80%",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    marginTop: "100px",
+                }}>
+                {posts &&
+                    posts.map((item, i) => (
+                        <LibertySelfItem item={item} key={i} />
+                    ))}
+            </div>
+
+            <div className="addPost" onClick={onCreateSelf}></div>
         </>
     );
 };
 
-export default Liberty;
+export default Auth(LibertySelf, true);

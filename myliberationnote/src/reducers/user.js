@@ -1,8 +1,4 @@
-import { ActionTypes } from "@mui/base";
-
-export const initialState = {
-    userInfo: null,
-};
+export const initialState = {};
 
 export const LOGIN = "LOGIN";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

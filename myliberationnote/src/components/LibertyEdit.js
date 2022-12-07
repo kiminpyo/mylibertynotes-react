@@ -1,61 +1,88 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Rating } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addPost } from "../reducers/post";
-const StyledRating = styled(Rating)({
-    "& .MuiRating-iconFilled": {
-        color: "#ff6d75",
-    },
-    "& .MuiRating-iconHover": {
-        color: "#ff3d47",
-    },
-});
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost, EDIT_POST, LOAD_POST_DETAIL } from "../reducers/post";
+import axios from "axios";
 
 const LibertyEdit = () => {
+    const StyledRating = styled(Rating)({
+        "& .MuiRating-iconFilled": {
+            color: "#ff6d75",
+        },
+        "& .MuiRating-iconHover": {
+            color: "#ff3d47",
+        },
+    });
+
+    const userEmail = localStorage.getItem("email");
+    const { state } = useLocation();
+    console.log(userEmail);
     const [hashtag, setHashtag] = useState([]);
     const [value, setValue] = useState({
-        rating: 0,
-        content: "",
+        rating: state?.previousrating || 0,
+        content: state?.previouscontent || "",
     });
+
     const contentRef = useRef();
     const { rating, content } = value;
     const today = new Date().toISOString().slice(0, 10);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const onClick = () => {
-        const data = {
-            rating,
-            content,
-        };
-      window.localStorage.setItem('libertyself', {rating: rating, content: content})
-    };
+    // console.log(previouscontent,previoustrating)
+    // 해시태그 생성
+    const input = document.getElementsByClassName("input");
+    const hashtagInput = document.getElementById("hashtagInput");
+    const div = document.createElement("div");
+    const divLength = document.querySelectorAll("div.hashtag").length;
+    div.setAttribute("class", "hashtag");
+
+    const onClick = useCallback(() => {
+        if (state?.id) {
+            dispatch({
+                type: EDIT_POST,
+                data: {
+                    content: content,
+                    rating: rating,
+                    id: state.id,
+                },
+            });
+        } else {
+            dispatch(addPost({ content: content, rating: rating }));
+        }
+
+        navigate("/liberty");
+    }, [rating, content]);
+
     const onChange = (e) => {
+        console.log(e);
         const nextValue = {
             ...value,
             [e.target.name]: e.target.value,
         };
         setValue(nextValue);
-        if (rating == 1) {
-            console.log("hi");
-        }
     };
-    const onEnterHashtag = (e) => {
-        const hashtagInput = document.getElementById("hashtagInput");
-        const div = document.createElement("div");
-        const divLengh = document.querySelectorAll("div.hashtag").length;
 
+    const onClickHashtag = (e) => {
+        div.innerText = hashtag;
+        hashtagInput.before(div);
+        setHashtag([...hashtag, input[0].value]);
+
+        input[0].value = "";
+    };
+    console.log(hashtag);
+
+    const onEnterHashtag = (e) => {
         const removeHashtag = () => {
             div.remove();
             e.target.value = "";
         };
 
-        div.setAttribute("class", "hashtag");
         if (e.code === "Enter") {
-            if (divLengh >= 5) {
+            if (divLength >= 5) {
                 alert("개시글은 5개까지만!");
                 return;
             }
@@ -75,12 +102,12 @@ const LibertyEdit = () => {
     // window.localStorage.setItem("hashtag", JSON.stringify(hashtag));
 
     return (
-        <div className='liberty-wrapper'>
-            <section className='liberty-date'>{today}</section>
-            <section className='liberty-rating'>
+        <div className="liberty-wrapper">
+            <section className="liberty-date">{today}</section>
+            <section className="liberty-rating">
                 <StyledRating
                     style={{ marginLeft: "10px" }}
-                    name='rating'
+                    name="rating"
                     precision={0.5}
                     value={rating}
                     onChange={onChange}
@@ -89,24 +116,30 @@ const LibertyEdit = () => {
                 />
             </section>
             <section>
-                <div className='liberty-hashtag'>
+                <div className="liberty-hashtag">
                     <div
-                        style={{ display: "flex", alignItems: "center" }}
-                        id='hashtagArr'>
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                        id="hashtagArr">
                         <div>태그: &nbsp; </div>
                         <input
-                            placeholder='입력 후 Enter'
-                            type='text'
-                            id='hashtagInput'
+                            className="input"
+                            placeholder="입력 후 Enter"
+                            type="text"
+                            id="hashtagInput"
                             onKeyPress={onEnterHashtag}
                         />
+                        <button onClick={onClickHashtag}>입력</button>
                     </div>
                 </div>
             </section>
 
-            <section className='content'>
+            <section className="content">
                 <textarea
-                    name='content'
+                    className="liberty-textarea"
+                    name="content"
                     ref={contentRef}
                     value={content}
                     onChange={onChange}></textarea>
@@ -129,7 +162,11 @@ const LibertyEdit = () => {
                         }}>
                         글쓰기
                     </button>
+
                     <button
+                        onClick={() => {
+                            navigate(-1);
+                        }}
                         style={{
                             border: 0,
                             color: "black",

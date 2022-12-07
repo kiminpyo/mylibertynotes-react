@@ -1,7 +1,6 @@
 export const initialState = {
     posts: [],
     post: {},
-    user: "a",
     mypost: null,
 };
 

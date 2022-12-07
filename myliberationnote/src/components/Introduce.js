@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
 const Introduce = () => {
@@ -9,34 +10,9 @@ const Introduce = () => {
         }, 0);
     }, []);
     return (
-        <div
-            id='intro-content-wrap'
-            style={{
-                marginTop: "100px",
-                marginBottom: "300px",
-            }}>
-            <div
-                style={{
-                    textAlign: "center",
-                    fontSize: "4rem",
-                    fontWeight: "bold",
-                }}>
-                INTRO
-            </div>
-            <div
-                className='intro-content'
-                style={{
-                    overflowX: "auto",
-                    height: "300px",
-                    padding: "50px",
-                    margin: "auto",
-                    marginTop: "50px",
-                    fontSize: "1.2rem",
-                    lineHeight: "1.3",
-                    wordSpacing: "0.2rem",
-                    width: "70%",
-                    boxShadow: "60px 40px 15px 1px rgba(0, 0, 255, .2)",
-                }}>
+        <IntroContentWrap id="intro-content-wrap">
+            <IntroTitle>INTRO</IntroTitle>
+            <IntroContent className="intro-content">
                 살면서 마음이 정말로 편하고 좋았던 적이 얼마나 있었나? 항상
                 무언가 해야 한다는 생각에, 어떻게든 하루를 알차게 살아내야
                 한다는 강박에 시달리면서도, 몸은 움직여주지 않고, 상황은 뜻대로
@@ -60,9 +36,33 @@ const Introduce = () => {
                 무기력한 것 아닐까?
                 <br />
                 <div style={{ textAlign: "center" }}>-나의 해방일지 中-</div>
-            </div>
-        </div>
+            </IntroContent>
+        </IntroContentWrap>
     );
 };
 
 export default Introduce;
+
+const IntroContentWrap = styled.div`
+    margin-top: 100px;
+    margin-bottom: 300px;
+`;
+
+const IntroTitle = styled.div`
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+`;
+
+const IntroContent = styled.div`
+    overflow-x: auto;
+    height: 300px;
+    padding: 50px;
+    margin: auto;
+    margin-top: 50px;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    word-spacing: 0.2rem;
+    width: 70%;
+    box-shadow: 60px 40px 15px 1px rgba(0, 0, 255, 0.2);
+`;

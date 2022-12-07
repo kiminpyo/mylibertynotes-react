@@ -101,23 +101,6 @@ function* deletePost(action) {
     }
 }
 
-// function loadMyContentAPI(data){
-//     return axios.get(`/post/${data}`)
-// }
-
-// function* loadMyContent(action){
-//     try{
-//         const result = yield call(loadMyContentAPI,action.data)
-//         yield put({
-//             type: LOAD_MY_CONTENT_SUCCESS,
-//             data: result.data
-//         })
-//     }catch(err){
-//         console.error(err)
-
-//     }
-// }
-
 function* watchAddpost() {
     yield takeLatest(ADD_POST, addPost);
 }
@@ -129,10 +112,6 @@ function* watchLoadPosts() {
 function* watchLoadPostDetail() {
     yield takeLatest(LOAD_POST_DETAIL, loadPostDetail);
 }
-
-// function* watchLoadMyContent(){
-//     yield takeLatest(LOAD_MY_CONTENT, loadMyContent)
-// }
 
 function* watchEditPost() {
     yield takeLatest(EDIT_POST, editPost);
@@ -147,6 +126,5 @@ export default function* postSaga() {
     yield all([fork(watchLoadPosts)]);
     yield all([fork(watchLoadPostDetail)]);
     yield all([fork(watchEditPost)]);
-    // yield all([fork(watchLoadMyContent)])
     yield all([fork(watchDeletePost)]);
 }

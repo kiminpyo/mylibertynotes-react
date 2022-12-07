@@ -6,12 +6,7 @@
     background-color: black;
     border-radius: 30px;
 }
-/* .moving-banner {
-    animation-name: movingBanner;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-} */
+
 @keyframes movingBanner {
     from {
         transform: translateX(-50px);

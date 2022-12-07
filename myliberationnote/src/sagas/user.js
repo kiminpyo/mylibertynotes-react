@@ -20,13 +20,13 @@ function* userLogin(action) {
             type: LOGIN_SUCCESS,
             data: result.data,
         });
-        localStorage.setItem("email", result.data.email);
     } catch (error) {
         console.error(error);
     }
 }
 
 function userSignupAPI(data) {
+    console.log(data);
     return axios.post("/user/signup", data);
 }
 
@@ -39,7 +39,7 @@ function* userSignup(action) {
 }
 
 function userLoadMeAPI() {
-    return axios.get("/user/");
+    return axios.get("/user");
 }
 
 function* userLoadMe(action) {

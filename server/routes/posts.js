@@ -10,11 +10,10 @@ router.get("/", async (req, res, next) => {
             order: [["createdAt", "DESC"]],
             include: {
                 model: User,
-                attributes: ['email']
+                attributes: ["email"],
             },
-       
         });
-        console.log(posts);
+
         res.status(200).json(posts);
     } catch (error) {
         console.error(error);

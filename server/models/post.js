@@ -10,7 +10,7 @@ module.exports = class Post extends Model {
                     allowNull: false,
                 },
                 rating: {
-                    type: DataTypes.STRING(30),
+                    type: DataTypes.STRING(20),
                     allowNull: false,
                 },
             },

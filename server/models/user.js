@@ -9,7 +9,6 @@ module.exports = class User extends Model {
                 email: {
                     type: DataTypes.STRING(30), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
                     allowNull: false, // 필수
-                    unique: true, // 고유한 값
                 },
 
                 password: {
