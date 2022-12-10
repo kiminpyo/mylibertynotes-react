@@ -38,6 +38,11 @@ npm install
  npm start
 ```
 
+3. /server 폴더에서 
+```
+ npm run dev
+```
+
 ### 배포 링크
 
 [배포링크 바로가기](https://myliberationnotes-c95d3.web.app/liberty)
@@ -50,7 +55,8 @@ npm install
 <div markdown="1">
 
 ```
-
+🗂 server
+  ...
 🗂 src
  ┣ 📁 components
  	┣ AppLayout.js
