@@ -42,10 +42,6 @@ npm install
 ```
  npm run dev
 ```
-
-### 배포 링크
-
-[배포링크 바로가기](https://myliberationnotes-c95d3.web.app/liberty)
 <br/>
 
 ## 프로젝트 설명
