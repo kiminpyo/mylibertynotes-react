@@ -40,7 +40,7 @@ const MainContent = () => {
                             <br />
                             <button>
                                 <Link
-                                    to={userInfo ? "/libertyself" : "/"}
+                                    to={userInfo ? "/libertyedit" : "/"}
                                     onClick={() => {
                                         if (!userInfo) {
                                             alert(

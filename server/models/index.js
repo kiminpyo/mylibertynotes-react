@@ -7,15 +7,7 @@ const hashtag = require("./hashtag");
 /* 업데이트 */
 /*  const comment  = require('./comment') */
 const env = process.env.NODE_ENV || "development";
-/* config에는 
- "development": {
-    "username": "root",
-    "password": "",
-    "database": "react-nodebird",
-    "host": "127.0.0.1",
-    "port": "3306",
-    "dialect": "mysql"
-  },이 담긴다. 우선은 개발용이기 때문에 */
+
 const config = require("../config/config.js")[env];
 /* 이안에 db정보 다 담는다. */
 const db = {};
@@ -28,12 +20,6 @@ const sequelize = new Sequelize(
     config.password,
     config
 );
-/* 업데이트 */
-/* db.Comment = require('./comment')(sequelize,Sequelize)
-db.Hashtag = require('./hashtag')(sequelize,Sequelize);
-db.Image = require('./image')(sequelize,Sequelize);
-db.Post = require('./post')(sequelize,Sequelize);
-db.User = require('./user')(sequelize,Sequelize); */
 
 db.Post = post;
 db.User = user;

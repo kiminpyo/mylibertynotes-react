@@ -1,70 +1,168 @@
-# Getting Started with Create React App
+## 프로젝트 요약
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+- CRA로 만든 react(redux, redux-saga)와 express.js(sequelisze + mysql)를 이용한 나의 해방일지 사이트 입니다.
+- 나혼자만 볼 수 있는 로컬스토리지를 이용한 글쓰기와,
+-  로그인 시 사람들과 공유할 수 있는 글쓰기를 만들어,
+-   드라마 나의 해방일지와 같은 사람들의 애환을 나눌 수 있는 공간을 만들고 싶었습니다. 
+-   이 페이지에서는 본인의 감정만 쓸수있고, 댓글이나 공감은 할 수 없습니다.
+```
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### 🔧 기술 스택
 
-### `npm start`
+<div align=center> 
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"/> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>   
+    <img src="https://img.shields.io/badge/REDUX-764ABC?style=for-the-badge&logo=REDUX&logoColor=black"/>  
+    <img src="https://img.shields.io/badge/MUI-DB7093?style=for-the-badge&logo=MUI&logoColor=black"/>   
+ <img src="https://img.shields.io/badge/Redux_Saga-999999?style=for-the-badge&logo=Redux-Saga&logoColor=black"/>   
+  <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=black"/>   
+ 
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 💻 실행 방법
 
-### `npm test`
+1.  라이브러리를 설치합니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install
+```
 
-### `npm run build`
+2.  프로젝트를 실행합니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+ npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. /server 폴더에서 
+```
+ npm run dev
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 배포 링크
 
-### `npm run eject`
+[배포링크 바로가기](https://myliberationnotes-c95d3.web.app/liberty)
+<br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 프로젝트 설명
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<details>
+<summary>  📂 디렉토리 구조</summary>
+<div markdown="1">
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+🗂 server
+  ...
+🗂 src
+ ┣ 📁 components
+ 	┣ AppLayout.js
+    ┣ Footer.js
+    ┣ Introduce.js
+    ┣ LibertyDetail.js
+    ┣ LibertyEdit.js
+    ┣ LibertyItem.js
+    ┣ MainContent.js
+    ┣ Random.js
+    ┣ Script.js
+    ┣ Time.js
+    ┗ ScrollRestoration.js 
+ ┣ 📁 HOC
+    ┗ Auth.js
+ ┣ 📁 reducers
+    ┣ index.js
+    ┣ news.js
+    ┣ post.js
+    ┗ user.js    
+ ┣ 📁 sagas
+    ┣ index.js
+    ┣ post.js
+    ┗ user.js 
+ ┣ 📂 pages
+    ┣ intro.js
+    ┣ Liberty.js
+    ┣ Main.js
+    ┣ MyPage.js
+    ┣ Signup.js
+    ┗ Login.js
+ ┣ 📂 store
+   ┣ configureStore.js
+   ┗ dummyScript.js
+ ┣ 📂 utils
+   ┣ backToTop.js
+   ┗ scrollEvent.js
+ ┣ animation.css
+ ┣ App.js
+ ┣ App.css
+ ┣ index.js
+ 
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+</div>
+</details>
 
-## Learn More
+<details>
+<summary>🗔 클라이언트</summary>
+<div markdown="1">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+ -로그인 및 회원가입 
+클라이언트에서 HOC로 각 페이지 라우팅시에 로그인이 필요한 페이지인지 아닌지를 판단할 수 있게 권한을 옵션으로 설정했습니다.
+redux-thunk를 이용해 로그인/로그아웃/회원가입에 대한 상태관리를 했습니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-소개글 및 헤더 
+animation과 timer함수를 만들어 적절히 배치했습니다. 헤더쪽은 script를 더미 데이터로 만들어 렌더 시 랜덤으로 글이 나오게끔 구현했습니다.
 
-### Code Splitting
+-상태관리
+redux-saga와 redux를 이용해서 상태관리를 진행했습니다. 기능별로 상태를 분리했고, 로그인한 글에 대한 생성 및 수정, 삭제가 가능합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-기타
+페이지 이동 시, 헤더가 있는 위치로 이동하게끔 restoration 컴포넌트를 따로 만들었습니다. 
+마이페이지 접근 시, fullcalender라이브러리를 사용해 내가 이때까지 적은 정보에 대한 제목을 보여줍니다.
 
-### Analyzing the Bundle Size
+```
+</div>
+</details>
+<details>
+<summary>🗔 서버(express + sequelizeDB)</summary>
+<div markdown="1">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+-모델 생성
+게시글/유저/해시태그 총 3개의 모델을 생성해 sequlizeDB와 연동시켰습니다. 
+게시글에는 컨텐츠 내용/행복도 유저에는 이메일/패스워드, 해시태그는 해시태그에 대한 스키마를 생성했습니다.
 
-### Making a Progressive Web App
+- 로그인
+local-passport 전략을 사용해, 이메일과 패스워드를 받고, 유저의 정보를 확인합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- 미들웨어
+게시글을 작성하거나 유저가 로그인 한 상태인지 판별하기 위해 local-passport에서 받아온 정보로 유저를 판별 후,
+필요한 정보만을 보내줍니다.
 
-### Advanced Configuration
+- CRUD
+로그인 정보를 판별 후, api에 맞게 필요한 정보들을 보내줍니다. 
+```
+</div>
+</details>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 사용한 라이브러리 및 API, CDN 등
 
-### `npm run build` fails to minify
+- axios
+- react-router-dom
+- MUI
+- redux-saga
+- styled-components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+
+
+
+
+

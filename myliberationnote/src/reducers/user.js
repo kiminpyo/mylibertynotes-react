@@ -1,4 +1,6 @@
-export const initialState = {};
+export const initialState = {
+    userInfo: null,
+};
 
 export const LOGIN = "LOGIN";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

@@ -58,6 +58,17 @@ const AppLayout = () => {
                             }}>
                             해방
                         </div>
+                        <div
+                            onClick={() => {
+                                if (!userInfo) {
+                                    alert("로그인 이후에 접속이 가능해요");
+                                    return navigate("/login");
+                                } else {
+                                    navigate("/mypage");
+                                }
+                            }}>
+                            마이페이지
+                        </div>
                     </NavBarLeft>
                     <NavBarRight className="head-navbar-right">
                         {userInfo ? (

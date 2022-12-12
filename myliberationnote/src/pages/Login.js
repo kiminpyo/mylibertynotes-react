@@ -14,6 +14,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Auth from "../HOC/auth";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -110,15 +111,3 @@ const Login = () => {
 };
 
 export default Login;
-
-const LoginForm = styled.div`
-    width: 40%;
-    padding: 30px 0 60px 0;
-    margin: auto;
-    margin-top: 100px;
-    text-align: center;
-    background-color: purple;
-    > div {
-        padding: 1rem;
-    }
-`;
