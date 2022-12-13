@@ -70,6 +70,8 @@ a {
 }
 
 .random {
+    width: 40%;
+    margin: auto;
     margin-top: 20px;
     color: white;
     font-size: 1.2rem;
@@ -239,19 +241,25 @@ a {
 }
 /*  혼재해방 리스트 아이템 */
 .liberty-item-wrapper {
-    width: 22%;
+    width: 20rem;
     margin: auto;
 }
 .liberty-item-content-wrap {
     margin: auto;
-    margin-top: 50px;
-    width: 80%;
-    height: 300px;
+    margin-top: 100px;
+    width: 90%;
+    height: 250px;
+
     opacity: 0.8;
     border-radius: 20px;
     background-color: rgba(63, 9, 63, 0.795);
-    box-shadow: 10px 0px 0px rgb(68, 35, 68);
+    box-shadow: 15px 15px 0px rgb(68, 35, 68);
 }
+.liberty-item-content-wrap:hover {
+    animation: shaking 1s;
+    animation-fill-mode: both;
+}
+
 .liberty-textarea {
     font-family: "Nanum Pen Script";
     font-size: 1rem;
@@ -267,29 +275,15 @@ a {
 
     padding: 20px;
 }
-.liberty-item-content {
-    width: 100%;
-    margin: auto;
-    text-align: center;
-}
-.liberty-item-rating {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-}
-.liberty-item-tail {
-    margin-left: 50%;
-    width: 0px;
-    height: 0px;
-    opacity: 0.8;
-    box-shadow: 5px 0px 0px rgb(68, 35, 68);
-    border-top: 30px solid rgba(63, 9, 63, 0.795);
-    border-bottom: 0px solid yellow;
-    border-left: 30px solid transparent;
-    border-right: 0px solid white;
-}
-/* 뉴스페이지 */
 
+/* 뉴스페이지 */
+@media screen and (max-width: 1024px) {
+    /* 혼자해방리스트 */
+    .liberty-item-wrapper {
+        width: 20rem;
+        margin: auto;
+    }
+}
 @media screen and (max-width: 768px) {
     /* 메인 */
     .main-wrapper {
@@ -326,12 +320,21 @@ a {
 
     /* 혼자해방리스트 */
     .liberty-item-wrapper {
-        width: 45%;
+        width: 20rem;
         margin: auto;
     }
 }
 @media screen and (max-width: 480px) {
     /* 소개글 */
+
+    /* 헤더 */
+    .head-navbar-left {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+    .head-navbar-right > div {
+        display: none;
+    }
 
     /* 메인 */
 
@@ -394,6 +397,7 @@ a {
 
         visibility: hidden;
     }
+
     /* 혼자해방리스트 */
     .liberty-item-wrapper {
         width: 80%;
@@ -406,6 +410,7 @@ a {
 
     /* 앱헤더  */
     .random {
+        width: 80%;
         font-size: 1rem;
         color: white;
     }
@@ -448,8 +453,4 @@ a {
         animation-timing-function: linear;
     }
     /* 혼자해방리스트 */
-    .liberty-item-wrapper {
-        width: 80%;
-        margin: auto;
-    }
 }

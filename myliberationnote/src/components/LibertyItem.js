@@ -1,12 +1,10 @@
 import axios from "axios";
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Grid } from "@mui/material";
+import React from "react";
 import { Rating } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
 
 const LibertyItem = (item) => {
     const StyledRating = styled(Rating)({
@@ -24,7 +22,7 @@ const LibertyItem = (item) => {
             <div
                 className="liberty-item-content-wrap"
                 onClick={onLibertyDetail}>
-                <div className="liberty-item-rating">
+                <LibertyItemRating>
                     <StyledRating
                         disabled
                         style={{ marginLeft: "10px", opacity: "1" }}
@@ -34,14 +32,31 @@ const LibertyItem = (item) => {
                         icon={<FavoriteIcon />}
                         emptyIcon={<FavoriteBorderIcon />}
                     />
-                </div>
+                </LibertyItemRating>
 
-                <div className="liberty-item-content">{item.item.content}</div>
-                <div className="liberty-item-date">{item.item.createdAt}</div>
+                <LibertyItemContent className="liberty-item-content">
+                    {item.item.content}
+                </LibertyItemContent>
+                <LibertyItemDate>
+                    {item.item.createdAt.slice(0, 10)}
+                </LibertyItemDate>
             </div>
-            <div className="liberty-item-tail"></div>
         </div>
     );
 };
 
 export default LibertyItem;
+
+const LibertyItemRating = styled.div`
+    padding: 10px;
+    text-align: center;
+`;
+const LibertyItemContent = styled.div`
+    padding: 10px;
+    height: 150px;
+    text-align: start;
+`;
+const LibertyItemDate = styled.div`
+    padding: 10px;
+    text-align: end;
+`;

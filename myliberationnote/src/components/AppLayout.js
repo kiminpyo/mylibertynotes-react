@@ -90,9 +90,14 @@ const AppLayout = () => {
                                 <div onClick={logout}>로그아웃</div>
                             </>
                         ) : (
-                            <Link to="/login">로그인</Link>
+                            <div>
+                                <Link style={{ color: "white" }} to="/login">
+                                    로그인
+                                </Link>
+                            </div>
                         )}
                     </NavBarRight>
+                   
                 </NavBar>
 
                 <MovingBanner className="moving-banner-wrapper">

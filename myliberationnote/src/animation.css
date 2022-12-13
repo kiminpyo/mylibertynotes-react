@@ -74,3 +74,11 @@
         font-size: 3.3rem;
     }
 }
+@keyframes shaking {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(-10px, -10px);
+    }
+}
