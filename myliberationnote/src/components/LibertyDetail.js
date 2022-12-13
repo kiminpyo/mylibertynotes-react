@@ -130,7 +130,7 @@ const LibertyDetail = () => {
                         ) : null}
                         <button
                             onClick={() => {
-                                navigate("/libertyself");
+                                navigate("/liberty");
                             }}
                             style={{
                                 border: 0,

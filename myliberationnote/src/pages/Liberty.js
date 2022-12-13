@@ -41,4 +41,4 @@ const LibertySelf = () => {
     );
 };
 
-export default Auth(LibertySelf, true);
+export default Auth(LibertySelf);

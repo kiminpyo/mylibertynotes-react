@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import mainImg from "../img/mainImg.png";
 import Random from "./Random";
 import Time from "./Time";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LOG_OUT } from "../reducers/user";
 import Footer from "./Footer";
 import { scrollEvent } from "../utils/scrollEvent";
@@ -13,10 +13,8 @@ const AppLayout = () => {
     let i = 0;
     const { userInfo } = useSelector((state) => state.user);
     const navigate = useNavigate();
-    useEffect(() => {
-        const timer = setInterval(() => {}, 6000);
-        return () => clearInterval(timer);
-    }, [i]);
+    const dispatch = useDispatch();
+
     window.addEventListener(
         "scroll",
         (e) => {
@@ -24,20 +22,30 @@ const AppLayout = () => {
         },
         []
     );
-
+    const logout = () => {
+        if (window.confirm("로그아웃 하실래요?")) {
+            dispatch({
+                type: LOG_OUT,
+            });
+            return navigate("/");
+        } else {
+            return;
+        }
+    };
     return (
         <div>
             <div className="head-container" style={{ height: "250px" }}>
                 <HeadUpperSide>
-                    <MainLogo className="head-left">
-                        <Link to="/">
+                    {" "}
+                    <Link to="/">
+                        <MainLogo className="head-left">
                             <LogoImg src={mainImg} />
-                        </Link>
-                        <SubLogo>나의 해방일지</SubLogo>
-                    </MainLogo>
-                    <HeadRight className="head-right">
+                            <SubLogo>나의 해방일지</SubLogo>
+                        </MainLogo>
+                    </Link>
+                    <HeadRightDown className="head-right">
                         <Time />
-                    </HeadRight>
+                    </HeadRightDown>
                 </HeadUpperSide>
                 <HeadMidlleSide>
                     <Random />
@@ -72,7 +80,15 @@ const AppLayout = () => {
                     </NavBarLeft>
                     <NavBarRight className="head-navbar-right">
                         {userInfo ? (
-                            <div>로그아웃</div>
+                            <>
+                                {userInfo ? (
+                                    <div>
+                                        {userInfo.email + "님 반갑습니다"}
+                                    </div>
+                                ) : null}
+
+                                <div onClick={logout}>로그아웃</div>
+                            </>
                         ) : (
                             <Link to="/login">로그인</Link>
                         )}
@@ -124,6 +140,10 @@ const SubLogo = styled.div`
 `;
 
 const HeadRight = styled.div`
+    color: white;
+    padding: 20px;
+`;
+const HeadRightDown = styled.div`
     width: 95%;
     margin: 10px 0 10px 10px;
     text-align: end;
@@ -149,6 +169,11 @@ const NavBarLeft = styled.div`
 
 const NavBarRight = styled.div`
     color: white;
+    display: flex;
+    & > div {
+        padding-right: 30px;
+        font-size: 1rem;
+    }
 `;
 
 const MovingBanner = styled.div`

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 
 const Time = () => {
     const [now, setNow] = useState(new Date());
+
     // 시계
-    const date = useEffect(() => {
+
+    useEffect(() => {
+        const time = document.getElementById("time");
         const id = setInterval(() => {
-            const time = document.getElementById("time");
             if (window.scrollY < 250) {
                 time.style.display = "none";
             } else {
@@ -25,7 +27,7 @@ const Time = () => {
 
     return (
         <div
-            id='time'
+            id="time"
             style={{
                 fontSize: "1.2rem",
             }}>
