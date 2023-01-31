@@ -33,7 +33,9 @@ db.sequelize
     .catch(console.error);
 
 passportConfig();
-
+app.use(morgan("combined"));
+app.use(hpp());
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(
     cors({
         origin: ["http://localhost:3000"],
@@ -56,7 +58,7 @@ app.use(
             secure: false,
             domain:
                 process.env.NODE_ENV === "production" &&
-                "http://localhost:3000",
+                "http://http://34.197.130.106:3000/",
         },
     })
 );

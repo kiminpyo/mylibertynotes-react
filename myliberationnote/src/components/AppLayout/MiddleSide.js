@@ -1,5 +1,4 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Random from "../Random";
 import styled from "@emotion/styled";
 const MiddleSide = () => {
