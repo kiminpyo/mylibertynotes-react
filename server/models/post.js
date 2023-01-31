@@ -13,6 +13,15 @@ module.exports = class Post extends Model {
                     type: DataTypes.STRING(20),
                     allowNull: false,
                 },
+                drink: {
+                    type: DataTypes.STRING(20),
+                    allowNull: false,
+                },
+                smoke: {
+                    type: DataTypes.STRING(20),
+                    allowNull: false,
+                },
+              
             },
             {
                 modelName: "Post",
@@ -25,5 +34,6 @@ module.exports = class Post extends Model {
     }
     static associate(db) {
         db.Post.belongsTo(db.User); // post.addUser, post.getUser, post.setUser
+        db.Post.belongsToMany(db.Hashtag, { through: "PostHashtag" });
     }
 };

@@ -15,6 +15,8 @@ const helmet = require("helmet");
 const postsRouter = require("./routes/post");
 const UserRouter = require("./routes/user");
 const PostsRouter = require("./routes/posts");
+const HashtagRouter = require("./routes/hashtag");
+const OauthRouter = require("./routes/oauth");
 const passportConfig = require("./passport");
 const db = require("./models");
 
@@ -64,7 +66,8 @@ app.use(passport.session());
 app.use("/post", postsRouter);
 app.use("/user", UserRouter);
 app.use("/posts", PostsRouter);
-
+app.use("/hashtag", HashtagRouter);
+app.use("/oauth", OauthRouter);
 app.listen(80, () => {
     console.log("서버 실행 중!");
 });

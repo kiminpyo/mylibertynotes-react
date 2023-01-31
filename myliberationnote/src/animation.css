@@ -2,10 +2,7 @@
     animation-name: fadeIn;
     animation-duration: 4s;
 }
-.moving-banner-wrapper {
-    background-color: black;
-    border-radius: 30px;
-}
+
 
 @keyframes movingBanner {
     from {
@@ -25,14 +22,7 @@
     }
 }
 
-@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
+
 
 @keyframes spinner {
     from {
@@ -68,17 +58,25 @@
 }
 @keyframes swing {
     from {
-        font-size: 3rem;
+        font-size: 100px;
     }
     to {
-        font-size: 3.3rem;
+        font-size: 110px;
     }
 }
 @keyframes shaking {
     from {
-        transform: translate(0, 0);
+        border-radius: 30%;
     }
     to {
-        transform: translate(-10px, -10px);
+        border-radius: 20%;
+    }
+}
+@keyframes cursor {
+    from {
+        border-right: 3px solid rgb(0, 0, 0);
+    }
+    to {
+        border-right: 3px solid rgb(255, 255, 255);
     }
 }

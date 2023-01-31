@@ -1,40 +1,45 @@
+import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
 const Time = () => {
-    const [now, setNow] = useState(new Date());
-
-    // 시계
-
     useEffect(() => {
-        const time = document.getElementById("time");
-        const id = setInterval(() => {
-            if (window.scrollY < 250) {
-                time.style.display = "none";
-            } else {
-                time.style.display = "block";
-            }
-            setNow(new Date());
-        }, 1000);
+        console.log(document.body.clientWidth);
+        const timer = () => {
+            const time = document.getElementById("time");
+            const id = setInterval(() => {
+                console.log(window.scrollY);
+                // if (window.scrollY < 100) {
+                //     time.style.display = "none";
+                // } else {
+                //     time.style.display = "block";
+                // }
+            }, 1000);
+            return () => clearInterval(id);
+        };
 
-        return () => clearInterval(id);
-    }, [now]);
-    const today = new Date();
-    const todayEmpty = [
-        [24 - today.getHours()],
-        [60 - today.getMinutes()],
-        [60 - today.getSeconds()],
-    ];
+        timer();
+    }, []);
+    const TodayEmpty = () => {
+        const today = new Date();
+        const hours = [24 - today.getHours()] + "시";
+        const minutes = [60 - today.getMinutes()] + "분";
+        const seconds = [60 - today.getSeconds()] + "초";
+        return <>{hours + minutes + seconds}</>;
+    };
 
     return (
-        <div
-            id="time"
-            style={{
-                fontSize: "1.2rem",
-            }}>
-            <div style={{ fontSize: "0.6rem" }}>오늘 해방</div>
-            {todayEmpty[0]}시{todayEmpty[1]}분{todayEmpty[2]}초
-        </div>
+        <Timer id="time">
+            <div>오늘 해방</div>
+            <TodayEmpty />
+        </Timer>
     );
 };
 
 export default Time;
+
+const Timer = styled.div`
+    font-size: 1.2rem;
+    > div {
+        font-size: 0.8rem;
+    }
+`;

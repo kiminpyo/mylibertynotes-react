@@ -1,72 +1,74 @@
-import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
-import Script from "../components/Script";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_NEWS } from "../reducers/news";
 import Auth from "../HOC/auth";
-import FullCalendar from "@fullcalendar/react"; // must go before plugins
-import dayGridPlugin from "@fullcalendar/daygrid"; // a plugi
-
-
 
 import LibertyChart from "../components/LibertyChart";
+import { LOAD_ME } from "../reducers/user";
+import LibertyStatus from "../components/LibertyStatus";
+import LibertyCalendar from "../components/LibertyCalendar";
+import styled from "@emotion/styled";
 
 const MyPage = () => {
     const [options, setOptions] = useState("liberty-calender");
-    const { post, email } = useSelector((state) => ({
-        post: state.user.userInfo?.Posts,
-        email: state.user.userInfo?.email,
-    }));
-    const events = post?.map((item) => {
-        const date = item.createdAt.slice(0, 10);
-        const title = item.content;
-        const rating = Number(item.rating);
-        return { date, title, rating };
-    });
+    const dispatch = useDispatch();
 
-    const handleDateClick = (arg) => {
-        console.log(arg);
-    };
-    const handleDateSelect = (e) => {
-        console.log(e);
-    };
-    const renderEventContent = (e) => {
-        console.log(e);
-    };
-    const handleEvents = (e) => {
-        console.log(e);
-    };
+    const { posts, email } = useSelector((state) => ({
+        posts: state.user?.userInfo?.Posts,
+        email: state.user?.userInfo?.email,
+    }));
+    console.log(email);
+    const averating =
+        posts
+            ?.map((v) => v.rating)
+            .reduce((acc, cur) => {
+                return parseFloat(acc) + parseFloat(cur);
+            }) / posts?.length;
+    console.log(averating);
+    useEffect(() => {
+        dispatch({
+            type: LOAD_ME,
+        });
+    }, []);
+
+    const events = posts?.map((item) => {
+        const date = item?.createdAt?.slice(0, 10);
+        const title = item?.content?.slice(0, 10);
+        const rating = Number(item?.rating);
+        const drink = Number(item?.drink);
+        const smoke = Number(item?.smoke);
+        const id = item?.id;
+        const length = posts.length;
+        return { date, title, rating, drink, smoke, id, length };
+    });
 
     const onClickLibertyOption = (e) => {
         setOptions(e.target.value);
     };
-    console.log(options);
-
+    console.log(posts);
     return (
         <>
             <div style={{ width: "80%", marginLeft: "10%", marginTop: "5%" }}>
-                <div>{email}님의 기록</div>
-                <select
+                {email ? <div>{email}님의 기록</div> : undefined}
+                <MypageSelect
                     name="liberty-mypage-option"
                     onChange={onClickLibertyOption}>
-                    <option value="liberty-calender">달력보기</option>
-                    <option value="liberty-graph">그래프보기</option>
-                </select>
+                    <MypageOption value="liberty-calender">
+                        달력보기
+                    </MypageOption>
+                    <MypageOption value="liberty-graph">
+                        그래프보기
+                    </MypageOption>
+                </MypageSelect>
                 {options === "liberty-graph" ? (
-                    <LibertyChart events={events} />
+                    <>
+                        <LibertyStatus
+                            total={events.length}
+                            average={averating}
+                        />
+                        <LibertyChart events={events} />
+                    </>
                 ) : (
-                    <FullCalendar
-                        plugins={[dayGridPlugin]}
-                        events={events}
-                        eventClick={handleDateClick}
-                        editable={true}
-                        selectable={true}
-                        selectMirror={true}
-                        dayMaxEvents={true}
-                        select={handleDateSelect}
-                        eventContent={renderEventContent} // custom render function
-                        eventsSet={handleEvents}
-                    />
+                    <LibertyCalendar events={events} />
                 )}
             </div>
         </>
@@ -74,3 +76,12 @@ const MyPage = () => {
 };
 
 export default Auth(MyPage);
+
+const MypageSelect = styled.select`
+    margin: 10px 0 10px 0;
+    color: black;
+    padding: 2px;
+    border-radius: 10px;
+`;
+
+const MypageOption = styled.option``;

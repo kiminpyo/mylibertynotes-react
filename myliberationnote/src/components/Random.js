@@ -1,23 +1,43 @@
+import styled from "@emotion/styled";
 import { Tooltip } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useTyping } from "../hooks/useTyping";
+
 import { script } from "../store/dummyScript";
 const Random = React.memo(() => {
     const randonNum = Math.floor(
         Math.random() * script[script.length - 1].id + 1
     );
-    const navigate = useNavigate();
+    useTyping(script[randonNum].script, ".random", 60);
+
     return (
-        <Tooltip title="명대사 보러가기" arrow>
+        <Script>
+            <RandomText className="random" />
             <div
-                className="random"
-                id="random-wrapper"
-                onClick={() => navigate("/scripts")}>
-                {script[randonNum].script}
-                <div style={{ paddingTop: "5px" }}>-나의 해방일지 중-</div>
+                style={{
+                    paddingTop: "5px",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                }}>
+                -나의 해방일지 중-
             </div>
-        </Tooltip>
+        </Script>
     );
 });
 
 export default Random;
+
+const Script = styled.div`
+    width: 80%;
+    margin: auto;
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+`;
+
+const RandomText = styled.div`
+    font-size: 1.5rem;
+    @media screen and (max-width: 450px) {
+        font-size: 1rem;
+    }
+`;

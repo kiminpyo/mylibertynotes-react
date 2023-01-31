@@ -7,19 +7,20 @@ const { User, Post } = require("../models");
 
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
-router.get("/", async (req, res, next) => {
+router.get("/", isLoggedIn, async (req, res, next) => {
     try {
         if (req.user) {
-           
             const fullUserWithoutPassword = await User.findOne({
                 where: { id: req.user.id },
                 attributes: {
-                    exclude: ["password"],
+                    exclude: ["password", "token"],
                 },
                 include: [
                     {
+                        limit: 30,
+                        order: [["createdAt", "DESC"]],
                         model: Post,
-                        attributes: ["id", "content", "rating", "createdAt"],
+                        attributes: ["id", "content", "rating", "createdAt","drink","smoke"],
                     },
                 ],
             });
@@ -90,7 +91,6 @@ router.post("/signup", isNotLoggedIn, async (req, res, next) => {
 
 router.post("/logout", isLoggedIn, (req, res, next) => {
     res.redirect("/");
-    console.log(req.user);
     req.session.destroy();
     res.send("ok");
 });

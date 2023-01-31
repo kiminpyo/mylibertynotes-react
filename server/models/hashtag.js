@@ -5,14 +5,13 @@ module.exports = class Hashtag extends Model {
     static init(sequelize) {
         return super.init(
             {
-                hashtag: {
+                name: {
                     type: DataTypes.STRING(20),
-                    allowNull: false,
                 },
             },
             {
                 modelName: "Hashtag",
-                tableName: "hashtag",
+                tableName: "hashtags",
                 charset: "utf8mb4",
                 collate: "utf8mb4_general_ci",
                 sequelize,
@@ -20,6 +19,7 @@ module.exports = class Hashtag extends Model {
         );
     }
     static associate(db) {
-        db.Hashtag.belongsTo(db.User); // post.addUser, post.getUser, post.setUser
+        db.Hashtag.belongsToMany(db.Post, { through: "PostHashtag" });
+      
     }
 };

@@ -1,16 +1,20 @@
 import "./App.css";
 import "./animation.css";
+import "./fontAwesome.css";
 import { Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
-import AppLayout from "./components/AppLayout";
-import Liberty from "./pages/Liberty";
+
 import Intro from "./pages/Intro";
 import ScrollRestoration from "./components/ScrollRestoration";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import LibertyEdit from "./components/LibertyEdit";
-import LibertyDetail from "./components/LibertyDetail";
+import Liberty from "./pages/Liberty";
 import MyPage from "./pages/MyPage";
+import Search from "./pages/Search";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import LibertyDetail from "./components/LibertyDetail";
+import LibertyEdit from "./components/LibertyEdit";
+import AppLayout from "./components/AppLayout/AppLayout";
+
 function App() {
     return (
         <>
@@ -25,6 +29,7 @@ function App() {
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/libertyedit" element={<LibertyEdit />} />
                     <Route path="/liberty/:id" element={<LibertyDetail />} />
+                    <Route path="/liberty/search/:id" element={<Search />} />
                 </Route>
             </Routes>
         </>

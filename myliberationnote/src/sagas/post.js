@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import {
     ADD_POST,
+    ADD_POST_SUCCESS,
     DELETE_POST,
     DELETE_POST_SUCCESS,
     EDIT_POST,
@@ -30,19 +31,24 @@ function addPostAPI(data) {
 function* addPost(action) {
     try {
         const result = yield call(addPostAPI, action.data);
+
+        yield put({
+            type: ADD_POST_SUCCESS,
+            data: result.data,
+        });
     } catch (err) {
         console.error(err);
     }
 }
 
-function loadPostsAPI() {
-    /* req.body.content를 만든다 */
-    return axios.get("/post");
+function loadPostsAPI(lastId) {
+    return axios.get(`/post?lastId=${lastId || 0}`);
 }
 
 function* loadPosts(action) {
     try {
-        const result = yield call(loadPostsAPI, action.data);
+        const result = yield call(loadPostsAPI, action.data, action.lastId);
+
         yield put({
             type: LOAD_POSTS_SUCCESS,
             data: result.data,
@@ -52,14 +58,14 @@ function* loadPosts(action) {
     }
 }
 
-function loadPostDetailAPI(data) {
-    /* req.body.content를 만든다 */
-    return axios.get(`/post/${data}`);
+function loadPostDetailAPI(id) {
+    return axios.get(`/post/${id}`);
 }
 
 function* loadPostDetail(action) {
     try {
         const result = yield call(loadPostDetailAPI, action.data);
+
         yield put({
             type: LOAD_POST_DETAIL_SUCCESS,
             data: result.data,

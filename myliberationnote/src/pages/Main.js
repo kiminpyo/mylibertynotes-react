@@ -1,12 +1,13 @@
 import React from "react";
 import MainContent from "../components/MainContent";
 import Auth from "../HOC/auth";
-
+import MiddleSide from "../components/AppLayout/MiddleSide";
 const Main = () => {
     return (
-        <>
+        <div>
+            <MiddleSide />
             <MainContent />
-        </>
+        </div>
     );
 };
 

@@ -14,11 +14,12 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { SIGNUP } from "../reducers/user";
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
     };
@@ -26,7 +27,6 @@ const Signup = () => {
         setPassword(e.target.value);
     };
     const theme = createTheme();
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -34,6 +34,8 @@ const Signup = () => {
             type: SIGNUP,
             data: { email: data.get("email"), password: data.get("password") },
         });
+        alert("회원가입이 완료 되었습니다.");
+        navigate("/");
     };
 
     return (

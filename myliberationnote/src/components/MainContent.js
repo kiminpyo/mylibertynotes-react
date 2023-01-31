@@ -1,11 +1,8 @@
-import { Grid } from "@mui/material";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainContent = () => {
-    const { userInfo } = useSelector((state) => state.user);
     const onClickNegative = () => {
         const mainTextContent = document.querySelector("div.main-text-content");
         mainTextContent.style.visibility = "visible";
@@ -15,49 +12,104 @@ const MainContent = () => {
         mainTextPicture.forEach((v) => (v.style.animation = "none"));
         mainTextContent.style.animation = "fadeIn 2s";
     };
+    const navigate = useNavigate();
     return (
         <>
-            <div className="main-wrapper">
-                <div className="main-text-wrap">
-                    <div className="main-text">
-                        <div className="main-text-header">오늘 기분은요?</div>
-                        <div className="main-text-picture">
-                            <i
-                                onClick={onClickNegative}
-                                className="fa-solid fa-heart heart"></i>
-                            <i className="fa-solid fa-arrow-left arrow-left"></i>
-                            <i className="fa-solid fa-arrow-right arrow-right"></i>
-                            <i
-                                className="fa-solid fa-heart-crack heart"
-                                onClick={onClickNegative}></i>
-                        </div>
-                        <div className="main-text-content">
-                            괜찮으시다면, <br />
-                            저에게 들려주시겠어요?
-                            <br />
-                            <i className="fa-solid fa-circle-down go-board"></i>
-                            <br />
-                            <br />
-                            <button>
-                                <Link
-                                    to={userInfo ? "/libertyedit" : "/"}
-                                    onClick={() => {
-                                        if (!userInfo) {
-                                            alert(
-                                                "로그인 이후에 접속이 가능해요"
-                                            );
-                                        }
-                                    }}>
-                                    가기
-                                </Link>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="main-content"></div>
-            </div>
+            <MainTextWrap>
+                <MainTextHead>Today's feeling</MainTextHead>
+
+                <MainTextPicture onClick={onClickNegative}>
+                    <MainTextPictureSide>
+                        <Heart className="fa-solid fa-heart heart" />
+                    </MainTextPictureSide>
+                    <MainTextPictureSide>
+                        <Heart className="fa-solid fa-heart-crack heart" />
+                    </MainTextPictureSide>
+                </MainTextPicture>
+                <MainTextContent className="main-text-content">
+                    저에게 들려주시겠어요?
+                    <br />
+                    <GoBoradButton className="fa-solid fa-circle-down go-board" />
+                    <br />
+                    <MainContentButton
+                        onClick={() => {
+                            return navigate("/liberty");
+                        }}>
+                        가기
+                    </MainContentButton>
+                </MainTextContent>
+            </MainTextWrap>
         </>
     );
 };
 
 export default MainContent;
+
+const MainTextWrap = styled.div`
+    margin: auto;
+    height: 400px;
+    text-align: center;
+`;
+const MainTextHead = styled.div`
+    font-size: 2.5rem;
+    font-weight: bold;
+`;
+const CircleWrapper = styled.div`
+    width: 170px;
+    height: 170px;
+    border: 50px solid rgba(0, 0, 0, 0.911);
+    border-top-color: rgba(121, 77, 162, 0.664);
+    border-radius: 50%;
+    animation: spinner 20s infinite;
+    animation-timing-function: linear;
+`;
+const MainContentButton = styled.button`
+    margin-top: 10px;
+    background-color: black;
+    list-style: none;
+    border-radius: 10px;
+    color: white;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+`;
+
+const MainTextPicture = styled.div`
+    margin: auto;
+    margin-top: 1rem;
+    justify-content: center;
+    display: flex;
+    > div:hover {
+        opacity: 1;
+    }
+    & div:active {
+        opacity: 1;
+    }
+`;
+
+const MainTextContent = styled.div`
+    margin-top: 5vh;
+    font-size: 1.1rem;
+    visibility: hidden;
+`;
+
+const MainTextPictureSide = styled.div`
+    width: 150px;
+    padding: 10px 0 10px 0;
+    margin: 0 10px 0 10px;
+    background: rgba(121, 77, 162, 0.664);
+    border-radius: 40%;
+    opacity: 0.7;
+    animation: shaking 1s infinite;
+    animation-direction: alternate;
+`;
+
+const Heart = styled.i`
+    font-size: 3rem;
+    line-height: 3;
+    color: rgba(255, 0, 0, 0.87);
+`;
+
+const GoBoradButton = styled.div`
+    animation: godown 2s infinite;
+`;

@@ -1,184 +1,248 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { styled } from "@mui/material/styles";
+import React, { useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ADD_POST, EDIT_POST } from "../reducers/post";
+import Auth from "../HOC/auth";
+
+import styled from "@emotion/styled";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SportsBarIcon from "@mui/icons-material/SportsBar";
+import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
 import { Rating } from "@mui/material";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addPost, EDIT_POST, LOAD_POST_DETAIL } from "../reducers/post";
-import axios from "axios";
 
 const LibertyEdit = () => {
-    const StyledRating = styled(Rating)({
-        "& .MuiRating-iconFilled": {
-            color: "#ff6d75",
-        },
-        "& .MuiRating-iconHover": {
-            color: "#ff3d47",
-        },
-    });
-
-    const userEmail = localStorage.getItem("email");
-    const { state } = useLocation();
-    console.log(userEmail);
-    const [hashtag, setHashtag] = useState([]);
-    const [value, setValue] = useState({
-        rating: state?.previousrating || 0,
-        content: state?.previouscontent || "",
-    });
-
     const contentRef = useRef();
-    const { rating, content } = value;
-    const today = new Date().toISOString().slice(0, 10);
+    const { state } = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // console.log(previouscontent,previoustrating)
-    // 해시태그 생성
+    const [editRating, setEditRating] = useState(state?.rating || 0);
+    const [editDrink, setEditDrink] = useState(state?.rating || 0);
+    const [editSmoke, setEditSmoke] = useState(state?.rating || 0);
+    const [editContent, setEditContent] = useState(state?.content || "");
+    const [hashtag, setHashtag] = useState("");
+    const [emptyMessage, setEmptyMessage] = useState(false);
+    const today = new Date().toISOString().slice(0, 10);
     const input = document.getElementsByClassName("input");
-    const hashtagInput = document.getElementById("hashtagInput");
+    const hashtagListWrap = document.querySelector(".hashtag-list-wrap");
     const div = document.createElement("div");
-    const divLength = document.querySelectorAll("div.hashtag").length;
     div.setAttribute("class", "hashtag");
+    const divLength = document.querySelectorAll("div.hashtag").length;
+    const hashTagList = [];
+    console.log(editDrink, editSmoke);
+    const removeHashtag = (e) => {
+        div.remove();
+    };
+    div.addEventListener("click", removeHashtag);
+    const onClickSubmit = () => {
+        const hashTagArr = document.querySelectorAll(".hashtag");
+        for (let x of hashTagArr) {
+            hashTagList.push(x.innerText);
+        }
 
-    const onClick = useCallback(() => {
+        const data = {
+            content: editContent,
+            rating: editRating,
+            smoke: editSmoke,
+            drink: editDrink,
+            hashtag: hashTagList?.join(","),
+            id: state?.id,
+        };
         if (state?.id) {
             dispatch({
                 type: EDIT_POST,
-                data: {
-                    content: content,
-                    rating: rating,
-                    id: state.id,
-                },
+                data,
             });
         } else {
-            dispatch(addPost({ content: content, rating: rating }));
+            dispatch({
+                type: ADD_POST,
+                data,
+            });
         }
-
-        navigate("/liberty");
-    }, [rating, content]);
-
-    const onChange = (e) => {
-        console.log(e);
-        const nextValue = {
-            ...value,
-            [e.target.name]: e.target.value,
-        };
-        setValue(nextValue);
     };
-
-    const onClickHashtag = (e) => {
+    const onSaveHashtag = (e) => {
+        e.preventDefault();
+        if (divLength >= 3) {
+            alert("개시글은 3개까지만!");
+            return;
+        }
+        if (hashtag.match(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/gi) || hashtag.trim() == "") {
+            return setEmptyMessage(true);
+        }
         div.innerText = hashtag;
-        hashtagInput.before(div);
-        setHashtag([...hashtag, input[0].value]);
-
+        console.log(hashtagListWrap);
+        hashtagListWrap.append(div);
+        setEmptyMessage(false);
+        // 초기화
         input[0].value = "";
     };
-    console.log(hashtag);
-
-    const onEnterHashtag = (e) => {
-        const removeHashtag = () => {
-            div.remove();
-            e.target.value = "";
-        };
-
-        if (e.code === "Enter") {
-            if (divLength >= 5) {
-                alert("개시글은 5개까지만!");
-                return;
-            }
-            if (e.target.value.trim() == "") {
-                alert("공백 불가");
-                return;
-            }
-            div.innerText = e.target.value;
-            hashtagInput.before(div);
-            setHashtag([...hashtag, e.target.value]);
-            e.target.value = "";
-        }
-
-        div.addEventListener("click", removeHashtag);
+    const onChangeRating = (e) => {
+        setEditRating(() => e.target.value);
     };
-
-    // window.localStorage.setItem("hashtag", JSON.stringify(hashtag));
+    const onChangeSmoke = (e) => {
+        setEditSmoke(() => e.target.value);
+    };
+    const onChangeDrink = (e) => {
+        setEditDrink(() => e.target.value);
+    };
+    const onChageContent = (e) => {
+        setEditContent(() => e.target.value);
+    };
+    const onChangeHashTag = (e) => {
+        setHashtag(() => e.target.value);
+    };
 
     return (
         <div className="liberty-wrapper">
             <section className="liberty-date">{today}</section>
             <section className="liberty-rating">
-                <StyledRating
-                    style={{ marginLeft: "10px" }}
-                    name="rating"
-                    precision={0.5}
-                    value={rating}
-                    onChange={onChange}
+                <StyledHeart
+                    name="editRating"
+                    precision={1}
+                    value={parseInt(editRating)}
+                    onChange={onChangeRating}
                     icon={<FavoriteIcon />}
                     emptyIcon={<FavoriteBorderIcon />}
                 />
             </section>
-            <section>
-                <div className="liberty-hashtag">
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                        id="hashtagArr">
-                        <div>태그: &nbsp; </div>
-                        <input
-                            className="input"
-                            placeholder="입력 후 Enter"
-                            type="text"
-                            id="hashtagInput"
-                            onKeyPress={onEnterHashtag}
-                        />
-                        <button onClick={onClickHashtag}>입력</button>
-                    </div>
-                </div>
+            <section className="liberty-rating">
+                <StyledSmoke
+                    onChange={onChangeSmoke}
+                    size="medium"
+                    icon={<SmokingRoomsIcon />}
+                    emptyIcon={<SmokingRoomsIcon />}
+                />
             </section>
-
+            <section className="liberty-rating">
+                <StyledSmoke
+                    onChange={onChangeDrink}
+                    size="medium"
+                    icon={<SportsBarIcon />}
+                    emptyIcon={<SportsBarIcon />}
+                />
+            </section>
+            <section>
+                <section style={{ display: "flex" }}>
+                    {state?.hashtag.map((v) => (
+                        <div
+                            style={{
+                                textAlign: "start",
+                                opacity: "0.5",
+                            }}>
+                            <span className="beforehashtag">{v}</span>
+                        </div>
+                    ))}
+                </section>
+                <HashtagForm>
+                    <form onSubmit={onSaveHashtag}>
+                        <HashtagListWrap>
+                            <span>Tag:</span>
+                            <HashtagInput
+                                className="input"
+                                placeholder="입력"
+                                type="text"
+                                id="hashtagInput"
+                                onChange={onChangeHashTag}
+                            />
+                            <HashtagButton type="submit">입력</HashtagButton>
+                        </HashtagListWrap>
+                        <div
+                            className="hashtag-list-wrap"
+                            style={{
+                                display: "flex",
+                                overflow: "auto",
+                            }}></div>
+                    </form>
+                </HashtagForm>
+                {emptyMessage ? (
+                    <div>공백 & 특수기호는 사용할 수 없어요.</div>
+                ) : (
+                    ""
+                )}
+            </section>
             <section className="content">
                 <textarea
                     className="liberty-textarea"
                     name="content"
                     ref={contentRef}
-                    value={content}
-                    onChange={onChange}></textarea>
+                    value={editContent}
+                    onChange={onChageContent}
+                />
             </section>
             <section>
-                <div
-                    style={{
-                        width: "100%",
-                        textAlign: "center",
-                        marginTop: "10px",
-                    }}>
-                    <button
-                        onClick={onClick}
-                        style={{
-                            border: 0,
-                            color: "black",
-
-                            padding: "5px",
-                            borderRadius: "5px",
-                        }}>
-                        글쓰기
-                    </button>
-
-                    <button
+                <ButtonWrapper>
+                    <SubmitButton onClick={onClickSubmit}>글쓰기</SubmitButton>
+                    <CancelButton
                         onClick={() => {
-                            navigate(-1);
-                        }}
-                        style={{
-                            border: 0,
-                            color: "black",
-                            padding: "5px",
-                            borderRadius: "5px",
+                            navigate("/liberty");
                         }}>
                         취소
-                    </button>
-                </div>
+                    </CancelButton>
+                </ButtonWrapper>
             </section>
         </div>
     );
 };
 
-export default LibertyEdit;
+export default Auth(LibertyEdit, true);
+
+const StyledHeart = styled(Rating)({
+    fontSize: "2rem",
+    "& .MuiRating-iconFilled": {
+        color: "#ff6d75",
+    },
+    "& .MuiRating-iconHover": {
+        color: "#ff3d47",
+    },
+});
+const StyledSmoke = styled(Rating)({});
+const ButtonWrapper = styled.div`
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+`;
+const SubmitButton = styled.button`
+    border: 0;
+    color: black;
+    margin: 0 5px 0 5px;
+    padding: 5px;
+    border-radius: 5px;
+`;
+
+const CancelButton = styled.button`
+    border: 0px;
+    color: black;
+    margin: 0 5px 0 5px;
+    padding: 5px;
+    border-radius: 5px;
+`;
+
+const HashtagForm = styled.div`
+    padding: 10px;
+    > form > div {
+        display: flex;
+        align-items: center;
+    }
+`;
+const HashtagListWrap = styled.div`
+    font-size: 1.3rem;
+    > span {
+        color: black;
+        font-size: 1.3rem;
+    }
+    > div {
+        font-size: 1.2rem;
+    }
+`;
+
+const HashtagInput = styled.input`
+    border: 0px;
+    width: 30%;
+`;
+const HashtagButton = styled.button`
+    padding: 5px 10px 5px 10px;
+    background: black;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.1rem;
+`;

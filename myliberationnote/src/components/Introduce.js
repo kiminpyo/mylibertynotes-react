@@ -9,6 +9,7 @@ const Introduce = () => {
             introContentWrap.style.display = "block";
         }, 0);
     }, []);
+
     return (
         <IntroContentWrap id="intro-content-wrap">
             <IntroTitle>INTRO</IntroTitle>

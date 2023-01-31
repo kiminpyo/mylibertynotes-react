@@ -12,6 +12,7 @@ export const LOG_OUT = "LOG_OUT";
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS: {
+            console.log(action);
             return {
                 ...state,
                 userInfo: action.data,
@@ -29,7 +30,9 @@ const reducer = (state = initialState, action) => {
             };
         }
         case LOAD_ME_SUCCESS: {
+            console.log(action);
             return {
+                ...state,
                 userInfo: action.data,
             };
         }

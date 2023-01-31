@@ -1,28 +1,33 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap"); */
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+}
 * {
-    font-family: "Stylish", sans-serif;
+    font-family: "Gaegu", cursive;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
+    font-weight: 500;
     list-style: none;
 }
+
 a {
     color: black;
+}
+.kakao {
+    background-color: yellow;
 }
 .App {
     width: 100%;
     overflow: hidden;
 }
-.head-container {
-    color: black;
-    z-index: 2;
-    background: rgb(194, 156, 219);
-    background: linear-gradient(
-        90deg,
-        rgba(194, 156, 219, 1) 0%,
-        rgba(111, 91, 120, 1) 26%,
-        rgba(17, 16, 17, 1) 63%
-    );
+
+/* .liberty-page,.mypage */
+Link {
+    cursor: pointer;
 }
+
 .head-navbar-left > div > a {
     color: black;
 }
@@ -34,6 +39,7 @@ a {
 .head-navbar-left #intro-content-wrap {
     border-radius: 20px;
 }
+
 .intro-content {
     background-color: rgba(240, 240, 204, 0.219);
     border-radius: 20px;
@@ -50,7 +56,7 @@ a {
     /* border-radius를 width와 heigth의 중간값으로 하면 원이된다*/
     border-radius: 20px;
     position: fixed;
-    bottom: 30px;
+    bottom: 90px;
     right: 30px;
     transition-property: background-color, opacity, visibility;
     transition-duration: 0.3s, 0.5s, 0.5s;
@@ -69,116 +75,27 @@ a {
     background-color: rgba(167, 81, 127, 0.384);
 }
 
-.random {
-    width: 40%;
-    margin: auto;
-    margin-top: 20px;
-    color: white;
-    font-size: 1.2rem;
-}
-
-.moving-banner {
-    width: 10%;
-    height: 30px;
-    position: absolute;
-}
 .popper {
     color: red;
-}
-
-/* main */
-
-.main-wrapper {
-    width: 500px;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 90px;
-}
-.main-content {
-    width: 80%;
-    height: 80%;
-    border: 50px solid rgba(0, 0, 0, 0.911);
-    border-top-color: rgba(121, 77, 162, 0.664);
-    border-radius: 50%;
-    animation: spinner 6s infinite;
-    animation-timing-function: linear;
-}
-.main-text-wrap {
-    position: absolute;
-    margin-left: 130px;
-    margin-top: 150px;
-    z-index: 999;
-}
-.main-text-header {
-    font-size: 3rem;
-    font-weight: bold;
-}
-.main-text {
-    text-align: center;
-}
-.main-text-picture {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.main-text-picture > * {
-    font-size: 4rem;
-    margin: 4%;
-}
-.heart {
-    font-size: 3rem;
-    color: rgba(231, 93, 93, 0.87);
-    animation: swing 3s infinite;
-    animation-timing-function: linear;
-}
-
-.heart::after {
-    color: black;
-}
-.arrow-left {
-    line-height: 2;
-    font-size: 2rem;
-    color: black;
-    animation: goleft 1s infinite;
-}
-.arrow-right {
-    line-height: 2;
-    font-size: 2rem;
-    color: black;
-    animation: goright 1s infinite;
-}
-.main-text-content {
-    margin-top: 40px;
-    font-size: 1.3rem;
-    visibility: hidden;
-}
-.go-board {
-    animation: godown 2s infinite;
 }
 
 /* 해방 create 페이지 */
 .liberty-wrapper {
     text-align: center;
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 .liberty-date {
-    margin-top: 100px;
+    margin-top: 12vh;
     text-align: center;
-    font-size: 3rem;
+    font-size: 2rem;
 }
-.liberty-hashtag {
-    padding: 10px;
-}
-.liberty-hashtag > div > input {
-    border: 2px;
-    border-style: inset;
-}
-.liberty-rating {
-    padding: 10px;
+
+.liberty-rating,
+.liberty-rating > span > span {
     display: flex;
     justify-content: space-around;
+    color: red;
 }
 
 /* 만든 태그 */
@@ -187,12 +104,12 @@ a {
     color: white;
     border-radius: 20px;
     margin: 5px;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
 }
 /* 푸터 */
 .footer-wrapper {
     text-align: center;
-    margin-top: 50px;
+
     height: 200px;
 }
 
@@ -216,64 +133,36 @@ a {
     margin-right: auto;
     border: 1px solid black;
 }
-#hashtagArr {
+.hashtag-list {
     flex-wrap: wrap;
 }
 
-/* 혼자해방 리스트페이지 */
-.addPost {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    bottom: 30px;
-    left: 30px;
-    background-color: black;
-    border-radius: 50%;
-    text-align: center;
-}
-.addPost::after {
-    content: "\2b";
-    font-family: FontAwesome;
-    font-size: 1.5rem;
-    /* line-height는 height값으로 쓰면 중앙으로 된다. */
-    line-height: 40px;
-    color: rgb(212, 203, 203);
-}
 /*  혼재해방 리스트 아이템 */
-.liberty-item-wrapper {
-    width: 20rem;
-    margin: auto;
-}
-.liberty-item-content-wrap {
-    margin: auto;
-    margin-top: 100px;
-    width: 90%;
-    height: 250px;
-
-    opacity: 0.8;
-    border-radius: 20px;
-    background-color: rgba(63, 9, 63, 0.795);
-    box-shadow: 15px 15px 0px rgb(68, 35, 68);
-}
 .liberty-item-content-wrap:hover {
-    animation: shaking 1s;
     animation-fill-mode: both;
 }
 
 .liberty-textarea {
-    font-family: "Nanum Pen Script";
-    font-size: 1rem;
-
-    box-sizing: border-box;
     width: 100%;
-    min-height: 200px;
+    overflow: auto;
+    white-space: pre-line;
+    word-wrap: break-word;
+    font-size: 1rem;
+    box-sizing: border-box;
+    min-height: 100px;
     resize: vertical;
-
     border: none;
     border-radius: 5px;
     background-color: #ececec;
 
     padding: 20px;
+}
+.liberty-banner-text::after {
+    content: "";
+    margin-left: 0.6rem;
+    border-right: 2px solid rgb(255, 255, 255);
+
+    animation: cursor 0.9s infinite steps(2);
 }
 
 /* 뉴스페이지 */
@@ -325,15 +214,11 @@ a {
     }
 }
 @media screen and (max-width: 480px) {
-    /* 소개글 */
-
-    /* 헤더 */
-    .head-navbar-left {
-        width: 100%;
-        font-size: 0.8rem;
+    .fc-today-button {
+        display: none !important;
     }
-    .head-navbar-right > div {
-        display: none;
+    .fc-button-group {
+        height: 40px;
     }
 
     /* 메인 */
@@ -373,10 +258,6 @@ a {
     }
     .main-text-picture > * {
         font-size: 4rem;
-    }
-    .heart {
-        font-size: 3rem;
-        color: red;
     }
     .arrow-left {
         line-height: 2;
@@ -443,6 +324,7 @@ a {
         font-size: 1rem;
     }
     .main-content {
+        margin: auto;
         width: 80%;
         height: 80%;
         border: 20px solid rgba(0, 0, 0, 0.911);

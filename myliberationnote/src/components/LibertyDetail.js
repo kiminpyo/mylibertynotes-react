@@ -6,55 +6,47 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { DELETE_POST, LOAD_POST_DETAIL } from "../reducers/post";
 import { LOAD_ME } from "../reducers/user";
-
+import Auth from "../HOC/auth";
 const LibertyDetail = () => {
     const { id } = useParams();
-    const { content, rating } = useSelector((state) => state.post.post);
-    console.log(rating);
-    const user = useSelector((state) => state.post.user);
-    const { userInfo } = useSelector((state) => state.user);
-
+    const post = useSelector((state) => state.post?.post);
+    const writer = useSelector((state) => state.post?.user);
+    const user = useSelector((state) => state.user?.userInfo);
+    useEffect(() => {
+        dispatch({
+            type: LOAD_ME,
+        });
+    }, []);
     useEffect(() => {
         dispatch({
             type: LOAD_POST_DETAIL,
             data: id,
         });
     }, [id]);
-    useEffect(() => {
-        dispatch({
-            type: LOAD_ME,
-        });
-    }, []);
-
+    console.log(post);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const today = new Date().toISOString().slice(0, 10);
-
-    const StyledRating = styled(Rating)({
-        "& .MuiRating-iconFilled": {
-            color: "#ff6d75",
-        },
-        "& .MuiRating-iconHover": {
-            color: "#ff3d47",
-        },
-    });
-
+    const hashtag = post.Hashtags?.map((v) => v.name);
+    console.log(hashtag);
     const onLibertyEdit = () => {
-        navigate("/libertyselfedit", {
+        navigate("/libertyedit", {
             state: {
-                previouscontent: content,
-                previousrating: rating,
-                id: id,
+                id: post.id,
+                content: post.content,
+                rating: post.rating,
+                hashtag,
             },
         });
     };
+
     const onLibertyDelete = () => {
         if (window.confirm("삭제하시겠습니까? ")) {
             dispatch({
                 type: DELETE_POST,
                 data: id,
             });
-            navigate("/libertyself");
+            navigate("/liberty");
         } else {
             return null;
         }
@@ -68,7 +60,7 @@ const LibertyDetail = () => {
                         style={{ marginLeft: "10px" }}
                         name="rating"
                         precision={0.5}
-                        value={rating}
+                        value={parseInt(post.rating)}
                         disabled
                         icon={<FavoriteIcon />}
                         emptyIcon={<FavoriteBorderIcon />}
@@ -79,7 +71,9 @@ const LibertyDetail = () => {
                         className="liberty-writer-wrap"
                         style={{ display: "flex" }}>
                         <div className="liberty-writer-label">글쓴이:</div>
-                        <div className="liberty-writer">{user && user[0]}</div>
+                        <div className="liberty-writer">
+                            {user && user.email}
+                        </div>
                     </div>
                 </section>
                 <section>
@@ -90,12 +84,17 @@ const LibertyDetail = () => {
                                 alignItems: "center",
                             }}
                             id="hashtagArr">
-                            <div>태그: &nbsp; </div>
+                            <div>
+                                태그: &nbsp;{" "}
+                                {post.Hashtags?.map((v) => (
+                                    <span>{v.name}</span>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                <section className="liberty-textarea">{content}</section>
+                <section className="liberty-textarea">{post.content}</section>
 
                 <section>
                     <div
@@ -104,29 +103,29 @@ const LibertyDetail = () => {
                             textAlign: "center",
                             marginTop: "10px",
                         }}>
-                        {userInfo && userInfo.email == user && user[0] ? (
-                            <button
-                                onClick={onLibertyDelete}
-                                style={{
-                                    border: 0,
-                                    color: "black",
-                                    padding: "5px",
-                                    borderRadius: "5px",
-                                }}>
-                                삭제
-                            </button>
-                        ) : null}
-                        {userInfo && userInfo.email == user && user[0] ? (
-                            <button
-                                onClick={onLibertyEdit}
-                                style={{
-                                    border: 0,
-                                    color: "black",
-                                    padding: "5px",
-                                    borderRadius: "5px",
-                                }}>
-                                수정
-                            </button>
+                        {user?.email == writer?.email ? (
+                            <>
+                                <button
+                                    onClick={onLibertyDelete}
+                                    style={{
+                                        border: 0,
+                                        color: "black",
+                                        padding: "5px",
+                                        borderRadius: "5px",
+                                    }}>
+                                    삭제
+                                </button>
+                                <button
+                                    onClick={onLibertyEdit}
+                                    style={{
+                                        border: 0,
+                                        color: "black",
+                                        padding: "5px",
+                                        borderRadius: "5px",
+                                    }}>
+                                    수정
+                                </button>
+                            </>
                         ) : null}
                         <button
                             onClick={() => {
@@ -147,4 +146,13 @@ const LibertyDetail = () => {
     );
 };
 
-export default LibertyDetail;
+export default Auth(LibertyDetail);
+
+const StyledRating = styled(Rating)({
+    "& .MuiRating-iconFilled": {
+        color: "#ff6d75",
+    },
+    "& .MuiRating-iconHover": {
+        color: "#ff3d47",
+    },
+});
