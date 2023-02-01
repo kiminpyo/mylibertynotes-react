@@ -7,11 +7,9 @@ import { onClickBackToTop } from "../../utils/backToTop";
 import styled from "@emotion/styled";
 
 import UpperSide from "./UpperSide";
-import BottomSide from "./BottomSide";
 import Banner from "./MovingBanner";
 const AppLayout = () => {
     const { userInfo } = useSelector((state) => state.user);
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch({

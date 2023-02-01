@@ -60,7 +60,6 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
     session({
         saveUninitialized: false,
-
         resave: false,
         secret: process.env.COOKIE_SECRET,
         cookie: {
@@ -68,7 +67,7 @@ app.use(
             secure: false,
             domain:
                 process.env.NODE_ENV === "production" &&
-                "http://34.197.130.106:3000/",
+                "http://localhost:3000",
         },
     })
 );

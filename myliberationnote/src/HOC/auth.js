@@ -9,7 +9,7 @@ const Auth = (SpecificComponent, option = null) => {
         const navigate = useNavigate();
 
         useEffect(() => {
-            axios.get("http://localhost:80/user").then((res) => {
+            axios.get("http://54.164.14.94:80/user").then((res) => {
                 if (option) {
                     // 로그인을 하지 않았다면,
 
