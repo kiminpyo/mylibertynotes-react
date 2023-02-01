@@ -66,8 +66,7 @@ app.use(
             httpOnly: true,
             secure: false,
             domain:
-                process.env.NODE_ENV === "production" &&
-                "http://34.197.130.106:3000",
+                process.env.NODE_ENV === "production" && "34.197.130.106:3000",
         },
     })
 );
