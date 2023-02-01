@@ -11,7 +11,6 @@ const morgan = require("morgan");
 const path = require("path");
 const hpp = require("hpp");
 const helmet = require("helmet");
-
 const postsRouter = require("./routes/post");
 const UserRouter = require("./routes/user");
 const PostsRouter = require("./routes/posts");
@@ -33,15 +32,26 @@ db.sequelize
     .catch(console.error);
 
 passportConfig();
-app.use(morgan("combined"));
-app.use(hpp());
-app.use(helmet({ contentSecurityPolicy: false }));
-app.use(
-    cors({
-        origin: ["http://localhost:3000"],
-        credentials: true,
-    })
-);
+if (process.env.NODE_ENV === "production") {
+    app.use(morgan("combined"));
+    app.use(hpp());
+    app.use(helmet({ contentSecurityPolicy: false }));
+    app.use(
+        cors({
+            /* 쿠키 관련  */
+            origin: ["http://localhost:3000", "http://34.197.130.106:3000"],
+            credentials: true,
+        })
+    );
+} else {
+    app.use(morgan("dev"));
+    app.use(
+        cors({
+            origin: true,
+            credentials: true,
+        })
+    );
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -58,7 +68,7 @@ app.use(
             secure: false,
             domain:
                 process.env.NODE_ENV === "production" &&
-                "http://http://34.197.130.106:3000/",
+                "http://34.197.130.106:3000/",
         },
     })
 );
