@@ -67,7 +67,7 @@ app.use(
             secure: false,
             domain:
                 process.env.NODE_ENV === "production" &&
-                "http://localhost:3000",
+                "http://34.197.130.106:3000",
         },
     })
 );
