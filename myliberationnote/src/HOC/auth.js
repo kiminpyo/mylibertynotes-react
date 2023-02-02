@@ -9,7 +9,7 @@ const Auth = (SpecificComponent, option = null) => {
         useEffect(async () => {
             try {
                 await axios
-                    .get("http://54.164.14.94:80/user", {
+                    .get("http://api.mylibertynotes.site/user", {
                         withCredentials: true,
                     })
                     .then((res) => {
