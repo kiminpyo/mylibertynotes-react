@@ -10,7 +10,7 @@ import LibertyBanner from "../components/LibertyBanner";
 const Liberty = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { posts, postscount } = useSelector((state) => state.post);
+    const { posts, postscount } = useSelector((state) => state?.post);
     const observerTargetEl = useRef(null);
     const page = useRef(0);
     const [loading, setLoading] = useState(false);

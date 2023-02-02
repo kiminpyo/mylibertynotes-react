@@ -26,7 +26,7 @@ export const LinearProgressWithLabel = (props) => {
 };
 const LibertyItem = ({ item }) => {
     // const { email, id } = item?.User;
-    // console.log(email);
+
     const [ratingProgress, setRatingProgress] = React.useState(0);
     const [drinkProgress, setDrinkProgress] = React.useState(0);
     const [smokeProgress, setSmokeProgress] = React.useState(0);
@@ -187,5 +187,5 @@ const LibertyItemDate = styled.div`
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
     borderRadius: 5,
-    color: () => console.log(theme),
+
 }));

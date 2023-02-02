@@ -1,9 +1,7 @@
 import React, { useRef } from "react";
-import { Bar, Line, Bubble } from "react-chartjs-2";
+import {  Line } from "react-chartjs-2";
 import { useTabs } from "../hooks/useTabs";
 import styled from "@emotion/styled";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -30,7 +28,7 @@ ChartJS.register(
 );
 
 const LibertyChart = ({ events }) => {
-    console.log(events);
+
     const chartRef = useRef();
     const sortedEvents = events?.sort((a, b) => a.id - b.id);
     const Tab = [

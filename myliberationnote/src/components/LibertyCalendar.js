@@ -6,8 +6,8 @@ import styled from "@emotion/styled";
 const LibertyCalendar = ({ events }) => {
     const navigate = useNavigate();
     const handleDateClick = (arg) => {
-        // console.log(arg);
-        // return navigate(`/liberty/${arg.event.id}`);
+        console.log(arg);
+        return navigate(`/liberty/${arg.event.id}`);
     };
     const headerToolbar = {
         right: "prev,next today",

@@ -9,7 +9,7 @@ import styled from "@emotion/styled";
 import UpperSide from "./UpperSide";
 import Banner from "./MovingBanner";
 const AppLayout = () => {
-    const { userInfo } = useSelector((state) => state.user);
+    const { userInfo } = useSelector((state) => state?.user);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch({
@@ -37,13 +37,7 @@ export default AppLayout;
 
 const HeadContainer = styled.div`
     z-index: 2;
-    /* background: rgb(194, 156, 219);
-    background: linear-gradient(
-        90deg,
-        rgba(194, 156, 219, 1) 0%,
-        rgba(111, 91, 120, 1) 26%,
-        rgba(17, 16, 17, 1) 63%
-    ); */
+   
     background-color: whitesmoke;
     padding-top: 10px;
     @media screen and (max-width: 425px) {

@@ -10,10 +10,11 @@ const Search = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
     const [list, setItem] = useState([]);
-    console.log(state);
     useEffect(() => {
         axios
-            .get(`http://localhost:80/hashtag/${id}`)
+            .get(`http://api.mylibertynotes.site/hashtag/${id}`, {
+                withCredentials: true,
+            })
             .then((res) => setItem(() => res.data));
     }, []);
 

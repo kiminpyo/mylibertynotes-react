@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ADD_POST, EDIT_POST } from "../reducers/post";
 import Auth from "../HOC/auth";
-
 import styled from "@emotion/styled";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -29,7 +28,7 @@ const LibertyEdit = () => {
     div.setAttribute("class", "hashtag");
     const divLength = document.querySelectorAll("div.hashtag").length;
     const hashTagList = [];
-    console.log(editDrink, editSmoke);
+
     const removeHashtag = (e) => {
         div.remove();
     };
@@ -70,7 +69,6 @@ const LibertyEdit = () => {
             return setEmptyMessage(true);
         }
         div.innerText = hashtag;
-        console.log(hashtagListWrap);
         hashtagListWrap.append(div);
         setEmptyMessage(false);
         // 초기화

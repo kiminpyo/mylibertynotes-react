@@ -17,7 +17,7 @@ import styled from "@emotion/styled";
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { userInfo } = useSelector((state) => state.user);
+    const { userInfo } = useSelector((state) => state?.user);
 
     const theme = createTheme();
     useEffect(() => {

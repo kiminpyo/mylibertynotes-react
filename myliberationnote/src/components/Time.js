@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 
 const Time = () => {
     useEffect(() => {
-        console.log(document.body.clientWidth);
         const timer = () => {
             const time = document.getElementById("time");
             const id = setInterval(() => {

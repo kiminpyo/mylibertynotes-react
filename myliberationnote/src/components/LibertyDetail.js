@@ -23,12 +23,11 @@ const LibertyDetail = () => {
             data: id,
         });
     }, [id]);
-    console.log(post);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const today = new Date().toISOString().slice(0, 10);
     const hashtag = post.Hashtags?.map((v) => v.name);
-    console.log(hashtag);
     const onLibertyEdit = () => {
         navigate("/libertyedit", {
             state: {
@@ -86,8 +85,8 @@ const LibertyDetail = () => {
                             id="hashtagArr">
                             <div>
                                 태그: &nbsp;{" "}
-                                {post.Hashtags?.map((v) => (
-                                    <span>{v.name}</span>
+                                {post.Hashtags?.map((v, i) => (
+                                    <span key={i}>{v.name}</span>
                                 ))}
                             </div>
                         </div>

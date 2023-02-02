@@ -8,7 +8,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { LOG_OUT } from "../../reducers/user";
 
 const UpperSide = (userInfo) => {
-    const { id, email } = userInfo;
+    const { email } = userInfo;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const logout = () => {

@@ -8,8 +8,7 @@ import { LOAD_ME } from "../../reducers/user";
 const ReactiveHeader = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { userInfo } = useSelector((state) => state.user);
-    console.log(userInfo);
+    const { userInfo } = useSelector((state) => state?.user);
     useEffect(() => {
         dispatch({
             type: LOAD_ME,

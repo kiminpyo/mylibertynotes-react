@@ -16,7 +16,7 @@ function userLoginAPI(data) {
 function* userLogin(action) {
     try {
         const result = yield call(userLoginAPI, action.data);
-        console.log(result.data);
+
 
         yield put({
             type: LOGIN_SUCCESS,
@@ -28,7 +28,7 @@ function* userLogin(action) {
 }
 
 function userSignupAPI(data) {
-    console.log(data);
+
     return axios.post("/user/signup", data);
 }
 
