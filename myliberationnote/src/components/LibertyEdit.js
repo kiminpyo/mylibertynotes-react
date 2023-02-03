@@ -58,6 +58,7 @@ const LibertyEdit = () => {
                 data,
             });
         }
+        return navigate("/liberty");
     };
     const onSaveHashtag = (e) => {
         e.preventDefault();
@@ -104,7 +105,7 @@ const LibertyEdit = () => {
                 />
             </section>
             <section className="liberty-rating">
-                <StyledSmoke
+                <StyledHeart
                     onChange={onChangeSmoke}
                     size="medium"
                     icon={<SmokingRoomsIcon />}
@@ -112,7 +113,7 @@ const LibertyEdit = () => {
                 />
             </section>
             <section className="liberty-rating">
-                <StyledSmoke
+                <StyledHeart
                     onChange={onChangeDrink}
                     size="medium"
                     icon={<SportsBarIcon />}

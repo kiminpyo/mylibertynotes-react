@@ -149,6 +149,7 @@ const LibertyItemTagWrap = styled.div`
     height: 30px;
     width: 16rem;
     margin: auto;
+    padding: 5px;
 `;
 
 const LibertyItemContentWrapper = styled.div`
@@ -187,5 +188,4 @@ const LibertyItemDate = styled.div`
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
     borderRadius: 5,
-
 }));
