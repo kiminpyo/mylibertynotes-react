@@ -1,5 +1,5 @@
 import { Rating, styled } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -12,17 +12,14 @@ const LibertyDetail = () => {
     const post = useSelector((state) => state.post?.post);
     const writer = useSelector((state) => state.post?.user);
     const user = useSelector((state) => state.user?.userInfo);
-    useEffect(() => {
-        dispatch({
-            type: LOAD_ME,
-        });
-    }, []);
+    console.log(user);
+    console.log("렌더");
     useEffect(() => {
         dispatch({
             type: LOAD_POST_DETAIL,
             data: id,
         });
-    }, [id]);
+    }, []);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -39,7 +36,7 @@ const LibertyDetail = () => {
         });
     };
 
-    const onLibertyDelete = () => {
+    const onLibertyDelete = useCallback(() => {
         if (window.confirm("삭제하시겠습니까? ")) {
             dispatch({
                 type: DELETE_POST,
@@ -49,7 +46,7 @@ const LibertyDetail = () => {
         } else {
             return null;
         }
-    };
+    }, [id]);
     return (
         <div>
             <div className="liberty-wrapper">
@@ -102,7 +99,7 @@ const LibertyDetail = () => {
                             textAlign: "center",
                             marginTop: "10px",
                         }}>
-                        {user?.email == writer?.email ? (
+                        {user?.email != writer?.email ? null : (
                             <>
                                 <button
                                     onClick={onLibertyDelete}
@@ -125,7 +122,7 @@ const LibertyDetail = () => {
                                     수정
                                 </button>
                             </>
-                        ) : null}
+                        )}
                         <button
                             onClick={() => {
                                 navigate("/liberty");

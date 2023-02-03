@@ -61,7 +61,7 @@ const IntroContent = styled.div`
     padding: 50px;
     margin: auto;
     margin-top: 50px;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     line-height: 1.3;
     word-spacing: 0.2rem;
     width: 70%;

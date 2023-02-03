@@ -37,7 +37,7 @@ const reducer = (state = initialState, action) => {
         case LOAD_POSTS_SUCCESS: {
             return {
                 ...state,
-                posts: state.posts.concat(action.data.rows),
+                posts: action.data.rows,
                 postscount: action.data.count,
             };
         }

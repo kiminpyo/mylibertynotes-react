@@ -11,11 +11,7 @@ import Banner from "./MovingBanner";
 const AppLayout = () => {
     const { userInfo } = useSelector((state) => state?.user);
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch({
-            type: LOAD_ME,
-        });
-    }, []);
+
     window.addEventListener("scroll", (e) => {
         scrollEvent(e);
     });
@@ -36,11 +32,11 @@ const AppLayout = () => {
 export default AppLayout;
 
 const HeadContainer = styled.div`
-    z-index: 2;
-   
-    background-color: whitesmoke;
-    padding-top: 10px;
+    background-color: black;
+    /* background-color: whitesmoke; */
+
     @media screen and (max-width: 425px) {
-        background: rgb(106 76 98 / 12%);
+        /* background: rgb(106 76 98 / 12%); */
+        padding: 5px 0 5px 0;
     }
 `;

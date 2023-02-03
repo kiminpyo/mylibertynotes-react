@@ -11,6 +11,9 @@ const Auth = (SpecificComponent, option = null) => {
                 .get("http://api.mylibertynotes.site/user", {
                     withCredentials: true,
                 })
+                // .get("http://localhost/user", {
+                //     withCredentials: true,
+                // })
                 .then((res) => {
                     if (option) {
                         // 로그인을 하지 않았다면,

@@ -3,7 +3,6 @@ import "./animation.css";
 import "./fontAwesome.css";
 import { Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
-
 import Intro from "./pages/Intro";
 import ScrollRestoration from "./components/ScrollRestoration";
 import Liberty from "./pages/Liberty";
@@ -14,8 +13,17 @@ import Login from "./pages/Login";
 import LibertyDetail from "./components/LibertyDetail";
 import LibertyEdit from "./components/LibertyEdit";
 import AppLayout from "./components/AppLayout/AppLayout";
+import { LOAD_ME } from "./reducers/user";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function App() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch({
+            type: LOAD_ME,
+        });
+    }, []);
     return (
         <>
             <ScrollRestoration />

@@ -3,18 +3,11 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { LOAD_ME } from "../../reducers/user";
+import { useSelector } from "react-redux";
+
 const ReactiveHeader = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const { userInfo } = useSelector((state) => state?.user);
-    useEffect(() => {
-        dispatch({
-            type: LOAD_ME,
-        });
-    }, []);
-
     const onClickMenu = () => {
         setActive((prev) => !prev);
     };
@@ -74,10 +67,11 @@ const IconWrap = styled.div`
     width: 30px;
     height: 30px;
     right: 5%;
-    top: 2vh;
+    top: 12px;
+    color: black;
     position: absolute;
     text-align: center;
-    line-height: 2;
+    line-height: 1.7;
     background-color: white;
     border-radius: 50%;
     :hover {
@@ -98,7 +92,7 @@ const HeaderMenu = styled.div`
     > div {
         font-family: "Noto Sans KR", sans-serif;
         font-size: 0.8rem;
-        padding: 3px;
+        padding: 5px;
         opacity: 0.5;
 
         :hover {

@@ -27,12 +27,12 @@ const UpperSide = (userInfo) => {
 
     return (
         <HeadUpperSide>
-            <Link to="/">
+            <NavStyle to="/">
                 <MainLogo>
-                    <LogoImg src={mainImg} alt="나의 해방일지" />
-                    <SubLogo>나의 해방일지</SubLogo>
+                    {/* <LogoImg src={mainImg} alt="나의 해방일지" /> */}
+                    <SubLogo>Liberty Notes</SubLogo>
                 </MainLogo>
-            </Link>
+            </NavStyle>
             <NavBar>
                 <NavBarLeft className="head-navbar-left">
                     <NavBarCategory>
@@ -65,14 +65,13 @@ const UpperSide = (userInfo) => {
                 {!email ? (
                     <>
                         <div>
-                            <Link style={{ color: "black" }} to="/login">
+                            <NavStyle style={{ color: "white" }} to="/login">
                                 로그인
-                            </Link>
+                            </NavStyle>
                         </div>
                     </>
                 ) : (
                     <>
-                        <div>{userInfo.email}</div>
                         <div onClick={logout}>로그아웃</div>
                     </>
                 )}
@@ -88,27 +87,35 @@ const UpperSide = (userInfo) => {
 export default UpperSide;
 
 const HeadUpperSide = styled.div`
+    color: white;
     align-items: center;
     display: flex;
     justify-content: space-between;
     padding: 6px;
 `;
 const MainLogo = styled.div`
-    margin-left: 0.5rem;
-    width: 100px;
+    /* margin-left: 0.5rem;
+    width: 100px; */
+
+    @media screen and (max-width: 425px) {
+        width: 50%;
+    }
 `;
 
 const HeadRightDown = styled.div`
     margin-right: 100px; ;
 `;
 const LogoImg = styled.img`
-    width: 80px;
-    height: auto;
+    width: 180px;
+    height: 30px;
 `;
 const SubLogo = styled.div`
+    color: white;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-weight: bold;
     margin-left: 8px;
-    margin-top: -10px;
-    font-size: 15px;
+    font-size: 0.6rem;
 `;
 
 //
@@ -130,17 +137,21 @@ const NavBarLeft = styled.div`
 `;
 
 const NavBarRight = styled.div`
-    display: flex;
     & > div {
-        padding-right: 30px;
-        font-size: 1rem;
+        font-size: 0.7rem;
+        padding: 0 10px 0 5px;
+    }
+    @media screen and (max-width: 425px) {
+        width: 50%;
+        text-align: end;
     }
 `;
 
 const NavBarCategory = styled.div`
     cursor: pointer;
+    font-size: 0.7rem;
 `;
 
 const NavStyle = styled(NavLink)`
-    border-bottom: 1px solid black;
+    font-size: 0.7rem;
 `;

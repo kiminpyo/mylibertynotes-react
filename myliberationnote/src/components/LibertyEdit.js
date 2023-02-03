@@ -226,7 +226,7 @@ const HashtagListWrap = styled.div`
     font-size: 1.3rem;
     > span {
         color: black;
-        font-size: 1.3rem;
+        font-size: 0.8rem;
     }
     > div {
         font-size: 1.2rem;

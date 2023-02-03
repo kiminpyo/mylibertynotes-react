@@ -12,6 +12,6 @@ const MiddleSide = () => {
 export default MiddleSide;
 
 const HeadMidlleSide = styled.div`
-    padding: 40vh 0 40vh 0;
+    padding: 30vh 0 40vh 0;
     text-align: center;
 `;
