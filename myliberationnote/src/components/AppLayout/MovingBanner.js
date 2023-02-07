@@ -1,16 +1,21 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useRef } from "react";
 
 const Banner = () => {
+    const ref = useRef();
     const text = "위로하지 않기. 조언하지 않기.";
+    const onClickDeleteBanner = () => {
+        ref.current.style.animation = "fadeOut 1s forwards";
+    };
+
     return (
-        <MovingBanner>
+        <MovingBanner ref={ref}>
             <MovingBannerText>
-                <marquee scrolldelay="200" direction="right">
+                <marquee scrolldelay="100" direction="right">
                     {text}
                 </marquee>
             </MovingBannerText>
-            <Xbox>x</Xbox>
+            <Xbox onClick={onClickDeleteBanner}>x</Xbox>
         </MovingBanner>
     );
 };
@@ -27,28 +32,42 @@ const MovingBanner = styled.div`
         height: 20px;
     }
 `;
-
 const MovingBannerText = styled.div`
-    line-height: 1;
     color: white;
     width: 100%;
     & > marquee {
+        height: 100%;
+        line-height: 2;
+        font-size: 0.8rem;
         font-family: sans-serif;
         @media screen and (max-width: 425px) {
-            font-size: 0.5rem;
+            line-height: 2;
+            font-size: 11px;
         }
     }
 `;
 
 const Xbox = styled.div`
     position: fixed;
-    bottom: 2px;
-    right: 4px;
-    width: 15px;
-    height: 15px;
+    bottom: 3px;
+    right: 15px;
+    width: 23px;
+    height: 23px;
     border-radius: 50%;
-
-    background-color: white;
+    color: white;
     text-align: center;
-    line-height: 0.6;
+    font-size: 19px;
+    line-height: 1;
+
+    @media screen and (max-width: 425px) {
+        bottom: 3.5px;
+        right: 6px;
+        width: 13px;
+        height: 12px;
+        border-radius: 50%;
+
+        text-align: center;
+        line-height: 0.7;
+        font-size: 12px;
+    }
 `;

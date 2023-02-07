@@ -46,29 +46,19 @@ const MainContent = () => {
 export default MainContent;
 
 const MainTextWrap = styled.div`
-    margin: auto;
-    height: 400px;
+    padding: 0 0 20vh 0;
+    color: white;
     text-align: center;
 `;
 const MainTextHead = styled.div`
     font-size: 2.5rem;
     font-weight: bold;
 `;
-const CircleWrapper = styled.div`
-    width: 170px;
-    height: 170px;
-    border: 50px solid rgba(0, 0, 0, 0.911);
-    border-top-color: rgba(121, 77, 162, 0.664);
-    border-radius: 50%;
-    animation: spinner 20s infinite;
-    animation-timing-function: linear;
-`;
 const MainContentButton = styled.button`
     margin-top: 10px;
-    background-color: black;
     list-style: none;
     border-radius: 10px;
-    color: white;
+
     width: 100px;
     height: 30px;
     cursor: pointer;
@@ -110,6 +100,4 @@ const Heart = styled.i`
     color: rgba(255, 0, 0, 0.87);
 `;
 
-const GoBoradButton = styled.div`
-    animation: godown 2s infinite;
-`;
+const GoBoradButton = styled.div``;

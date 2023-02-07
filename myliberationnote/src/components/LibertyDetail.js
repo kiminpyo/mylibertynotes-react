@@ -1,4 +1,4 @@
-import { Rating, styled } from "@mui/material";
+import { Rating } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,6 +7,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { DELETE_POST, LOAD_POST_DETAIL } from "../reducers/post";
 import { LOAD_ME } from "../reducers/user";
 import Auth from "../HOC/auth";
+import Hashtag from "./Hashtag";
+import styled from "@emotion/styled";
 const LibertyDetail = () => {
     const { id } = useParams();
     const post = useSelector((state) => state.post?.post);
@@ -66,10 +68,8 @@ const LibertyDetail = () => {
                     <div
                         className="liberty-writer-wrap"
                         style={{ display: "flex" }}>
-                        <div className="liberty-writer-label">글쓴이:</div>
-                        <div className="liberty-writer">
-                            {user && user.email}
-                        </div>
+                        <TextLabel>글쓴이:</TextLabel>
+                        <TextLabel>{user && user.email}</TextLabel>
                     </div>
                 </section>
                 <section>
@@ -81,9 +81,9 @@ const LibertyDetail = () => {
                             }}
                             id="hashtagArr">
                             <div>
-                                태그: &nbsp;{" "}
-                                {post.Hashtags?.map((v, i) => (
-                                    <span key={i}>{v.name}</span>
+                                <TextLabel>태그:</TextLabel>
+                                {post.Hashtags?.map((tag, i) => (
+                                    <Hashtag key={i} {...tag} />
                                 ))}
                             </div>
                         </div>
@@ -93,49 +93,24 @@ const LibertyDetail = () => {
                 <section className="liberty-textarea">{post.content}</section>
 
                 <section>
-                    <div
-                        style={{
-                            width: "100%",
-                            textAlign: "center",
-                            marginTop: "10px",
-                        }}>
+                    <ButtonWrap>
                         {user?.email != writer?.email ? null : (
                             <>
-                                <button
-                                    onClick={onLibertyDelete}
-                                    style={{
-                                        border: 0,
-                                        color: "black",
-                                        padding: "5px",
-                                        borderRadius: "5px",
-                                    }}>
+                                <CustomButton onClick={onLibertyDelete}>
                                     삭제
-                                </button>
-                                <button
-                                    onClick={onLibertyEdit}
-                                    style={{
-                                        border: 0,
-                                        color: "black",
-                                        padding: "5px",
-                                        borderRadius: "5px",
-                                    }}>
+                                </CustomButton>
+                                <CustomButton onClick={onLibertyEdit}>
                                     수정
-                                </button>
+                                </CustomButton>
                             </>
                         )}
-                        <button
+                        <CustomButton
                             onClick={() => {
                                 navigate("/liberty");
-                            }}
-                            style={{
-                                border: 0,
-                                color: "black",
-                                padding: "5px",
-                                borderRadius: "5px",
                             }}>
                             취소
-                        </button>
-                    </div>
+                        </CustomButton>
+                    </ButtonWrap>
                 </section>
             </div>
         </div>
@@ -152,3 +127,18 @@ const StyledRating = styled(Rating)({
         color: "#ff3d47",
     },
 });
+
+export const TextLabel = styled.span`
+    font-size: 0.7rem;
+`;
+const ButtonWrap = styled.div`
+    width: 100%;
+    text-align: center;
+    margin-top: 5vh;
+`;
+const CustomButton = styled.button`
+    border: 0px;
+    color: black;
+    margin: 5px;
+    font-size: 0.8srem;
+`;

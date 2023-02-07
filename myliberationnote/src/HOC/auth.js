@@ -1,16 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import requests from "../Axios/requests";
+import { AxiosInstance } from "../Axios/instance";
 
 const Auth = (SpecificComponent, option = null) => {
     const Authentication = () => {
         const navigate = useNavigate();
-
         useEffect(() => {
-            axios
-                .get("http://api.mylibertynotes.site/user", {
-                    withCredentials: true,
-                })
+            AxiosInstance.get(requests.fetchAuth)
                 // .get("http://localhost/user", {
                 //     withCredentials: true,
                 // })

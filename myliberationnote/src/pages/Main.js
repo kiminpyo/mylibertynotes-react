@@ -3,13 +3,18 @@ import MainContent from "../components/MainContent";
 import Auth from "../HOC/auth";
 import MiddleSide from "../components/AppLayout/MiddleSide";
 import axios from "axios";
+import styled from "@emotion/styled";
 const Main = () => {
     return (
-        <div>
+        <MainWrapper>
             <MiddleSide />
             <MainContent />
-        </div>
+        </MainWrapper>
     );
 };
 
 export default Auth(Main);
+
+const MainWrapper = styled.div`
+    background-color: black;
+`;

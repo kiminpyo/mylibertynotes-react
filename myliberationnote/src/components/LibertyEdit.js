@@ -135,7 +135,7 @@ const LibertyEdit = () => {
                 <HashtagForm>
                     <form onSubmit={onSaveHashtag}>
                         <HashtagListWrap>
-                            <span>Tag:</span>
+                            <span style={{ color: "white" }}>태그:</span>
                             <HashtagInput
                                 className="input"
                                 placeholder="입력"
@@ -237,11 +237,12 @@ const HashtagListWrap = styled.div`
 const HashtagInput = styled.input`
     border: 0px;
     width: 30%;
+    border-radius: 5px;
+    margin: 3px;
 `;
 const HashtagButton = styled.button`
-    padding: 5px 10px 5px 10px;
-    background: black;
+    background: white;
     border-radius: 10px;
-    color: white;
-    font-size: 1.1rem;
+    color: black;
+    font-size: 0.9rem;
 `;

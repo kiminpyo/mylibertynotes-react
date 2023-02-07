@@ -46,9 +46,17 @@ const MyPage = () => {
     };
     console.log(posts);
     return (
-        <>
-            <div style={{ width: "80%", marginLeft: "10%", marginTop: "5%" }}>
-                {email ? <div>{email}님의 기록</div> : undefined}
+        <MypageWrap>
+            <div
+                style={{
+                    width: "80%",
+                    marginLeft: "10%",
+                    paddingTop: "5%",
+                    color: "white",
+                }}>
+                {email ? (
+                    <div style={{ fontSize: "0.8rem" }}>{email}님의 기록</div>
+                ) : undefined}
                 <MypageSelect
                     name="liberty-mypage-option"
                     onChange={onClickLibertyOption}>
@@ -71,17 +79,23 @@ const MyPage = () => {
                     <LibertyCalendar events={events} />
                 )}
             </div>
-        </>
+        </MypageWrap>
     );
 };
 
 export default Auth(MyPage);
 
+const MypageWrap = styled.div`
+    background-color: black;
+    padding: 0 0 10vh 0;
+`;
 const MypageSelect = styled.select`
     margin: 10px 0 10px 0;
-    color: black;
+    color: white;
+    background-color: black;
     padding: 2px;
     border-radius: 10px;
+    font-size: 0.8rem;
 `;
 
 const MypageOption = styled.option``;

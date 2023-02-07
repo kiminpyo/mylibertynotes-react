@@ -30,14 +30,14 @@ export default Random;
 const Script = styled.div`
     width: 80%;
     margin: auto;
-    color: black;
+    color: white;
     font-weight: bold;
     font-size: 30px;
 `;
 
 const RandomText = styled.div`
     font-size: 1.5rem;
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 425px) {
         font-size: 1rem;
     }
 `;

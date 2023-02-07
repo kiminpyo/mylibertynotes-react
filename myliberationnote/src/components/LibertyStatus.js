@@ -27,7 +27,7 @@ const LibertyBubbleWrap = styled.div`
     border-radius: 20px;
     padding: 40px 10px 40px 10px;
     margin: 10px 0 10px 0;
-    font-size: 3vmax;
+    font-size: 2vmax;
 `;
 
 const Bold = styled.span`

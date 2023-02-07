@@ -10,8 +10,6 @@ import UpperSide from "./UpperSide";
 import Banner from "./MovingBanner";
 const AppLayout = () => {
     const { userInfo } = useSelector((state) => state?.user);
-    const dispatch = useDispatch();
-
     window.addEventListener("scroll", (e) => {
         scrollEvent(e);
     });
@@ -21,10 +19,10 @@ const AppLayout = () => {
             <HeadContainer>
                 <UpperSide {...userInfo} />
                 {/* <BottomSide /> */}
-                <Banner />
             </HeadContainer>
-            <div id="backToTop" onClick={onClickBackToTop}></div>
+            <BackToTop id="backToTop" onClick={onClickBackToTop} />
             <Outlet />
+            <Banner />
         </div>
     );
 };
@@ -33,10 +31,10 @@ export default AppLayout;
 
 const HeadContainer = styled.div`
     background-color: black;
-    /* background-color: whitesmoke; */
+    padding: 10px 0 10px 0;
 
     @media screen and (max-width: 425px) {
-        /* background: rgb(106 76 98 / 12%); */
         padding: 5px 0 5px 0;
     }
 `;
+const BackToTop = styled.div``;

@@ -14,7 +14,7 @@ const LibertyCalendar = ({ events }) => {
     };
 
     return (
-        <div style={{ fontSize: "2rem" }}>
+        <CalendarWrapper>
             <FullCalendar
                 headerToolbar={headerToolbar}
                 contentHeight={"500px"}
@@ -29,7 +29,7 @@ const LibertyCalendar = ({ events }) => {
                 eventBackgroundColor="black"
                 eventBorderColor="black"
             />
-        </div>
+        </CalendarWrapper>
     );
 };
 
@@ -38,3 +38,5 @@ export default LibertyCalendar;
 const MycustomButton = styled.button`
     background-color: red;
 `;
+
+const CalendarWrapper = styled.div``;

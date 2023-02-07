@@ -3,7 +3,6 @@
     animation-duration: 4s;
 }
 
-
 @keyframes movingBanner {
     from {
         transform: translateX(-50px);
@@ -22,7 +21,15 @@
     }
 }
 
-
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        display: none;
+        opacity: 0;
+    }
+}
 
 @keyframes spinner {
     from {
@@ -34,10 +41,10 @@
 }
 @keyframes godown {
     from {
-        transform: translateY(0px);
+        padding: 0px;
     }
     to {
-        transform: translateY(10px);
+        padding-bottom: 30px;
     }
 }
 @keyframes goleft {

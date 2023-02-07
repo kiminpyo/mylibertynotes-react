@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
@@ -8,18 +8,17 @@ import { useSelector } from "react-redux";
 const ReactiveHeader = () => {
     const navigate = useNavigate();
     const { userInfo } = useSelector((state) => state?.user);
-    const onClickMenu = () => {
+    const onClickMenu = useCallback(() => {
         setActive((prev) => !prev);
-    };
+    }, []);
+
     const [active, setActive] = useState(false);
     const onClickNav = (path) => {
         setActive((prev) => !prev);
-        if (!userInfo) {
-            return navigate("/login");
-        }
 
         navigate(`/${path}`);
     };
+
     return (
         <>
             <HeaderReactiveMenuWrap>
@@ -55,8 +54,6 @@ const ReactiveHeader = () => {
 export default ReactiveHeader;
 
 const HeaderReactiveMenuWrap = styled.div`
-    width: 40%;
-    height: 40%;
     user-select: none;
     @media screen and (min-width: 425px) {
         display: none;
@@ -67,23 +64,20 @@ const IconWrap = styled.div`
     width: 30px;
     height: 30px;
     right: 5%;
-    top: 12px;
-    color: black;
+    top: 20px;
+    color: white;
     position: absolute;
     text-align: center;
     line-height: 1.7;
-    background-color: white;
+
     border-radius: 50%;
-    :hover {
-        background-color: whitesmoke;
-    }
 `;
 const HeaderMenu = styled.div`
     width: 100%;
     left: 0;
-    color: black;
+    color: white;
     text-align: center;
-    background-color: whitesmoke;
+    background-color: black;
     border-radius: 3px;
     top: 57px;
     position: absolute;

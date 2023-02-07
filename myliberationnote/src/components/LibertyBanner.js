@@ -21,7 +21,7 @@ const BannerWrapper = styled.div`
 `;
 const Banner = styled.div`
     text-align: center;
-    color: black;
+    color: white;
     justify-items: center;
     font-size: 3v;
     height: 8vh;

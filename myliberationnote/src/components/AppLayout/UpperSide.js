@@ -29,7 +29,6 @@ const UpperSide = (userInfo) => {
         <HeadUpperSide>
             <NavStyle to="/">
                 <MainLogo>
-                    {/* <LogoImg src={mainImg} alt="나의 해방일지" /> */}
                     <SubLogo>Liberty Notes</SubLogo>
                 </MainLogo>
             </NavStyle>
@@ -66,7 +65,7 @@ const UpperSide = (userInfo) => {
                     <>
                         <div>
                             <NavStyle style={{ color: "white" }} to="/login">
-                                로그인
+                                Log in
                             </NavStyle>
                         </div>
                     </>
@@ -76,6 +75,7 @@ const UpperSide = (userInfo) => {
                     </>
                 )}
             </NavBarRight>
+            {/* <ModeSelect /> */}
             <ReactiveHeader />
             {/* <HeadRightDown>
                 <Time />
@@ -102,26 +102,19 @@ const MainLogo = styled.div`
     }
 `;
 
-const HeadRightDown = styled.div`
-    margin-right: 100px; ;
-`;
-const LogoImg = styled.img`
-    width: 180px;
-    height: 30px;
-`;
 const SubLogo = styled.div`
     color: white;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     font-weight: bold;
     margin-left: 8px;
-    font-size: 0.6rem;
+    font-size: 0.9rem;
 `;
 
 //
-
 const NavBar = styled.nav`
     display: flex;
+    margin-right: 7%;
     @media screen and (max-width: 425px) {
         display: none;
     }
@@ -130,9 +123,11 @@ const NavBar = styled.nav`
 const NavBarLeft = styled.div`
     display: flex;
     font-size: 0.8rem;
-
     > div {
-        color: black;
+        color: white;
+    }
+    > div > a {
+        color: white;
     }
 `;
 
@@ -142,7 +137,7 @@ const NavBarRight = styled.div`
         padding: 0 10px 0 5px;
     }
     @media screen and (max-width: 425px) {
-        width: 50%;
+        width: 20%;
         text-align: end;
     }
 `;
@@ -154,4 +149,11 @@ const NavBarCategory = styled.div`
 
 const NavStyle = styled(NavLink)`
     font-size: 0.7rem;
+`;
+
+const ModeSelect = styled.div`
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;
 `;

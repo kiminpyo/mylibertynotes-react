@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import {  Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { useTabs } from "../hooks/useTabs";
 import styled from "@emotion/styled";
 import {
@@ -28,28 +28,27 @@ ChartJS.register(
 );
 
 const LibertyChart = ({ events }) => {
-
     const chartRef = useRef();
     const sortedEvents = events?.sort((a, b) => a.id - b.id);
     const Tab = [
         {
             title: "week",
             ratingOptions: sortedEvents?.map((v) => v.rating).splice(-7),
-            label: sortedEvents?.map((v) => v.date.slice(6, 10)).splice(-7),
+            label: sortedEvents?.map((v) => v.date.slice(8, 10)).splice(-7),
             drinkOptions: sortedEvents?.map((v) => v.drink).splice(-7),
             smokeOptions: sortedEvents?.map((v) => v.smoke).splice(-7),
         },
         {
             title: "month",
             ratingOptions: sortedEvents?.map((v) => v.rating).splice(-30),
-            label: sortedEvents?.map((v) => v.date.slice(6, 10)).splice(-30),
+            label: sortedEvents?.map((v) => v.date.slice(8, 10)).splice(-30),
             drinkOptions: sortedEvents?.map((v) => v.drink).splice(-30),
             smokeOptions: sortedEvents?.map((v) => v.smoke).splice(-30),
         },
         {
             title: "total",
             ratingOptions: sortedEvents?.map((v) => v.rating),
-            label: sortedEvents?.map((v) => v.date.slice(6, 10)),
+            label: sortedEvents?.map((v) => v.date.slice(8, 10)),
             drinkOptions: sortedEvents?.map((v) => v.drink),
             smokeOptions: sortedEvents?.map((v) => v.smoke),
         },
@@ -71,7 +70,7 @@ const LibertyChart = ({ events }) => {
             },
             y: {
                 ticks: {
-                    stepSize: 2,
+                    stepSize: 1,
                 },
                 title: {
                     display: true,
@@ -79,15 +78,15 @@ const LibertyChart = ({ events }) => {
                     color: "#911",
                     font: {
                         family: "Comic Sans MS",
-                        size: 7,
+                        size: 10,
                         weight: "bold",
-                        lineHeight: 2,
+                        lineHeight: 1,
                     },
                 },
                 grid: {
                     color: function (context) {
                         if ((context.tick.value === 4) & 5) {
-                            return "black ";
+                            return "white ";
                         }
                         return "#DBD4D3 ";
                     },
@@ -103,14 +102,13 @@ const LibertyChart = ({ events }) => {
     const barData = {
         datasets: [
             {
-                label: "fd",
+                label: "rating",
                 data: currentItem.ratingOptions,
                 backgroundColor: function (context) {
-                    return "#C2402D ";
+                    return "#FC1F00 ";
                 },
                 borderColor: "#FC1F00",
                 borderWidth: 1,
-                borderRadius: 7,
             },
             {
                 label: "drink",
@@ -119,8 +117,7 @@ const LibertyChart = ({ events }) => {
                     return "green ";
                 },
                 borderColor: "green",
-                borderWidth: 4,
-                borderRadius: 7,
+                borderWidth: 1,
             },
             {
                 label: "smoke",
@@ -130,7 +127,6 @@ const LibertyChart = ({ events }) => {
                 },
                 borderColor: "yellow",
                 borderWidth: 1,
-                borderRadius: 7,
             },
         ],
     };

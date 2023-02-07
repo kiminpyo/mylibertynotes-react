@@ -54,38 +54,6 @@ const LibertyItem = ({ item }) => {
             <LibertyItemContentWrapper
                 className="liberty-item-content-wrap"
                 onClick={onLibertyDetail}>
-                {/* <LibertyItemRating>
-                    <StyledRating
-                        name="rating"
-                        precision={0.5}
-                        value={parseInt(item.rating)}
-                        icon={<FavoriteIcon />}
-                        emptyIcon={<FavoriteBorderIcon />}
-                        readOnly
-                    />
-                </LibertyItemRating> */}
-
-                {/* <LibertyItemRating>
-                    <StyledRating
-                        name="rating"
-                        precision={0.5}
-                        value={parseInt(item.drink)}
-                        icon={<SportsBarIcon />}
-                        emptyIcon={<SportsBarIcon />}
-                        readOnly
-                    />
-                </LibertyItemRating> */}
-                {/* <LibertyItemRating>
-                    <StyledRating
-                        name="rating"
-                        precision={0.5}
-                        value={parseInt(item.smoke)}
-                        icon={<SmokingRooms />}
-                        emptyIcon={<SmokingRooms />}
-                        readOnly
-                    />
-                </LibertyItemRating> */}
-
                 <LibertyItemContent>{item.content}</LibertyItemContent>
 
                 <LinearProgressBox>
@@ -103,7 +71,7 @@ const LibertyItem = ({ item }) => {
                         variant="determinate"
                         value={drinkProgress}
                         barcolor="secondary"
-                        color="#ff9900"
+                        color="#F2E7DC"
                     />
                 </LinearProgressBox>
                 <LinearProgressBox>
@@ -158,7 +126,7 @@ const LibertyItemContentWrapper = styled.div`
     width: 16rem;
     height: 250px;
     border-radius: 5px;
-    background-color: rgba(63, 9, 63, 0.795);
+    background-color: #46373B;
     @media screen and (max-width: 420px) {
         height: 180px;
         margin-bottom: 1rem;

@@ -36,7 +36,9 @@ const Introduce = () => {
                 사랑해보면 어떨까? 관계에서 한 번도 채워진 적이 없기에 이렇게
                 무기력한 것 아닐까?
                 <br />
-                <div style={{ textAlign: "center" }}>-나의 해방일지 中-</div>
+                <div style={{ textAlign: "center", marginTop: "10px" }}>
+                    -나의 해방일지 中-
+                </div>
             </IntroContent>
         </IntroContentWrap>
     );
@@ -45,25 +47,21 @@ const Introduce = () => {
 export default Introduce;
 
 const IntroContentWrap = styled.div`
-    margin-top: 100px;
-    margin-bottom: 300px;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
 `;
 
 const IntroTitle = styled.div`
     text-align: center;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
 `;
 
 const IntroContent = styled.div`
     overflow-x: auto;
-    height: 300px;
-    padding: 50px;
+    padding: 10px;
     margin: auto;
-    margin-top: 50px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     line-height: 1.3;
     word-spacing: 0.2rem;
-    width: 70%;
-    box-shadow: 60px 40px 15px 1px rgba(0, 0, 255, 0.2);
 `;

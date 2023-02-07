@@ -25,7 +25,8 @@ const LibertyItemHashtag = styled.span`
     padding: 7px;
     margin-left: 10px;
     background-color: black;
-    color: whitesmoke;
+    color: black;
+    background-color: #876972;
     font-size: 0.6rem;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     border-radius: 10px;

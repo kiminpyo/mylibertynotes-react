@@ -44,22 +44,26 @@ const Liberty = () => {
     };
 
     return (
-        <LibertyWrapper>
-            <LibertyBanner />
-            <LibertyItemWrap>
-                {posts?.map((item, i) => (
-                    <LibertyItem item={item} key={i} />
-                ))}
-            </LibertyItemWrap>
-            <AddPost onClick={onCreateSelf}>+</AddPost>
-            <div>{loading ? "로딩 중 입니다" : undefined}</div>
-            <div ref={observerTargetEl} id="observer" />
-        </LibertyWrapper>
+        <LibertyPage>
+            <LibertyWrapper>
+                <LibertyBanner />
+                <LibertyItemWrap>
+                    {posts?.map((item, i) => (
+                        <LibertyItem item={item} key={i} />
+                    ))}
+                </LibertyItemWrap>
+                <AddPost onClick={onCreateSelf}>+</AddPost>
+                <div>{loading ? "로딩 중 입니다" : undefined}</div>
+                <div ref={observerTargetEl} id="observer" />
+            </LibertyWrapper>
+        </LibertyPage>
     );
 };
 
 export default Auth(Liberty);
-
+export const LibertyPage = styled.div`
+    background-color: black;
+`;
 export const LibertyWrapper = styled.div`
     width: 80%;
     margin: auto;
@@ -75,14 +79,21 @@ export const LibertyItemWrap = styled.div`
 
 export const AddPost = styled.div`
     color: white;
-    line-height: 1.1;
+    line-height: 0.9;
     font-size: 40px;
     position: fixed;
     width: 40px;
     height: 40px;
-    bottom: 30px;
+    bottom: 60px;
     right: 30px;
     background-color: black;
     border-radius: 50%;
     text-align: center;
+    @media screen and (max-width: 425px) {
+        width: 30px;
+        right: 10px;
+        height: 30px;
+        bottom: 30px;
+        font-size: 30px;
+    }
 `;

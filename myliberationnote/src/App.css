@@ -1,8 +1,10 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap"); */
 html,
 body {
+    background-color: black;
     margin: 0px;
     padding: 0px;
+    color: white;
 }
 * {
     /* font-family: "Gaegu", cursive; */
@@ -42,22 +44,29 @@ Link {
 }
 
 .intro-content {
-    background-color: rgba(240, 240, 204, 0.219);
+    background-color: rgba(207, 207, 24, 0.219);
     border-radius: 20px;
+}
+.fc,
+.fc *,
+.fc *:before,
+.fc *:after {
+    color: white;
+    font-size: 0.6rem;
 }
 .intro-content:hover {
     transition: transform 0.2s linear;
     transform: translate3d(-3px, -3px, 2px);
 }
 #backToTop {
-    background-color: rgb(12, 12, 12);
+    background-color: rgb(232, 229, 229);
     width: 40px;
     height: 40px;
     text-align: center;
     /* border-radius를 width와 heigth의 중간값으로 하면 원이된다*/
     border-radius: 20px;
     position: fixed;
-    bottom: 90px;
+    bottom: 110px;
     right: 30px;
     transition-property: background-color, opacity, visibility;
     transition-duration: 0.3s, 0.5s, 0.5s;
@@ -73,7 +82,7 @@ Link {
 }
 #backToTop.show {
     opacity: 1;
-    background-color: rgba(167, 81, 127, 0.384);
+    background-color: rgb(54, 51, 51);
 }
 
 .popper {
@@ -87,7 +96,6 @@ Link {
     margin: auto;
 }
 .liberty-date {
-    margin-top: 12vh;
     text-align: center;
     font-size: 2rem;
 }
@@ -144,6 +152,7 @@ Link {
 }
 
 .liberty-textarea {
+    margin-top: 5vh;
     width: 100%;
     overflow: auto;
     white-space: pre-line;
@@ -154,6 +163,7 @@ Link {
     resize: vertical;
     border: none;
     border-radius: 5px;
+    color: black;
     background-color: #ececec;
 
     padding: 20px;
@@ -162,7 +172,6 @@ Link {
     content: "";
     margin-left: 0.6rem;
     border-right: 2px solid rgb(255, 255, 255);
-
     animation: cursor 0.9s infinite steps(2);
 }
 
@@ -214,7 +223,7 @@ Link {
         margin: auto;
     }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 425px) {
     .fc-today-button {
         display: none !important;
     }
@@ -232,7 +241,6 @@ Link {
     .main-content {
         width: 80%;
         height: 80%;
-
         border: 30px solid rgba(0, 0, 0, 0.911);
         border-top-color: rgba(121, 77, 162, 0.664);
         border-left-color: rgba(121, 77, 162, 0.664);
@@ -285,17 +293,40 @@ Link {
         width: 80%;
         margin: auto;
     }
+    /* back to top */
+    #backToTop {
+        background-color: rgb(12, 12, 12);
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        /* border-radius를 width와 heigth의 중간값으로 하면 원이된다*/
+        border-radius: 20px;
+        position: fixed;
+        bottom: 70px;
+        right: 10px;
+        transition-property: background-color, opacity, visibility;
+        transition-duration: 0.3s, 0.5s, 0.5s;
+        opacity: 0;
+    }
+    #backToTop::after {
+        content: "\f077";
+        font-family: FontAwesome;
+        font-size: 1rem;
+        /* line-height는 height값으로 쓰면 중앙으로 된다. */
+        line-height: 30px;
+        color: rgb(255, 255, 255);
+    }
+    #backToTop.show {
+        opacity: 1;
+        background-color: rgb(74, 68, 68);
+    }
 }
 
 @media screen and (max-width: 320px) {
     /* 소개글 */
 
     /* 앱헤더  */
-    .random {
-        width: 80%;
-        font-size: 1rem;
-        color: white;
-    }
+
     .head-navbar > div > a {
         font-size: 0.8rem;
     }
