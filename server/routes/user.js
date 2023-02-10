@@ -4,12 +4,16 @@ const passport = require("passport");
 const router = express.Router();
 const { Op } = require("sequelize");
 const { User, Post } = require("../models");
+const requestIp = require("request-ip");
 
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 router.get("/", isLoggedIn, async (req, res, next) => {
     try {
         if (req.user) {
+            console.log(req.user);
+            let ip = requestIp.getClientIp(req);
+            console.log(ip + "사용자 ip");
             const fullUserWithoutPassword = await User.findOne({
                 where: { id: req.user.id },
                 attributes: {
@@ -20,7 +24,14 @@ router.get("/", isLoggedIn, async (req, res, next) => {
                         limit: 30,
                         order: [["createdAt", "DESC"]],
                         model: Post,
-                        attributes: ["id", "content", "rating", "createdAt","drink","smoke"],
+                        attributes: [
+                            "id",
+                            "content",
+                            "rating",
+                            "createdAt",
+                            "drink",
+                            "smoke",
+                        ],
                     },
                 ],
             });

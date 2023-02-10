@@ -1,24 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { LOAD_ME } from "../../reducers/user";
+import { useSelector } from "react-redux";
 import { scrollEvent } from "../../utils/scrollEvent";
 import { onClickBackToTop } from "../../utils/backToTop";
 import styled from "@emotion/styled";
-
 import UpperSide from "./UpperSide";
 import Banner from "./MovingBanner";
+
 const AppLayout = () => {
     const { userInfo } = useSelector((state) => state?.user);
     window.addEventListener("scroll", (e) => {
         scrollEvent(e);
     });
-
     return (
         <div>
             <HeadContainer>
                 <UpperSide {...userInfo} />
-                {/* <BottomSide /> */}
             </HeadContainer>
             <BackToTop id="backToTop" onClick={onClickBackToTop} />
             <Outlet />

@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
-import { Tooltip } from "@mui/material";
 import React from "react";
 import { useTyping } from "../hooks/useTyping";
-
 import { script } from "../store/dummyScript";
 const Random = React.memo(() => {
     const randonNum = Math.floor(
@@ -37,6 +35,7 @@ const Script = styled.div`
 
 const RandomText = styled.div`
     font-size: 1.5rem;
+
     @media screen and (max-width: 425px) {
         font-size: 1rem;
     }

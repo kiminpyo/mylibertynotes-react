@@ -147,9 +147,9 @@ Link {
 }
 
 /*  혼재해방 리스트 아이템 */
-.liberty-item-content-wrap:hover {
+/* .liberty-item-content-wrap:hover {
     animation-fill-mode: both;
-}
+} */
 
 .liberty-textarea {
     margin-top: 5vh;

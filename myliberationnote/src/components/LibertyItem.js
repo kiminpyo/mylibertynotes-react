@@ -7,6 +7,7 @@ import SmokingRooms from "@mui/icons-material/SmokingRooms";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import CoffeeIcon from "@mui/icons-material/Coffee";
+import { useSelector } from "react-redux";
 
 export const LinearProgressWithLabel = (props) => {
     return (
@@ -25,8 +26,8 @@ export const LinearProgressWithLabel = (props) => {
     );
 };
 const LibertyItem = ({ item }) => {
-    // const { email, id } = item?.User;
-
+    const email = item?.User?.email;
+    const { userInfo } = useSelector((state) => state.user);
     const [ratingProgress, setRatingProgress] = React.useState(0);
     const [drinkProgress, setDrinkProgress] = React.useState(0);
     const [smokeProgress, setSmokeProgress] = React.useState(0);
@@ -34,6 +35,7 @@ const LibertyItem = ({ item }) => {
         width: "80%",
         margin: "auto",
     });
+
     useEffect(() => {
         setRatingProgress(() => item.rating * 20);
         setDrinkProgress(() => item.drink * 20);
@@ -52,49 +54,54 @@ const LibertyItem = ({ item }) => {
                 ))}
             </LibertyItemTagWrap>
             <LibertyItemContentWrapper
-                className="liberty-item-content-wrap"
+                // className="liberty-item-content-wrap"
                 onClick={onLibertyDetail}>
+                <div style={{ width: "80%" }}>
+                    {/* 내 글 일때 */}
+                    {email === userInfo?.email ? <MyPostCheck /> : null}
+                </div>
                 <LibertyItemContent>{item.content}</LibertyItemContent>
+                <div>
+                    <LinearProgressBox>
+                        <LinearProgressWithLabel
+                            component={<FavoriteIcon fontSize="small" />}
+                            color="#ff4336"
+                            barcolor="secondary"
+                            variant="determinate"
+                            value={ratingProgress}
+                        />
+                    </LinearProgressBox>
+                    <LinearProgressBox>
+                        <LinearProgressWithLabel
+                            component={<CoffeeIcon fontSize="small" />}
+                            variant="determinate"
+                            value={drinkProgress}
+                            barcolor="secondary"
+                            color="#F2E7DC"
+                        />
+                    </LinearProgressBox>
+                    <LinearProgressBox>
+                        <LinearProgressWithLabel
+                            component={<SmokingRooms fontSize="small" />}
+                            variant="determinate"
+                            value={smokeProgress}
+                            barcolor="secondary"
+                            color="#ceb1b1"
+                        />
+                    </LinearProgressBox>
+                </div>
 
-                <LinearProgressBox>
-                    <LinearProgressWithLabel
-                        component={<FavoriteIcon fontSize="small" />}
-                        color="#ff4336"
-                        barcolor="secondary"
-                        variant="determinate"
-                        value={ratingProgress}
-                    />
-                </LinearProgressBox>
-                <LinearProgressBox>
-                    <LinearProgressWithLabel
-                        component={<CoffeeIcon fontSize="small" />}
-                        variant="determinate"
-                        value={drinkProgress}
-                        barcolor="secondary"
-                        color="#F2E7DC"
-                    />
-                </LinearProgressBox>
-                <LinearProgressBox>
-                    <LinearProgressWithLabel
-                        component={<SmokingRooms fontSize="small" />}
-                        variant="determinate"
-                        value={smokeProgress}
-                        barcolor="secondary"
-                        color="#ceb1b1"
-                    />
-                </LinearProgressBox>
                 <div
                     style={{
                         fontWeight: "bold",
-                        marginTop: "1.5vh",
                         width: "90%",
                         margin: "auto",
                         display: "flex",
                         justifyContent: "space-between",
                     }}>
-                    {/* {email ? (
+                    {email ? (
                         <div style={{ fontSize: "0.6rem" }}>{email}</div>
-                    ) : null} */}
+                    ) : null}
                     <LibertyItemDate>
                         {item.createdAt?.slice(0, 10)}
                     </LibertyItemDate>
@@ -119,14 +126,20 @@ const LibertyItemTagWrap = styled.div`
     margin: auto;
     padding: 5px;
 `;
+const MyPostCheck = styled.div`
+    border: 10px solid #fc5801cf;
 
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    margin-left: 110%;
+`;
 const LibertyItemContentWrapper = styled.div`
     margin: auto;
     margin-bottom: 2rem;
     width: 16rem;
     height: 250px;
     border-radius: 5px;
-    background-color: #46373B;
+    background-color: #46373b;
     @media screen and (max-width: 420px) {
         height: 180px;
         margin-bottom: 1rem;
@@ -138,6 +151,7 @@ const LibertyItemRating = styled.div`
     text-align: center;
 `;
 const LibertyItemContent = styled.div`
+    font-size: 0.8rem;
     padding: 10px;
     width: 80%;
     height: 100px;

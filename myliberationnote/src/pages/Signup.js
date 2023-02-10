@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { SIGNUP } from "../reducers/user";
 import { useNavigate } from "react-router-dom";
+import Auth from "../HOC/auth";
 const Signup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const Signup = () => {
             data: { email: data.get("email"), password: data.get("password") },
         });
         alert("회원가입이 완료 되었습니다.");
-        navigate("/");
+        return navigate("/login");
     };
 
     return (
@@ -114,4 +115,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default Auth(Signup, false);

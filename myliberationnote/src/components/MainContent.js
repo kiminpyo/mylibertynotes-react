@@ -27,7 +27,7 @@ const MainContent = () => {
                     </MainTextPictureSide>
                 </MainTextPicture>
                 <MainTextContent className="main-text-content">
-                    저에게 들려주시겠어요?
+                    들려주시겠어요?
                     <br />
                     <GoBoradButton className="fa-solid fa-circle-down go-board" />
                     <br />
@@ -58,6 +58,7 @@ const MainContentButton = styled.button`
     margin-top: 10px;
     list-style: none;
     border-radius: 10px;
+    border: none;
 
     width: 100px;
     height: 30px;
@@ -87,7 +88,7 @@ const MainTextPictureSide = styled.div`
     width: 150px;
     padding: 10px 0 10px 0;
     margin: 0 10px 0 10px;
-    background: rgba(121, 77, 162, 0.664);
+    background: #46373b;
     border-radius: 40%;
     opacity: 0.7;
     animation: shaking 1s infinite;

@@ -160,4 +160,12 @@ const LibertyChartOptions = styled.button`
     margin: 3px;
     color: white;
     border-radius: 3px;
+    @media screen and (max-width: 425px) {
+        font-size: 0.6rem;
+        border: 1px solid white;
+        font-weight: 500;
+    }
+    :hover {
+        background-color: red;
+    }
 `;

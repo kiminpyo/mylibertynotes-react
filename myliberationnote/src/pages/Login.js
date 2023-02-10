@@ -22,7 +22,7 @@ const Login = () => {
     const theme = createTheme();
     useEffect(() => {
         if (userInfo != null) {
-            return navigate("/");
+            return navigate(-1);
         }
     }, [userInfo]);
 

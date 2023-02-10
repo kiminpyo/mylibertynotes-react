@@ -39,12 +39,6 @@ const BottomSide = (userInfo) => {
                 <NavBarCategory
                     // className="mypage"
                     onClick={() => {
-                        if (!userInfo) {
-                            alert("로그인 이후에 접속이 가능해요");
-                            return navigate("/login");
-                        } else {
-                            navigate("/mypage");
-                        }
                         return navigate("/mypage");
                     }}>
                     마이페이지

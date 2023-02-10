@@ -8,16 +8,12 @@ import {
     LOG_OUT,
     SIGNUP,
 } from "../reducers/user";
-
 function userLoginAPI(data) {
     return axios.post("/user/login", data);
 }
-
 function* userLogin(action) {
     try {
         const result = yield call(userLoginAPI, action.data);
-
-
         yield put({
             type: LOGIN_SUCCESS,
             data: result.data,
@@ -28,10 +24,8 @@ function* userLogin(action) {
 }
 
 function userSignupAPI(data) {
-
     return axios.post("/user/signup", data);
 }
-
 function* userSignup(action) {
     try {
         const result = yield call(userSignupAPI, action.data);
@@ -43,7 +37,6 @@ function* userSignup(action) {
 function userLoadMeAPI() {
     return axios.get("/user");
 }
-
 function* userLoadMe(action) {
     try {
         const result = yield call(userLoadMeAPI, action.data);
@@ -60,7 +53,6 @@ function* userLoadMe(action) {
 function userLogoutAPI() {
     return axios.post("/user/logout");
 }
-
 function* userLogout(action) {
     try {
         const result = yield call(userLogoutAPI, action.data);
@@ -78,7 +70,6 @@ function* watchSignup() {
 function* watchLoadMe() {
     yield takeLatest(LOAD_ME, userLoadMe);
 }
-
 function* watchLogout() {
     yield takeLatest(LOG_OUT, userLogout);
 }

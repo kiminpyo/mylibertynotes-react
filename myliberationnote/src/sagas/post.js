@@ -42,6 +42,7 @@ function* addPost(action) {
 }
 
 function loadPostsAPI(lastId) {
+    console.log(lastId);
     return axios.get(`/post?lastId=${lastId || 0}`);
 }
 

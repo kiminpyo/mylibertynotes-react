@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LibertyItem from "../components/LibertyItem";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS } from "../reducers/post";
@@ -11,38 +11,39 @@ const Liberty = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { posts, postscount } = useSelector((state) => state?.post);
-    const observerTargetEl = useRef(null);
-    const page = useRef(0);
-    const [loading, setLoading] = useState(false);
+    const [target, observerTargetEl] = useState(null);
+    const [lastText, setLastText] = useState(false);
+    const [loading, setLoading] = useState(true);
+    let page = useRef(0);
     useEffect(() => {
-        dispatch({
-            type: LOAD_POSTS,
-        });
-    }, []);
+        if (posts.length >= 82) {
+            setLoading(false);
+            setLastText((prev) => !prev);
+        }
+    }, [posts]);
     useEffect(() => {
-        if (!observerTargetEl.current) return;
-        const io = new IntersectionObserver((entries, observer) => {
-            if (entries[0].isIntersecting) {
-                dispatch({
-                    type: LOAD_POSTS,
-                    data: page.current++,
-                });
-            } else {
-                return;
-            }
-            setLoading(() => true);
-        });
-        io.observe(observerTargetEl.current);
-        return () => {
-            setLoading(() => false);
-            io.disconnect();
-        };
-    }, [observerTargetEl.current]);
-
+        let observe;
+        if (target) {
+            observe = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting && loading) {
+                            dispatch({
+                                type: LOAD_POSTS,
+                                data: page.current++,
+                            });
+                        }
+                    });
+                },
+                { threshold: 0.2 }
+            );
+                     observe.observe(target);
+        }
+        return () => observe && observe.disconnect();
+    }, [target]);
     const onCreateSelf = () => {
         return navigate("/libertyedit");
     };
-
     return (
         <LibertyPage>
             <LibertyWrapper>
@@ -52,15 +53,15 @@ const Liberty = () => {
                         <LibertyItem item={item} key={i} />
                     ))}
                 </LibertyItemWrap>
+                <div>{lastText ? "마지막 페이지 입니다" : undefined}</div>
                 <AddPost onClick={onCreateSelf}>+</AddPost>
-                <div>{loading ? "로딩 중 입니다" : undefined}</div>
-                <div ref={observerTargetEl} id="observer" />
+                <div ref={observerTargetEl} style={{ height: "1px" }} />
             </LibertyWrapper>
         </LibertyPage>
     );
 };
 
-export default Auth(Liberty);
+export default Auth(Liberty, true);
 export const LibertyPage = styled.div`
     background-color: black;
 `;

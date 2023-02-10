@@ -12,7 +12,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
             content: req.body.content,
             rating: req.body.rating,
             drink: req.body.drink,
-            smoke: req.body.smoke
+            smoke: req.body.smoke,
         });
         if (req.body.hashtag) {
             const hashtag = req.body.hashtag.split(",");
@@ -86,7 +86,7 @@ router.get("/:postId", isLoggedIn, async (req, res, next) => {
         }
         const fullPost = await Post.findOne({
             where: { id: post.id },
-            attributes: ["content", "rating", "id","smoke","drink"],
+            attributes: ["content", "rating", "id", "smoke", "drink"],
             include: [
                 {
                     model: User,
@@ -133,7 +133,7 @@ router.patch("/:postId", async (req, res, next) => {
                 content: req.body.content,
                 rating: req.body.rating,
                 drink: req.body.drink,
-                smoke: req.body.smoke
+                smoke: req.body.smoke,
             },
             {
                 where: {
@@ -147,7 +147,7 @@ router.patch("/:postId", async (req, res, next) => {
             content: req.body.content,
             rating: req.body.rating,
             drink: req.body.drink,
-            smoke: req.body.smoke
+            smoke: req.body.smoke,
         });
     } catch (err) {
         console.error(err);

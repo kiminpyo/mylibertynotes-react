@@ -32,7 +32,9 @@ db.sequelize
     .catch(console.error);
 
 passportConfig();
+
 if (process.env.NODE_ENV === "production") {
+    app.set("trust porxy", 1);
     app.use(morgan("combined"));
     app.use(hpp());
     app.use(helmet({ contentSecurityPolicy: false }));
@@ -59,6 +61,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
     session({
+        proxy: true,
         saveUninitialized: false,
         resave: false,
         secret: process.env.COOKIE_SECRET,
@@ -66,8 +69,8 @@ app.use(
             httpOnly: true,
             secure: false,
             domain:
-                process.env.NODE_ENV === "production" && ".mylibertynotes.site",
-            // process.env.NODE_ENV === "production" && "localhost:3000",
+                // process.env.NODE_ENV === "production" && ".mylibertynotes.site",
+                process.env.NODE_ENV === "production" && "localhost:3000",
         },
     })
 );

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import requests from "../Axios/requests";
@@ -9,21 +8,23 @@ const Auth = (SpecificComponent, option = null) => {
         const navigate = useNavigate();
         useEffect(() => {
             AxiosInstance.get(requests.fetchAuth)
-                // .get("http://localhost/user", {
-                //     withCredentials: true,
-                // })
+                // axios
+                //     .get("http://localhost/user", {
+                //         withCredentials: true,
+                //     })
                 .then((res) => {
-                    if (option) {
-                        // 로그인을 하지 않았다면,
-
-                        if (!res.data?.email) {
-                            alert("로그인 후 이용해주세요");
-                            return navigate("/login");
-                        }
-                        //  로그인을 했는데 로그인 페이지에 접속 시
-                    } else if (option === false) {
+                    if (option === false) {
                         if (res.data?.email) {
                             return navigate("/");
+                        }
+                    }
+                })
+                .catch((res) => {
+                    if (option) {
+                        // 로그인을 하지 않았다면,
+                        if (!res.data) {
+                            alert("로그인 후 이용해주세요");
+                            return navigate("/login");
                         }
                     }
                 });
