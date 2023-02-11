@@ -126,7 +126,6 @@ const LibertyItemTagWrap = styled.div`
 `;
 const MyPostCheck = styled.div`
     border: 10px solid #fc5801cf;
-
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
     margin-left: 110%;
@@ -158,7 +157,7 @@ const LibertyItemContent = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     @media screen and (max-width: 420px) {
-        height: 60px;
+        height: 40px;
     }
 `;
 

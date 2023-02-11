@@ -67,9 +67,13 @@ const LibertyEdit = () => {
             alert("개시글은 3개까지만!");
             return;
         }
+        if (hashtag.length >= 20) {
+            return alert("20자 미만으로");
+        }
         if (hashtag.match(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/gi) || hashtag.trim() == "") {
             return setEmptyMessage(true);
         }
+        console.log("hi");
         div.innerText = hashtag;
         hashtagListWrap.append(div);
         setEmptyMessage(false);
@@ -110,7 +114,7 @@ const LibertyEdit = () => {
                     onChange={onChangeDrink}
                     value={parseInt(editDrink)}
                     size="medium"
-                    icon={<SportsBarIcon />}
+                    icon={<SportsBarIcon style={{ color: "yellow" }} />}
                     emptyIcon={<SportsBarIcon />}
                 />
             </section>
@@ -119,7 +123,7 @@ const LibertyEdit = () => {
                     onChange={onChangeSmoke}
                     value={parseInt(editSmoke)}
                     size="medium"
-                    icon={<SmokingRoomsIcon />}
+                    icon={<SmokingRoomsIcon style={{ color: "#c46b91" }} />}
                     emptyIcon={<SmokingRoomsIcon />}
                 />
             </section>

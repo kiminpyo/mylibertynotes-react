@@ -10,18 +10,17 @@ module.exports = class Post extends Model {
                     allowNull: false,
                 },
                 rating: {
-                    type: DataTypes.STRING(20),
+                    type: DataTypes.STRING(5),
                     allowNull: false,
                 },
                 drink: {
-                    type: DataTypes.STRING(20),
+                    type: DataTypes.STRING(5),
                     allowNull: false,
                 },
                 smoke: {
-                    type: DataTypes.STRING(20),
+                    type: DataTypes.STRING(5),
                     allowNull: false,
                 },
-              
             },
             {
                 modelName: "Post",

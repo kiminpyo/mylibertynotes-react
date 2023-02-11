@@ -174,7 +174,9 @@ Link {
     border-right: 2px solid rgb(255, 255, 255);
     animation: cursor 0.9s infinite steps(2);
 }
-
+.MuiRating-iconEmpty {
+    color: white !important;
+}
 /* 뉴스페이지 */
 @media screen and (max-width: 1024px) {
     /* 혼자해방리스트 */

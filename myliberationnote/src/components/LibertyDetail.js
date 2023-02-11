@@ -72,7 +72,7 @@ const LibertyDetail = () => {
                         disabled
                         value={parseInt(post.drink)}
                         size="medium"
-                        icon={<SportsBarIcon />}
+                        icon={<SportsBarIcon style={{ color: "yellow" }} />}
                         emptyIcon={<SportsBarIcon />}
                     />
                 </section>
@@ -82,7 +82,7 @@ const LibertyDetail = () => {
                         precision={0.5}
                         value={parseInt(post.smoke)}
                         size="medium"
-                        icon={<SmokingRoomsIcon />}
+                        icon={<SmokingRoomsIcon style={{ color: "#c46b91" }} />}
                         emptyIcon={<SmokingRoomsIcon />}
                     />
                 </section>
