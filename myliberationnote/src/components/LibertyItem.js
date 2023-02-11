@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "@emotion/styled";
+import { useSelector } from "react-redux";
 import Hashtag from "./Hashtag";
+
+import styled from "@emotion/styled";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import SmokingRooms from "@mui/icons-material/SmokingRooms";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import CoffeeIcon from "@mui/icons-material/Coffee";
-import { useSelector } from "react-redux";
 
 export const LinearProgressWithLabel = (props) => {
     return (
@@ -26,22 +27,19 @@ export const LinearProgressWithLabel = (props) => {
     );
 };
 const LibertyItem = ({ item }) => {
-    const email = item?.User?.email;
+    const navigate = useNavigate();
+    const email = item.User?.email;
+    const { rating, drink, smoke } = item;
     const { userInfo } = useSelector((state) => state.user);
-    const [ratingProgress, setRatingProgress] = React.useState(0);
-    const [drinkProgress, setDrinkProgress] = React.useState(0);
-    const [smokeProgress, setSmokeProgress] = React.useState(0);
+    // const [ratingProgress, setRatingProgress] = useState(0 || item.rating);
+    // const [drinkProgress, setDrinkProgress] = useState(0 || item.drink);
+    // const [smokeProgress, setSmokeProgress] = useState(0 || item.smoke);
     const LinearProgressBox = styled(Box)({
         width: "80%",
         margin: "auto",
     });
+    console.log(item);
 
-    useEffect(() => {
-        setRatingProgress(() => item.rating * 20);
-        setDrinkProgress(() => item.drink * 20);
-        setSmokeProgress(() => item.smoke * 20);
-    }, []);
-    const navigate = useNavigate();
     const onLibertyDetail = () => {
         navigate(`/liberty/${item.id}`);
     };
@@ -68,14 +66,14 @@ const LibertyItem = ({ item }) => {
                             color="#ff4336"
                             barcolor="secondary"
                             variant="determinate"
-                            value={ratingProgress}
+                            value={(rating * 20) | 0}
                         />
                     </LinearProgressBox>
                     <LinearProgressBox>
                         <LinearProgressWithLabel
                             component={<CoffeeIcon fontSize="small" />}
                             variant="determinate"
-                            value={drinkProgress}
+                            value={(drink * 20) | 0}
                             barcolor="secondary"
                             color="#F2E7DC"
                         />
@@ -84,7 +82,7 @@ const LibertyItem = ({ item }) => {
                         <LinearProgressWithLabel
                             component={<SmokingRooms fontSize="small" />}
                             variant="determinate"
-                            value={smokeProgress}
+                            value={(smoke * 20) | 0}
                             barcolor="secondary"
                             color="#ceb1b1"
                         />

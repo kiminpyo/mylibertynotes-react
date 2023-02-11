@@ -83,7 +83,7 @@ function editPostAPI(data) {
 function* editPost(action) {
     try {
         const result = yield call(editPostAPI, action.data);
-
+        console.log(result.data);
         yield put({
             type: EDIT_POST_SUCCESS,
             data: result.data,

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ADD_POST, EDIT_POST } from "../reducers/post";
 import Auth from "../HOC/auth";
+
 import styled from "@emotion/styled";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -16,8 +17,8 @@ const LibertyEdit = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [editRating, setEditRating] = useState(state?.rating || 0);
-    const [editDrink, setEditDrink] = useState(state?.rating || 0);
-    const [editSmoke, setEditSmoke] = useState(state?.rating || 0);
+    const [editDrink, setEditDrink] = useState(state?.drink || 0);
+    const [editSmoke, setEditSmoke] = useState(state?.smoke || 0);
     const [editContent, setEditContent] = useState(state?.content || "");
     const [hashtag, setHashtag] = useState("");
     const [emptyMessage, setEmptyMessage] = useState(false);
@@ -106,24 +107,28 @@ const LibertyEdit = () => {
             </section>
             <section className="liberty-rating">
                 <StyledHeart
-                    onChange={onChangeSmoke}
-                    size="medium"
-                    icon={<SmokingRoomsIcon />}
-                    emptyIcon={<SmokingRoomsIcon />}
-                />
-            </section>
-            <section className="liberty-rating">
-                <StyledHeart
                     onChange={onChangeDrink}
+                    value={parseInt(editDrink)}
                     size="medium"
                     icon={<SportsBarIcon />}
                     emptyIcon={<SportsBarIcon />}
                 />
             </section>
+            <section className="liberty-rating">
+                <StyledHeart
+                    onChange={onChangeSmoke}
+                    value={parseInt(editSmoke)}
+                    size="medium"
+                    icon={<SmokingRoomsIcon />}
+                    emptyIcon={<SmokingRoomsIcon />}
+                />
+            </section>
+
             <section>
                 <section style={{ display: "flex" }}>
-                    {state?.hashtag.map((v) => (
+                    {state?.hashtag.map((v, i) => (
                         <div
+                            key={i}
                             style={{
                                 textAlign: "start",
                                 opacity: "0.5",

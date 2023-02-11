@@ -3,9 +3,10 @@ import LibertyItem from "../components/LibertyItem";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS } from "../reducers/post";
 import { useNavigate } from "react-router-dom";
-import Auth from "../HOC/auth";
-import styled from "@emotion/styled";
 import LibertyBanner from "../components/LibertyBanner";
+import Auth from "../HOC/auth";
+
+import styled from "@emotion/styled";
 
 const Liberty = () => {
     const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const Liberty = () => {
                 },
                 { threshold: 0.2 }
             );
-                     observe.observe(target);
+            observe.observe(target);
         }
         return () => observe && observe.disconnect();
     }, [target]);

@@ -1,21 +1,25 @@
-import { Rating } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { DELETE_POST, LOAD_POST_DETAIL } from "../reducers/post";
-import { LOAD_ME } from "../reducers/user";
 import Auth from "../HOC/auth";
 import Hashtag from "./Hashtag";
+
+import { Rating } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import styled from "@emotion/styled";
+import SportsBarIcon from "@mui/icons-material/SportsBar";
+import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
 const LibertyDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const post = useSelector((state) => state.post?.post);
     const writer = useSelector((state) => state.post?.user);
     const user = useSelector((state) => state.user?.userInfo);
-    console.log(user);
-    console.log("렌더");
+    const today = new Date().toISOString().slice(0, 10);
+    const hashtag = post.Hashtags?.map((v) => v.name);
     useEffect(() => {
         dispatch({
             type: LOAD_POST_DETAIL,
@@ -23,16 +27,14 @@ const LibertyDetail = () => {
         });
     }, []);
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const today = new Date().toISOString().slice(0, 10);
-    const hashtag = post.Hashtags?.map((v) => v.name);
     const onLibertyEdit = () => {
         navigate("/libertyedit", {
             state: {
                 id: post.id,
                 content: post.content,
                 rating: post.rating,
+                drink: post.drink,
+                smoke: post.smoke,
                 hashtag,
             },
         });
@@ -54,14 +56,34 @@ const LibertyDetail = () => {
             <div className="liberty-wrapper">
                 <section className="liberty-date">{today}</section>
                 <section className="liberty-rating">
-                    <StyledRating
-                        style={{ marginLeft: "10px" }}
-                        name="rating"
+                    <StyledHeart
+                        name="editRating"
                         precision={0.5}
                         value={parseInt(post.rating)}
+                        size="medium"
                         disabled
                         icon={<FavoriteIcon />}
                         emptyIcon={<FavoriteBorderIcon />}
+                    />
+                </section>
+                <section className="liberty-rating">
+                    <StyledHeart
+                        precision={0.5}
+                        disabled
+                        value={parseInt(post.drink)}
+                        size="medium"
+                        icon={<SportsBarIcon />}
+                        emptyIcon={<SportsBarIcon />}
+                    />
+                </section>
+                <section className="liberty-rating">
+                    <StyledHeart
+                        disabled
+                        precision={0.5}
+                        value={parseInt(post.smoke)}
+                        size="medium"
+                        icon={<SmokingRoomsIcon />}
+                        emptyIcon={<SmokingRoomsIcon />}
                     />
                 </section>
                 <section>
@@ -91,7 +113,6 @@ const LibertyDetail = () => {
                 </section>
 
                 <section className="liberty-textarea">{post.content}</section>
-
                 <section>
                     <ButtonWrap>
                         {user?.email != writer?.email ? null : (
@@ -119,7 +140,8 @@ const LibertyDetail = () => {
 
 export default Auth(LibertyDetail);
 
-const StyledRating = styled(Rating)({
+const StyledHeart = styled(Rating)({
+    fontSize: "2rem",
     "& .MuiRating-iconFilled": {
         color: "#ff6d75",
     },

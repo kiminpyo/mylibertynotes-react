@@ -105,14 +105,25 @@ router.get("/:postId", isLoggedIn, async (req, res, next) => {
 
 router.patch("/:postId", async (req, res, next) => {
     try {
-        console.log(req.body.hashtag);
         const { postId } = req.params;
+        await Post.update(
+            {
+                content: req.body.content,
+                rating: req.body.rating,
+                drink: req.body.drink,
+                smoke: req.body.smoke,
+            },
+            {
+                where: {
+                    id: postId,
+                },
+            }
+        );
+        await db.sequelize.models.PostHashtag.destroy({
+            where: { PostId: postId },
+        });
         const post = await Post.findOne({
             where: { id: postId },
-            include: [{ model: Hashtag }],
-        });
-        await db.sequelize.models.PostHashtag.destroy({
-            where: { PostId: post.id },
         });
         if (req.body.hashtag) {
             const hashtag = req.body.hashtag.split(",");
@@ -128,27 +139,17 @@ router.patch("/:postId", async (req, res, next) => {
             await post.addHashtag(libertyHashtag.map((v) => v[0]));
         }
 
-        await Post.update(
-            {
-                content: req.body.content,
-                rating: req.body.rating,
-                drink: req.body.drink,
-                smoke: req.body.smoke,
-            },
-            {
-                where: {
-                    id: postId,
+        const pullpost = await Post.findOne({
+            where: { id: post.id },
+            include: [
+                {
+                    model: Hashtag,
+                    attributes: ["id", "name"],
                 },
-            }
-        );
-
-        res.status(200).json({
-            post,
-            content: req.body.content,
-            rating: req.body.rating,
-            drink: req.body.drink,
-            smoke: req.body.smoke,
+            ],
         });
+        console.log(pullpost, "풀포스트");
+        res.status(201).json({ pullpost });
     } catch (err) {
         console.error(err);
     }

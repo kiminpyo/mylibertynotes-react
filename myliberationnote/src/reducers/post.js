@@ -54,9 +54,16 @@ const reducer = (state = initialState, action) => {
             };
         }
         case EDIT_POST_SUCCESS: {
-            console.log(action.data);
+            let newPost = state.posts.map((v) => {
+                if (v.id === action.data.pullpost.id) {
+                    v = action.data.pullpost;
+                }
+                return v;
+            });
+            console.log(newPost);
             return {
                 ...state,
+                posts: newPost,
             };
         }
         case DELETE_POST_SUCCESS: {
