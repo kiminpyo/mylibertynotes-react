@@ -69,8 +69,8 @@ app.use(
             httpOnly: true,
             secure: false,
             domain:
-                // process.env.NODE_ENV === "production" && ".mylibertynotes.site",
-                process.env.NODE_ENV === "production" && "localhost:3000",
+                process.env.NODE_ENV === "production" && ".mylibertynotes.site",
+            // process.env.NODE_ENV === "production" && "localhost:3000",
         },
     })
 );

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseURL = "http://api.mylibertynotes.site/";
-const baseURL = "http://localhost:80/";
+const baseURL = "http://api.mylibertynotes.site/";
+// const baseURL = "http://localhost:80/";
 
 export const AxiosInstance = axios.create({
     baseURL,
