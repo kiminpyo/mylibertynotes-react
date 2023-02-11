@@ -18,4 +18,4 @@ const Intro = () => {
     );
 };
 
-export default Auth(Intro, false);
+export default Auth(Intro);

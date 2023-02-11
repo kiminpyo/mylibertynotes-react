@@ -36,7 +36,7 @@ const Signup = () => {
             data: { email: data.get("email"), password: data.get("password") },
         });
         alert("회원가입이 완료 되었습니다.");
-        return navigate("/login");
+        navigate("/login");
     };
 
     return (
@@ -115,4 +115,4 @@ const Signup = () => {
     );
 };
 
-export default Auth(Signup, false);
+export default Auth(Signup);

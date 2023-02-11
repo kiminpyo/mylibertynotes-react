@@ -14,17 +14,21 @@ const MyPage = () => {
         posts: state.user?.userInfo?.Posts,
         email: state.user?.userInfo?.email,
     }));
+    console.log(posts, email);
     useEffect(() => {
         dispatch({
             type: LOAD_ME,
         });
     }, []);
-    const averating =
-        posts
-            ?.map((v) => v.rating)
-            .reduce((acc, cur) => {
-                return parseFloat(acc) + parseFloat(cur);
-            }) / posts?.length;
+    let averating;
+    if (posts?.length >= 1) {
+        averating =
+            posts
+                ?.map((v) => v.rating)
+                ?.reduce((acc, cur) => {
+                    return parseFloat(acc) + parseFloat(cur);
+                }) / posts?.length;
+    }
 
     const events = posts?.map((item) => {
         const date = item?.createdAt?.slice(0, 10);
@@ -33,7 +37,7 @@ const MyPage = () => {
         const drink = Number(item?.drink);
         const smoke = Number(item?.smoke);
         const id = item?.id;
-        const length = posts.length;
+        const length = posts?.length;
         return { date, title, rating, drink, smoke, id, length };
     });
     const onClickLibertyOption = (e) => {
@@ -54,7 +58,10 @@ const MyPage = () => {
             </MypageSelect>
             {options === "liberty-graph" ? (
                 <>
-                    <LibertyStatus total={events.length} average={averating} />
+                    <LibertyStatus
+                        total={events.length}
+                        average={averating ? averating : null}
+                    />
                     <LibertyChart events={events} />
                 </>
             ) : (
