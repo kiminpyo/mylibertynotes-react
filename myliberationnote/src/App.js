@@ -18,12 +18,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 function App() {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch({
-            type: LOAD_ME,
-        });
-    }, []);
     return (
         <>
             <ScrollRestoration />
