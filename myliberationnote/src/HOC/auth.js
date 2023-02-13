@@ -22,7 +22,7 @@ const Auth = (SpecificComponent, option = null) => {
                 .catch((res) => {
                     if (option) {
                         // 로그인을 하지 않았다면,
-                        if (!res.data) {
+                        if (!res.data?.email) {
                             alert("로그인 후 이용해주세요");
                             return navigate("/login");
                         }

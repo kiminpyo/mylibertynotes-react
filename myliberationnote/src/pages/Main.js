@@ -13,7 +13,7 @@ const Main = () => {
     );
 };
 
-export default Auth(Main, false);
+export default Auth(Main);
 
 const MainWrapper = styled.div`
     background-color: black;
