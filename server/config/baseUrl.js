@@ -1,4 +1,4 @@
 module.exports = {
-    baseUrl: "http://mylibertynotes.site",
+    baseUrl: "https://mylibertynotes.site",
     devUrl: "http://localhost:80",
 };

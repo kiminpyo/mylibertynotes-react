@@ -98,7 +98,7 @@ const Login = () => {
                         <Grid item>
                             <a
                                 id="kakao"
-                                href="http://54.164.14.94:80/oauth/kakao"
+                                href="https://api.mylibertynotes.site/oauth/kakao"
                                 className="btn">
                                 <SocialButton className="kakao">
                                     {" "}
@@ -121,7 +121,7 @@ const Login = () => {
                         <Grid item>
                             <a
                                 id="google"
-                                href="http://54.164.14.94:80/oauth/google"
+                                href="https://api.mylibertynotes.site/oauth/google"
                                 className="btn">
                                 <SocialButton className="google">
                                     <svg

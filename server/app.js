@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(
         cors({
             /* 쿠키 관련  */
-            origin: ["http://localhost:3000", "http://mylibertynotes.site"],
+            origin: ["http://localhost:3000", "https://mylibertynotes.site"],
             credentials: true,
         })
     );
@@ -67,7 +67,7 @@ app.use(
         secret: process.env.COOKIE_SECRET,
         cookie: {
             httpOnly: true,
-            secure: false,
+            secure: true,
             domain:
                 process.env.NODE_ENV === "production" && ".mylibertynotes.site",
             // process.env.NODE_ENV === "production" && "localhost:3000",
@@ -82,6 +82,6 @@ app.use("/user", UserRouter);
 app.use("/posts", PostsRouter);
 app.use("/hashtag", HashtagRouter);
 app.use("/oauth", OauthRouter);
-app.listen(80, () => {
+app.listen(3065, () => {
     console.log("서버 실행 중!");
 });

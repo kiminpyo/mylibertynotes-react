@@ -9,10 +9,10 @@ router.get("/kakao", passport.authenticate("kakao"));
 router.get(
     "/kakao/callback",
     passport.authenticate("kakao", {
-        failureRedirect: devUrl,
+        failureRedirect: baseUrl,
     }),
     (req, res) => {
-        res.redirect(devUrl);
+        res.redirect(baseUrl);
     }
 );
 
@@ -21,10 +21,10 @@ router.get("/google", passport.authenticate("google", { scope: ["email"] }));
 router.get(
     "/google/callback",
     passport.authenticate("google", {
-        failureRedirect: devUrl,
+        failureRedirect: baseUrl,
     }),
     (req, res) => {
-        res.redirect(devUrl);
+        res.redirect(baseUrl);
     }
 );
 
