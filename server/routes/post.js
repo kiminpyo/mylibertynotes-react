@@ -37,6 +37,10 @@ router.post("/", isLoggedIn, async (req, res, next) => {
                         exclude: ["createdAt", "updatedAt"],
                     },
                 },
+                {
+                    model: User,
+                    attributes: ["email", "id"],
+                },
             ],
         });
         console.log(fullpost);
@@ -50,8 +54,8 @@ router.post("/", isLoggedIn, async (req, res, next) => {
 router.get("/", async (req, res, next) => {
     try {
         const post = await Post.findAndCountAll({
-            offset: 18 * req.query.lastId,
-            limit: 18,
+            offset: 6 * req.query.lastId,
+            limit: 6,
             order: [["createdAt", "DESC"]],
             include: [
                 {
@@ -145,6 +149,10 @@ router.patch("/:postId", async (req, res, next) => {
                 {
                     model: Hashtag,
                     attributes: ["id", "name"],
+                },
+                {
+                    model: User,
+                    attributes: ["email", "id", "nickname"],
                 },
             ],
         });

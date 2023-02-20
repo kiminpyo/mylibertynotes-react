@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Hashtag from "./Hashtag";
-
 import styled from "@emotion/styled";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SmokingRooms from "@mui/icons-material/SmokingRooms";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import CoffeeIcon from "@mui/icons-material/Coffee";
-
 export const LinearProgressWithLabel = (props) => {
     return (
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -28,17 +26,14 @@ export const LinearProgressWithLabel = (props) => {
 };
 const LibertyItem = ({ item }) => {
     const navigate = useNavigate();
-    const email = item.User?.email;
-    const { rating, drink, smoke } = item;
     const { userInfo } = useSelector((state) => state.user);
-    // const [ratingProgress, setRatingProgress] = useState(0 || item.rating);
-    // const [drinkProgress, setDrinkProgress] = useState(0 || item.drink);
-    // const [smokeProgress, setSmokeProgress] = useState(0 || item.smoke);
+    const email = item?.User?.email;
+    const { rating, drink, smoke } = item || {};
+    console.log(rating, drink);
     const LinearProgressBox = styled(Box)({
         width: "80%",
         margin: "auto",
     });
-    console.log(item);
 
     const onLibertyDetail = () => {
         navigate(`/liberty/${item.id}`);
@@ -47,7 +42,7 @@ const LibertyItem = ({ item }) => {
     return (
         <LibertyItemWrapper>
             <LibertyItemTagWrap>
-                {item.Hashtags?.map((tag, i) => (
+                {item?.Hashtags?.map((tag, i) => (
                     <Hashtag key={i} {...tag} />
                 ))}
             </LibertyItemTagWrap>
@@ -58,7 +53,7 @@ const LibertyItem = ({ item }) => {
                     {/* 내 글 일때 */}
                     {email === userInfo?.email ? <MyPostCheck /> : null}
                 </div>
-                <LibertyItemContent>{item.content}</LibertyItemContent>
+                <LibertyItemContent>{item?.content}</LibertyItemContent>
                 <div>
                     <LinearProgressBox>
                         <LinearProgressWithLabel
@@ -66,14 +61,14 @@ const LibertyItem = ({ item }) => {
                             color="#ff4336"
                             barcolor="secondary"
                             variant="determinate"
-                            value={(rating * 20) | 0}
+                            value={rating * 20 || 0}
                         />
                     </LinearProgressBox>
                     <LinearProgressBox>
                         <LinearProgressWithLabel
                             component={<CoffeeIcon fontSize="small" />}
                             variant="determinate"
-                            value={(drink * 20) | 0}
+                            value={drink * 20 || 0}
                             barcolor="secondary"
                             color="#F2E7DC"
                         />
@@ -82,7 +77,7 @@ const LibertyItem = ({ item }) => {
                         <LinearProgressWithLabel
                             component={<SmokingRooms fontSize="small" />}
                             variant="determinate"
-                            value={(smoke * 20) | 0}
+                            value={smoke * 20 || 0}
                             barcolor="secondary"
                             color="#ceb1b1"
                         />
@@ -101,7 +96,7 @@ const LibertyItem = ({ item }) => {
                         <div style={{ fontSize: "0.6rem" }}>{email}</div>
                     ) : null}
                     <LibertyItemDate>
-                        {item.createdAt?.slice(0, 10)}
+                        {item?.createdAt?.slice(0, 10)}
                     </LibertyItemDate>
                 </div>
             </LibertyItemContentWrapper>

@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "@emotion/styled";
+import Auth from "../HOC/auth";
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -98,7 +99,7 @@ const Login = () => {
                         <Grid item>
                             <a
                                 id="kakao"
-                                href="https://api.mylibertynotes.site/oauth/kakao"
+                                href="https://mylibertynotes.site/oauth/kakao"
                                 className="btn">
                                 <SocialButton className="kakao">
                                     {" "}
@@ -153,7 +154,7 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Auth(Login, false);
 
 const SocialButton = styled.button`
     width: 44px;

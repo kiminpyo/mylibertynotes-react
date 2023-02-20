@@ -11,6 +11,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import styled from "@emotion/styled";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
+import { LOAD_ME } from "../reducers/user";
 const LibertyDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -20,21 +21,24 @@ const LibertyDetail = () => {
     const user = useSelector((state) => state.user?.userInfo);
     const today = new Date().toISOString().slice(0, 10);
     const hashtag = post.Hashtags?.map((v) => v.name);
+    const { content, rating, drink, smoke } = post;
     useEffect(() => {
+        dispatch({
+            type: LOAD_ME,
+        });
         dispatch({
             type: LOAD_POST_DETAIL,
             data: id,
         });
     }, []);
-
     const onLibertyEdit = () => {
         navigate("/libertyedit", {
             state: {
-                id: post.id,
-                content: post.content,
-                rating: post.rating,
-                drink: post.drink,
-                smoke: post.smoke,
+                id,
+                content,
+                rating,
+                drink,
+                smoke,
                 hashtag,
             },
         });
@@ -91,7 +95,7 @@ const LibertyDetail = () => {
                         className="liberty-writer-wrap"
                         style={{ display: "flex" }}>
                         <TextLabel>글쓴이:</TextLabel>
-                        <TextLabel>{user && user.email}</TextLabel>
+                        <TextLabel>{writer?.email}</TextLabel>
                     </div>
                 </section>
                 <section>
@@ -138,7 +142,7 @@ const LibertyDetail = () => {
     );
 };
 
-export default Auth(LibertyDetail);
+export default Auth(LibertyDetail, true);
 
 const StyledHeart = styled(Rating)({
     fontSize: "2rem",

@@ -115,4 +115,4 @@ const Signup = () => {
     );
 };
 
-export default Auth(Signup);
+export default Auth(Signup, false);

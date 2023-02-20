@@ -1,38 +1,19 @@
 import styled from "@emotion/styled";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-const Hashtag = (item) => {
-    const navigate = useNavigate();
+const Hashtag = ({ name }) => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const searchHashtag = useCallback((e) => {
         if (id === e.target.innerText) return;
-        navigate(`/liberty/search/${item.name}`, {
+        navigate(`/liberty/search/${name}`, {
             state: e.target.innerText,
         });
     }, []);
-    const { pathname } = useLocation();
-    const showPullHashtag = (e) => {};
-    if (pathname === `/liberty` || `/search`) {
-        return (
-            <LibertyItemHashtag
-                onClick={searchHashtag}
-                onMouseOver={showPullHashtag}>
-                {item.name.length >= 5
-                    ? item.name.slice(0, 5) + "..."
-                    : item.name}
-                <HashtagToolTip>{item.name}</HashtagToolTip>
-            </LibertyItemHashtag>
-        );
-    } else {
-        return (
-            <LibertyItemHashtag
-                onClick={searchHashtag}
-                onMouseOver={showPullHashtag}>
-                {item.name}
-                {/* <HashtagToolTip>{item.name}</HashtagToolTip> */}
-            </LibertyItemHashtag>
-        );
-    }
+
+    return (
+        <LibertyItemHashtag onClick={searchHashtag}>{name}</LibertyItemHashtag>
+    );
 };
 
 export default Hashtag;
@@ -49,22 +30,8 @@ const LibertyItemHashtag = styled.span`
     border-radius: 10px;
     :hover {
         background-color: #aa2424;
-        /* > span {
-            position: absolute;
-            display: inline;
-            padding: 8px;
-            -webkit-border-radius: 8px;
-            -moz-border-radius: 8px;
-            border-radius: 8px;
-            background: #333;
-            color: #fff;
-            font-size: 14px;
-        } */
     }
     @media screen and (max-width: 425px) {
         padding: 4px;
     }
-`;
-const HashtagToolTip = styled.span`
-    display: none;
 `;

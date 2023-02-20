@@ -8,10 +8,6 @@ const Auth = (SpecificComponent, option = null) => {
         const navigate = useNavigate();
         useEffect(() => {
             AxiosInstance.get(requests.fetchAuth)
-                // axios
-                //     .get("http://localhost/user", {
-                //         withCredentials: true,
-                //     })
                 .then((res) => {
                     if (option === false) {
                         if (res.data?.email) {
@@ -22,7 +18,7 @@ const Auth = (SpecificComponent, option = null) => {
                 .catch((res) => {
                     if (option) {
                         // 로그인을 하지 않았다면,
-                        if (!res.data?.email) {
+                        if (!res.data) {
                             alert("로그인 후 이용해주세요");
                             return navigate("/login");
                         }

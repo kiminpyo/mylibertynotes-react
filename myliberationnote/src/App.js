@@ -13,9 +13,7 @@ import Login from "./pages/Login";
 import LibertyDetail from "./components/LibertyDetail";
 import LibertyEdit from "./components/LibertyEdit";
 import AppLayout from "./components/AppLayout/AppLayout";
-import { LOAD_ME } from "./reducers/user";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import Modal from "./components/Modal/Modal";
 
 function App() {
     return (

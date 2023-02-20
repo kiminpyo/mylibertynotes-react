@@ -5,39 +5,50 @@ import { LOAD_POSTS } from "../reducers/post";
 import { useNavigate } from "react-router-dom";
 import LibertyBanner from "../components/LibertyBanner";
 import Auth from "../HOC/auth";
-
 import styled from "@emotion/styled";
+import Modal from "../components/Modal/Modal";
+import { LOAD_ME } from "../reducers/user";
 
 const Liberty = () => {
+    let page = useRef(0);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [hasNextPage, setHasNextPage] = useState(false);
     const { posts, postscount } = useSelector((state) => state?.post);
     const [target, observerTargetEl] = useState(null);
-    const [lastText, setLastText] = useState(false);
-    const [loading, setLoading] = useState(true);
-    let page = useRef(0);
+
     useEffect(() => {
-        if (posts.length >= 82) {
-            setLoading(false);
-            setLastText((prev) => !prev);
+        dispatch({
+            type: LOAD_ME,
+        });
+    }, []);
+    useEffect(() => {
+        if (posts) {
+            return;
+        } else {
+            console.log("렌더");
+            dispatch({
+                type: LOAD_POSTS,
+                data: 0,
+            });
         }
-    }, [posts]);
+    }, []);
+    const onIntersect = async ([entry], observer) => {
+        if (entry.isIntersecting) {
+            // observer.unobserve(entry.target);
+            dispatch({
+                type: LOAD_POSTS,
+                data: page.current++,
+            });
+            // observer.observe(entry.target);
+        }
+    };
     useEffect(() => {
         let observe;
+
         if (target) {
-            observe = new IntersectionObserver(
-                (entries, observer) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting && loading) {
-                            dispatch({
-                                type: LOAD_POSTS,
-                                data: page.current++,
-                            });
-                        }
-                    });
-                },
-                { threshold: 0.2 }
-            );
+            console.log("렌더");
+            observe = new IntersectionObserver(onIntersect, { threshold: 1 });
             observe.observe(target);
         }
         return () => observe && observe.disconnect();
@@ -54,7 +65,6 @@ const Liberty = () => {
                         <LibertyItem item={item} key={i} />
                     ))}
                 </LibertyItemWrap>
-                <div>{lastText ? "마지막 페이지 입니다" : undefined}</div>
                 <AddPost onClick={onCreateSelf}>+</AddPost>
                 <div ref={observerTargetEl} style={{ height: "1px" }} />
             </LibertyWrapper>
