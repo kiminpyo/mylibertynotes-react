@@ -8,6 +8,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { LOG_OUT } from "../../reducers/user";
 
 const UpperSide = (userInfo) => {
+    console.log(userInfo);
     const { email } = userInfo;
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -64,14 +65,28 @@ const UpperSide = (userInfo) => {
                 {!email ? (
                     <>
                         <div>
-                            <NavStyle style={{ color: "white" }} to="/login">
+                            <NavStyle
+                                style={{
+                                    color: "white",
+                                    fontWeight: "bold",
+                                    fontSize: "0.9rem",
+                                }}
+                                to="/login">
                                 Log in
                             </NavStyle>
                         </div>
                     </>
                 ) : (
                     <>
-                        <div onClick={logout}>로그아웃</div>
+                        <div
+                            onClick={logout}
+                            style={{
+                                color: "white",
+                                fontWeight: "bold",
+                                fontSize: "0.9rem",
+                            }}>
+                            로그아웃
+                        </div>
                     </>
                 )}
             </NavBarRight>

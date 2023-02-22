@@ -14,6 +14,7 @@ import LibertyDetail from "./components/LibertyDetail";
 import LibertyEdit from "./components/LibertyEdit";
 import AppLayout from "./components/AppLayout/AppLayout";
 import Modal from "./components/Modal/Modal";
+import NoMatch from "./pages/NoMatch";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/libertyedit" element={<LibertyEdit />} />
                     <Route path="/liberty/:id" element={<LibertyDetail />} />
                     <Route path="/liberty/search/:id" element={<Search />} />
+                    <Route path="*" element={<NoMatch />} />
                 </Route>
             </Routes>
         </>

@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { DELETE_POST, LOAD_POST_DETAIL } from "../reducers/post";
 import Auth from "../HOC/auth";
 import Hashtag from "./Hashtag";
-
 import { Rating } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -12,6 +11,9 @@ import styled from "@emotion/styled";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
 import { LOAD_ME } from "../reducers/user";
+import NoMatch from "../pages/NoMatch";
+import Loader from "./Loader";
+import Container from "./Container";
 const LibertyDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -19,6 +21,9 @@ const LibertyDetail = () => {
     const post = useSelector((state) => state.post?.post);
     const writer = useSelector((state) => state.post?.user);
     const user = useSelector((state) => state.user?.userInfo);
+    const { loadPostDetailFailure, loadPostDetailLoading } = useSelector(
+        (state) => state.post
+    );
     const today = new Date().toISOString().slice(0, 10);
     const hashtag = post.Hashtags?.map((v) => v.name);
     const { content, rating, drink, smoke } = post;
@@ -43,7 +48,6 @@ const LibertyDetail = () => {
             },
         });
     };
-
     const onLibertyDelete = useCallback(() => {
         if (window.confirm("삭제하시겠습니까? ")) {
             dispatch({
@@ -56,7 +60,9 @@ const LibertyDetail = () => {
         }
     }, [id]);
     return (
-        <div>
+        <Container
+            loading={loadPostDetailLoading}
+            failure={loadPostDetailFailure}>
             <div className="liberty-wrapper">
                 <section className="liberty-date">{today}</section>
                 <section className="liberty-rating">
@@ -138,7 +144,7 @@ const LibertyDetail = () => {
                     </ButtonWrap>
                 </section>
             </div>
-        </div>
+        </Container>
     );
 };
 

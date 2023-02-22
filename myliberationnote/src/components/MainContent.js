@@ -88,7 +88,7 @@ const MainTextPictureSide = styled.div`
     width: 150px;
     padding: 10px 0 10px 0;
     margin: 0 10px 0 10px;
-    background: #46373b;
+    background: #7b2d89;
     border-radius: 40%;
     opacity: 0.7;
     animation: shaking 1s infinite;

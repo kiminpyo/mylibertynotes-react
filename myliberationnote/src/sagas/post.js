@@ -20,6 +20,7 @@ import {
     LOAD_POSTS,
     LOAD_POSTS_SUCCESS,
     LOAD_POST_DETAIL,
+    LOAD_POST_DETAIL_FAILURE,
     LOAD_POST_DETAIL_SUCCESS,
 } from "../reducers/post";
 
@@ -72,7 +73,11 @@ function* loadPostDetail(action) {
             data: result.data,
         });
     } catch (err) {
-        console.error(err.response.data);
+        console.error(err.response);
+        yield put({
+            type: LOAD_POST_DETAIL_FAILURE,
+            data: err.response,
+        });
     }
 }
 

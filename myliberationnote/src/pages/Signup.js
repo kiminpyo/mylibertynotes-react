@@ -21,13 +21,8 @@ const Signup = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const onChangeEmail = (e) => {
-        setEmail(e.target.value);
-    };
-    const onChangePassword = (e) => {
-        setPassword(e.target.value);
-    };
-    const theme = createTheme();
+    const onChangeEmail = (e) => setEmail(e.target.value);
+    const onChangePassword = (e) => setPassword(e.target.value);
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -40,12 +35,12 @@ const Signup = () => {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <div style={{ backgroundColor: "black" }}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
                     sx={{
-                        marginTop: 8,
+                        paddingTop: 8,
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -53,7 +48,7 @@ const Signup = () => {
                     <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5">
+                    <Typography component="h1" variant="h5" color="white">
                         Sign Up
                     </Typography>
                     <Box
@@ -66,11 +61,12 @@ const Signup = () => {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="nickname"
                             name="email"
                             autoComplete="email"
                             autoFocus
                             onChange={onChangeEmail}
+                            variant="filled"
                         />
                         <TextField
                             margin="normal"
@@ -82,6 +78,7 @@ const Signup = () => {
                             id="password"
                             autoComplete="current-password"
                             onChange={onChangePassword}
+                            variant="filled"
                         />
                         <FormControlLabel
                             control={
@@ -93,6 +90,7 @@ const Signup = () => {
                             type="submit"
                             fullWidth
                             variant="contained"
+                            color="secondary"
                             sx={{ mt: 3, mb: 2 }}>
                             Sign Up
                         </Button>
@@ -111,7 +109,7 @@ const Signup = () => {
                     </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
+        </div>
     );
 };
 

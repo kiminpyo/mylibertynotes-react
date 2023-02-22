@@ -30,13 +30,10 @@ const LibertyEdit = () => {
     div.setAttribute("class", "hashtag");
     const divLength = document.querySelectorAll("div.hashtag").length;
     const hashTagList = [];
-
-    const removeHashtag = (e) => {
-        div.remove();
-    };
+    const removeHashtag = (e) => div.remove();
     div.addEventListener("click", removeHashtag);
     const onClickSubmit = () => {
-        const hashTagArr = document.querySelectorAll(".hashtag");
+    const hashTagArr = document.querySelectorAll(".hashtag");
         for (let x of hashTagArr) {
             hashTagList.push(x.innerText);
         }
@@ -63,38 +60,21 @@ const LibertyEdit = () => {
     };
     const onSaveHashtag = (e) => {
         e.preventDefault();
-        if (divLength >= 3) {
-            alert("개시글은 3개까지만!");
-            return;
-        }
-        if (hashtag.length >= 20) {
-            return alert("20자 미만으로");
-        }
-        if (hashtag.match(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/gi) || hashtag.trim() == "") {
+        if (divLength >= 3) return alert("개시글은 3개까지만!");
+        if (hashtag.length >= 20) return alert("20자 미만으로");
+        if (hashtag.match(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/gi) || hashtag.trim() == "")
             return setEmptyMessage(true);
-        }
-        console.log("hi");
         div.innerText = hashtag;
         hashtagListWrap.append(div);
         setEmptyMessage(false);
         // 초기화
         input[0].value = "";
     };
-    const onChangeRating = (e) => {
-        setEditRating(() => e.target.value);
-    };
-    const onChangeSmoke = (e) => {
-        setEditSmoke(() => e.target.value);
-    };
-    const onChangeDrink = (e) => {
-        setEditDrink(() => e.target.value);
-    };
-    const onChageContent = (e) => {
-        setEditContent(() => e.target.value);
-    };
-    const onChangeHashTag = (e) => {
-        setHashtag(() => e.target.value);
-    };
+    const onChangeRating = (e) => setEditRating(() => e.target.value);
+    const onChangeSmoke = (e) => setEditSmoke(() => e.target.value);
+    const onChangeDrink = (e) => setEditDrink(() => e.target.value);
+    const onChageContent = (e) => setEditContent(() => e.target.value);
+    const onChangeHashTag = (e) => setHashtag(() => e.target.value);
 
     return (
         <div className="liberty-wrapper">

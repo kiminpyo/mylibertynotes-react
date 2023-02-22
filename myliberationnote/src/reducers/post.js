@@ -1,6 +1,8 @@
 import produce from "../utils/produce";
 
 export const initialState = {
+    loadPostDetailLoading: false,
+    loadPostDetailFailure: null,
     posts: [],
     post: {
         user: [],
@@ -16,6 +18,7 @@ export const LOAD_POSTS = "LOAD_POSTS";
 export const LOAD_POSTS_SUCCESS = "LOAD_POSTS_SUCCESS";
 export const LOAD_POST_DETAIL = "LOAD_POST_DETAIL";
 export const LOAD_POST_DETAIL_SUCCESS = "LOAD_POST_DETAIL_SUCCESS";
+export const LOAD_POST_DETAIL_FAILURE = "LOAD_POST_DETAIL_FAILURE";
 export const LOAD_MY_CONTENT = "LOAD_MY_CONTENT";
 export const EDIT_POST = "EDIT_POST";
 export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS";
@@ -36,10 +39,18 @@ const reducer = (state = initialState, action) => {
             case LOAD_POSTS_SUCCESS:
                 draft.posts = draft.posts.concat(action.data.rows);
                 break;
-
+            case LOAD_POST_DETAIL:
+                draft.loadPostDetailLoading = true;
+                break;
             case LOAD_POST_DETAIL_SUCCESS:
+                draft.loadPostDetailLoading = false;
+                draft.loadPostDetailFailure = false;
                 draft.post = action.data;
                 draft.user = action.data.User;
+                break;
+            case LOAD_POST_DETAIL_FAILURE:
+                draft.loadPostDetailLoading = false;
+                draft.loadPostDetailFailure = true;
                 break;
             case LOAD_MY_CONTENT:
                 break;
@@ -51,7 +62,6 @@ const reducer = (state = initialState, action) => {
                     }
                     return v;
                 });
-
                 draft.posts = newPost;
                 break;
             }

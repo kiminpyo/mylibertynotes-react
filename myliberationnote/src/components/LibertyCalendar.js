@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 const LibertyCalendar = ({ events }) => {
     const navigate = useNavigate();
-    console.log({ events });
     const handleDateClick = (arg) => {
-        console.log(arg);
         return navigate(`/liberty/${arg.event.id}`);
     };
     const headerToolbar = {
