@@ -10,7 +10,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
 import { Rating } from "@mui/material";
-import Modal from "./Modal/Modal";
+import Modal from "./Confirm/Confirm";
 
 const LibertyEdit = () => {
     const contentRef = useRef();
@@ -33,7 +33,7 @@ const LibertyEdit = () => {
     const removeHashtag = (e) => div.remove();
     div.addEventListener("click", removeHashtag);
     const onClickSubmit = () => {
-    const hashTagArr = document.querySelectorAll(".hashtag");
+        const hashTagArr = document.querySelectorAll(".hashtag");
         for (let x of hashTagArr) {
             hashTagList.push(x.innerText);
         }

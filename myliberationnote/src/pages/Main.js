@@ -6,10 +6,11 @@ import styled from "@emotion/styled";
 
 const Main = () => {
     return (
-        <MainWrapper>
-            <MiddleSide />
-            <MainContent />
-        </MainWrapper>
+        <div>hihihi</div>
+        // <MainWrapper>
+        //     <MiddleSide />
+        //     <MainContent />
+        // </MainWrapper>
     );
 };
 

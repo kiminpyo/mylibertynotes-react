@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import LibertyBanner from "../components/LibertyBanner";
 import Auth from "../HOC/auth";
 import styled from "@emotion/styled";
-import Modal from "../components/Modal/Modal";
+import Modal from "../components/Confirm/Confirm";
 import { LOAD_ME } from "../reducers/user";
 
 const Liberty = () => {
@@ -26,7 +26,6 @@ const Liberty = () => {
         if (posts) {
             return;
         } else {
-            console.log("렌더");
             dispatch({
                 type: LOAD_POSTS,
                 data: 0,

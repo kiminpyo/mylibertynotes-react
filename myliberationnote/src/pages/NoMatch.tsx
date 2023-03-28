@@ -1,15 +1,12 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
-const NoMatch = ({ text }) => {
-    console.log(text);
-    const navigate = useNavigate();
+const NoMatch = ({ text }: any) => {
+    const navigate: NavigateFunction = useNavigate();
     return (
         <Wrapper>
-            <NoMatchText>
-                {text ? `${text}` : "잘못된 접근경로 입니다."}
-            </NoMatchText>
+            <NoMatchText>nomatch</NoMatchText>
             <Button onClick={() => navigate(-1)}>돌아가기</Button>
         </Wrapper>
     );

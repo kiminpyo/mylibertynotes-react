@@ -1,7 +1,8 @@
 import "./App.css";
+import React from "react";
 import "./animation.css";
 import "./fontAwesome.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Main from "./pages/Main";
 import Intro from "./pages/Intro";
 import ScrollRestoration from "./components/ScrollRestoration";
@@ -10,13 +11,13 @@ import MyPage from "./pages/MyPage";
 import Search from "./pages/Search";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import NoMatch from "./pages/NoMatch";
 import LibertyDetail from "./components/LibertyDetail";
 import LibertyEdit from "./components/LibertyEdit";
 import AppLayout from "./components/AppLayout/AppLayout";
-import Modal from "./components/Modal/Modal";
-import NoMatch from "./pages/NoMatch";
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
-function App() {
+function App():ReactJSXElement {
     return (
         <>
             <ScrollRestoration />

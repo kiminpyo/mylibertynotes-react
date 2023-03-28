@@ -1,16 +1,16 @@
 import { createContext, useContext } from "react";
 
-export const ModalContext = createContext();
+export const ConfirmContext = createContext();
 
-export const ModalProvider = ({ children, props }) => {
+export const ConfirmProvider = ({ children, props }) => {
     const onSave = ({ message, type }) => {
         window.confirm(`${message}`);
     };
     return (
         <>
-            <ModalContext.Provider value={onSave}>
+            <ConfirmContext.Provider value={onSave}>
                 {children}
-            </ModalContext.Provider>
+            </ConfirmContext.Provider>
         </>
     );
 };

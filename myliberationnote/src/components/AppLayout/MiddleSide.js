@@ -39,6 +39,7 @@ const ArrowDown = styled.div`
     border-radius: 50%;
     top: 90%;
     left: 50%;
+    cursor: pointer;
     transform: translate(-50%, -50%);
     animation: godown 1s infinite alternate;
     position: absolute;

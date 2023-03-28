@@ -14,7 +14,9 @@ body {
     font-weight: 500;
     list-style: none;
 }
-
+button {
+    cursor: pointer;
+}
 a {
     color: black;
 }

@@ -1,4 +1,4 @@
-export const ModalWrapperStyle = {
+export const ConfirmWrapperStyle = {
     position: "fixed",
     width: "400px",
     backgroundColor: "gray",
@@ -6,17 +6,17 @@ export const ModalWrapperStyle = {
     textAlign: "center",
     borderRadius: "15px",
 };
-export const ModalHeaderStyle = {
+export const ConfirmHeaderStyle = {
     textAlign: "end",
 };
-export const ModalBodyStyle = {
+export const ConfirmBodyStyle = {
     height: "160px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
 };
-export const ModalButtonWrapperStyle = {
+export const ConfirmButtonWrapperStyle = {
     display: "flex",
     justifyContent: "space-evenly",
 };
-export const ModalButtonStyle = {};
+export const ConfirmButtonStyle = {};

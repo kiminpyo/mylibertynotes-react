@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LOGIN } from "../reducers/user";
@@ -12,42 +12,23 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
 import styled from "@emotion/styled";
 import Auth from "../HOC/auth";
-import { Modal } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import Modal from "../components/Modal/Modal";
 
 const Login = () => {
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            "& .MuiFilledInput-root": {
-                backgroundColor: "rgb(232, 241, 250)",
-            },
-            "& .MuiFilledInput-root:hover": {
-                backgroundColor: "rgb(250, 232, 241)",
-                // Reset on touch devices, it doesn't add specificity
-                "@media (hover: none)": {
-                    backgroundColor: "rgb(232, 241, 250)",
-                },
-            },
-            "& .MuiFilledInput-root.Mui-focused": {
-                backgroundColor: "rgb(250, 241, 232)",
-            },
-        },
-    }));
     const classes = useStyles();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showInfo, setShowInfo] = useState(false);
     const { userInfo } = useSelector((state) => state?.user);
+
     useEffect(() => {
-        if (userInfo != null) {
-            return navigate(-1);
-        }
+        if (userInfo != null) return navigate(-1);
     }, [userInfo]);
-    const onInfoHandler = (text) => {
-        text === "over" ? setShowInfo(true) : setShowInfo(false);
+    const onInfoHandler = () => {
+        setShowInfo(() => true);
     };
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -58,7 +39,7 @@ const Login = () => {
         });
     };
     return (
-        <div style={{}}>
+        <div style={{ backgroundColor: "black", height: "100vh" }}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -92,6 +73,7 @@ const Login = () => {
                             color="secondary"
                         />
                         <TextField
+                            className={classes.root}
                             margin="normal"
                             required
                             fullWidth
@@ -111,22 +93,9 @@ const Login = () => {
                             sx={{ mt: 3, mb: 2 }}>
                             Log In
                         </Button>
-                        <Grid container>
+                        <Grid container padding={"0 5px 0 5px"}>
                             <Grid item xs>
-                                <AuthInfo
-                                    onMouseOver={() => onInfoHandler("over")}
-                                    onMouseOut={() => onInfoHandler("out")}>
-                                    ?
-                                    {showInfo ? (
-                                        <Modal
-                                            closeAfterTransition
-                                            q
-                                            aria-labelledby="transition-modal-title"
-                                            aria-describedby="transition-modal-description">
-                                            fd
-                                        </Modal>
-                                    ) : undefined}
-                                </AuthInfo>
+                                <AuthInfo onClick={onInfoHandler} />
                             </Grid>
                             <Grid item>
                                 <Link href="/signup" variant="body">
@@ -136,7 +105,11 @@ const Login = () => {
                         </Grid>
                     </Box>
                 </Box>
-                <Grid container flex justifyContent={"space-evenly"}>
+                <Grid
+                    container
+                    flex
+                    justifyContent={"space-evenly"}
+                    mt={"15px"}>
                     <Grid item>
                         <a
                             id="kakao"
@@ -190,12 +163,30 @@ const Login = () => {
                     </Grid>
                 </Grid>
             </Container>
+            {showInfo ? <Modal setShowInfo={setShowInfo} /> : undefined}
         </div>
     );
 };
 
 export default Auth(Login, false);
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        "& .MuiFilledInput-root": {
+            backgroundColor: "rgb(255, 255, 255)",
+        },
+        "& .MuiFilledInput-root:hover": {
+            backgroundColor: "rgb(250, 232, 241)",
+            // Reset on touch devices, it doesn't add specificity
+            "@media (hover: none)": {
+                backgroundColor: "rgb(255, 255, 255)",
+            },
+        },
+        "& .MuiFilledInput-root.Mui-focused": {
+            backgroundColor: "rgb(255, 255, 255)",
+        },
+    },
+}));
 const SocialButton = styled.button`
     width: 44px;
     height: 44px;
@@ -210,9 +201,16 @@ const SocialButton = styled.button`
 
 const AuthInfo = styled.div`
     border-radius: 50%;
-    font-size: 0.8rem;
-    padding: 1px 6px 1px 6px;
+    font-size: 0.9rem;
+    padding: 1px 9px 1px 9px;
     display: inline-block;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: #52495799;
+    cursor: pointer;
+    ::after {
+        content: "?";
+    }
+    :active {
+        background-color: #52435beb;
+    }
 `;

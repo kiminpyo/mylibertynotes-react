@@ -1,14 +1,12 @@
 import styled from "@emotion/styled";
 import React from "react";
-import mainImg from "../../img/mainImglogo.png";
-import Time from "../Time";
+
 import ReactiveHeader from "./ReactiveHeader";
 import { useDispatch } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LOG_OUT } from "../../reducers/user";
 
 const UpperSide = (userInfo) => {
-    console.log(userInfo);
     const { email } = userInfo;
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -41,60 +39,38 @@ const UpperSide = (userInfo) => {
                         </NavStyle>
                     </NavBarCategory>
                     <NavBarCategory
-                        onClick={() => {
-                            return navigate("/liberty");
-                        }}>
-                        해방
+                    // onClick={() => {
+                    //     return navigate("/liberty");
+                    // }}
+                    >
+                        <NavStyle to="/liberty">해방</NavStyle>
                     </NavBarCategory>
                     <NavBarCategory
-                        // className="mypage"
-                        onClick={() => {
-                            if (!userInfo) {
-                                alert("로그인 이후에 접속이 가능해요");
-                                return navigate("/login");
-                            } else {
-                                navigate("/mypage");
-                            }
-                            return navigate("/mypage");
-                        }}>
-                        마이페이지
+                    // className="mypage"
+                    // onClick={() => {
+                    //     if (!userInfo) {
+                    //         alert("로그인 이후에 접속이 가능해요");
+                    //         return navigate("/login");
+                    //     } else {
+                    //         navigate("/mypage");
+                    //     }
+                    //     return navigate("/mypage");
+                    // }}
+                    >
+                        <NavStyle to="/mypage"> 마이페이지</NavStyle>
                     </NavBarCategory>
                 </NavBarLeft>
             </NavBar>{" "}
             <NavBarRight className="head-navbar-right">
                 {!email ? (
-                    <>
-                        <div>
-                            <NavStyle
-                                style={{
-                                    color: "white",
-                                    fontWeight: "bold",
-                                    fontSize: "0.9rem",
-                                }}
-                                to="/login">
-                                Log in
-                            </NavStyle>
-                        </div>
-                    </>
+                    <NavStyle to="/login">Log in</NavStyle>
                 ) : (
-                    <>
-                        <div
-                            onClick={logout}
-                            style={{
-                                color: "white",
-                                fontWeight: "bold",
-                                fontSize: "0.9rem",
-                            }}>
-                            로그아웃
-                        </div>
-                    </>
+                    <NavStyle to="#" onClick={logout}>
+                        logout
+                    </NavStyle>
                 )}
             </NavBarRight>
-            {/* <ModeSelect /> */}
             <ReactiveHeader />
-            {/* <HeadRightDown>
-                <Time />
-            </HeadRightDown> */}
         </HeadUpperSide>
     );
 };
@@ -109,21 +85,16 @@ const HeadUpperSide = styled.div`
     padding: 6px;
 `;
 const MainLogo = styled.div`
-    /* margin-left: 0.5rem;
-    width: 100px; */
-
     @media screen and (max-width: 425px) {
         width: 50%;
     }
 `;
-
 const SubLogo = styled.div`
     color: white;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     font-weight: bold;
     margin-left: 8px;
     font-size: 0.9rem;
+    text-align: center;
 `;
 
 //
@@ -145,7 +116,6 @@ const NavBarLeft = styled.div`
         color: white;
     }
 `;
-
 const NavBarRight = styled.div`
     & > div {
         font-size: 0.7rem;
@@ -156,19 +126,13 @@ const NavBarRight = styled.div`
         text-align: end;
     }
 `;
-
 const NavBarCategory = styled.div`
     cursor: pointer;
     font-size: 0.7rem;
 `;
-
 const NavStyle = styled(NavLink)`
     font-size: 0.7rem;
-`;
-
-const ModeSelect = styled.div`
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    text-align: center;
 `;

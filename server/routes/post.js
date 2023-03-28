@@ -51,7 +51,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.get("/", async (req, res, next) => {
+router.get("/", isLoggedIn, async (req, res, next) => {
     try {
         const post = await Post.findAndCountAll({
             offset: 6 * req.query.lastId,
@@ -107,7 +107,7 @@ router.get("/:postId", isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.patch("/:postId", async (req, res, next) => {
+router.patch("/:postId", isLoggedIn, async (req, res, next) => {
     try {
         const { postId } = req.params;
         await Post.update(
