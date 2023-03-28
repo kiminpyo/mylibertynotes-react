@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import requests from "../Axios/requests";
 import { AxiosInstance } from "../Axios/instance";
 
-const Auth = (SpecificComponent, option = null) => {
+const Auth = (SpecificComponent: any, option: true | false | null = null) => {
     const Authentication = () => {
         const navigate = useNavigate();
         useEffect(() => {
             AxiosInstance.get(requests.fetchAuth)
-                .then((res) => {
+                .then((res:any) => {
                     if (option === false) {
                         if (res.data?.email) {
                             return navigate("/");
