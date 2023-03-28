@@ -8,17 +8,26 @@ import LibertyCalendar from "../components/LibertyCalendar";
 import styled from "@emotion/styled";
 
 const MyPage = () => {
+      const dispatch = useDispatch();
+
     const [options, setOptions] = useState("liberty-calender");
-    const dispatch = useDispatch();
-    const { posts, email } = useSelector((state) => ({
+    const { posts, email } = useSelector((state: any) => ({
         posts: state.user?.userInfo?.Posts,
         email: state.user?.userInfo?.email,
     }));
-    const averating =
-        posts?.reduce((acc, { rating }) => acc + Number(rating), 0) /
+    /**
+     * @rating 게시글의 별점
+     *
+     * 이때까지 작성한 글의 총 rating을 더해 / 전체 갯수 나눠 평균 값을 보여줌
+     */
+    const averating: number =
+        posts?.reduce((acc: any, { rating }: any) => acc + Number(rating), 0) /
         posts?.length;
-    const events = posts?.map(
-        ({ createdAt, content, rating, drink, smoke, id }) => ({
+    /**
+     * 내가 작성한 총 게시글들의 날짜와 inputs들을 변환시킴
+     */
+    const events: object[] = posts?.map(
+        ({ createdAt, content, rating, drink, smoke, id }: any) => ({
             date: createdAt?.slice(0, 10),
             title: content?.slice(0, 10),
             rating: Number(rating),
@@ -28,13 +37,13 @@ const MyPage = () => {
             length: posts?.length,
         })
     );
-    console.log(events);
+    const handleOptionChange = (e: any) => setOptions(e.target.value);
     useEffect(() => {
         dispatch({
             type: LOAD_ME,
         });
-    }, []);
-    const handleOptionChange = (e) => setOptions(e.target.value);
+    }, [dispatch]);
+
     return (
         <MypageWrap>
             {email && (

@@ -1,6 +1,5 @@
 import React from "react";
 import MainContent from "../components/MainContent";
-import Auth from "../HOC/auth";
 import MiddleSide from "../components/AppLayout/MiddleSide";
 import styled from "@emotion/styled";
 

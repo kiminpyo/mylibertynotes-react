@@ -6,22 +6,21 @@ import { useNavigate } from "react-router-dom";
 import LibertyBanner from "../components/LibertyBanner";
 import Auth from "../HOC/auth";
 import styled from "@emotion/styled";
-import Modal from "../components/Confirm/Confirm";
 import { LOAD_ME } from "../reducers/user";
 
 const Liberty = () => {
     let page = useRef(0);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [hasNextPage, setHasNextPage] = useState(false);
-    const { posts, postscount } = useSelector((state) => state?.post);
-    const [target, observerTargetEl] = useState(null);
 
+    const [target, observerTargetEl] = useState();
+
+    const { posts } = useSelector((state: any) => state?.post);
     useEffect(() => {
         dispatch({
             type: LOAD_ME,
         });
-    }, []);
+    }, [dispatch]);
     useEffect(() => {
         if (posts) {
             return;
@@ -31,27 +30,30 @@ const Liberty = () => {
                 data: 0,
             });
         }
-    }, []);
-    const onIntersect = async ([entry], observer) => {
-        if (entry.isIntersecting) {
-            // observer.unobserve(entry.target);
-            dispatch({
-                type: LOAD_POSTS,
-                data: page.current++,
-            });
-            // observer.observe(entry.target);
-        }
-    };
-    useEffect(() => {
-        let observe;
+    }, [dispatch, posts]);
+    /**
+     * 인피니티 스크롤
+     */
 
+    useEffect(() => {
+        const onIntersect = async ([entry]: any, observer: any) => {
+            if (entry.isIntersecting) {
+                // observer.unobserve(entry.target);
+                dispatch({
+                    type: LOAD_POSTS,
+                    data: page.current++,
+                });
+                // observer.observe(entry.target);
+            }
+        };
+        let observe: any;
         if (target) {
             console.log("렌더");
             observe = new IntersectionObserver(onIntersect, { threshold: 1 });
             observe.observe(target);
         }
         return () => observe && observe.disconnect();
-    }, [target]);
+    }, [target, dispatch]);
     const onCreateSelf = () => {
         return navigate("/libertyedit");
     };
@@ -60,7 +62,7 @@ const Liberty = () => {
             <LibertyWrapper>
                 <LibertyBanner />
                 <LibertyItemWrap>
-                    {posts?.map((item, i) => (
+                    {posts?.map((item: object[], i: number) => (
                         <LibertyItem item={item} key={i} />
                     ))}
                 </LibertyItemWrap>

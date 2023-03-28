@@ -19,16 +19,23 @@ import Auth from "../HOC/auth";
 const Signup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+   
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const onChangeEmail = (e) => setEmail(e.target.value);
-    const onChangePassword = (e) => setPassword(e.target.value);
-    const handleSubmit = (event) => {
+   
+    const onChangeEmail = (e: any) => setEmail(e.target.value);
+    const onChangePassword = (e: any) => setPassword(e.target.value);
+    
+    const handleSubmit = (event: any): void => {
+        if (!event) throw Error("error");
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         dispatch({
             type: SIGNUP,
-            data: { email: data.get("email"), password: data.get("password") },
+            data: {
+                email: data.get(`${email}`),
+                password: data.get(`${password}`),
+            },
         });
         alert("회원가입이 완료 되었습니다.");
         navigate("/login");

@@ -1,7 +1,6 @@
 import React from "react";
 import Introduce from "../components/Introduce";
 import Grid from "@mui/material/Grid";
-import zIndex from "@mui/material/styles/zIndex";
 import Auth from "../HOC/auth";
 
 const Intro = () => {

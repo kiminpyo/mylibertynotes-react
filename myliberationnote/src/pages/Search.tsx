@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+    NavigateFunction,
+    useLocation,
+    useNavigate,
+    useParams,
+} from "react-router-dom";
 import LibertyBanner from "../components/LibertyBanner";
 import LibertyItem from "../components/LibertyItem";
 import {
@@ -13,18 +18,29 @@ import { AxiosInstance } from "../Axios/instance";
 import requests from "../Axios/requests";
 import Auth from "../HOC/auth";
 const Search = () => {
+    const navigate = useNavigate();
+
     const { id } = useParams();
     const { state } = useLocation();
-    const navigate = useNavigate();
-    const [list, setItem] = useState([]);
+
     const observerTargetEl = useRef(null);
+    const [list, setItem] = useState([]);
+
     const [loading, setLoading] = useState(false);
+
+    /**
+     * @params 게시글 수정 페이지로 이동
+     */
+    const onCreateSelf: React.MouseEventHandler<HTMLDivElement> = (): void =>
+        navigate({
+            pathname: "/libertyedit",
+        });
+
     useEffect(() => {
         AxiosInstance.get(`${requests.fetchHashtag}/${id}`).then((res) =>
             setItem(() => res.data)
         );
-    }, []);
-    const onCreateSelf = () => navigate("/libertyedit");
+    }, [id]);
 
     return (
         <LibertyPage>

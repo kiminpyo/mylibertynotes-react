@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LOGIN } from "../reducers/user";
@@ -19,18 +19,23 @@ import Modal from "../components/Modal/Modal";
 
 const Login = () => {
     const classes = useStyles();
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const [showInfo, setShowInfo] = useState(false);
-    const { userInfo } = useSelector((state) => state?.user);
+    const { userInfo } = useSelector((state: any) => state?.user);
 
     useEffect(() => {
         if (userInfo != null) return navigate(-1);
-    }, [userInfo]);
+    }, [navigate, userInfo]);
     const onInfoHandler = () => {
         setShowInfo(() => true);
     };
-    const handleSubmit = (event) => {
+    /**
+     * 로그인
+     */
+    const handleSubmit = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         dispatch({
@@ -98,7 +103,7 @@ const Login = () => {
                                 <AuthInfo onClick={onInfoHandler} />
                             </Grid>
                             <Grid item>
-                                <Link href="/signup" variant="body">
+                                <Link href="/signup" variant="inherit">
                                     {"sign up"}
                                 </Link>
                             </Grid>
@@ -107,7 +112,7 @@ const Login = () => {
                 </Box>
                 <Grid
                     container
-                    flex
+                    display={"flex"}
                     justifyContent={"space-evenly"}
                     mt={"15px"}>
                     <Grid item>
