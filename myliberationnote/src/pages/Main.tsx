@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 
 const Main = () => {
     return (
-        <MainWrapper>
+        <MainWrapper test-id="mainPage">
             <MiddleSide />
             <MainContent />
         </MainWrapper>

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import React, { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 const Hashtag = ({ name }) => {
     const { id } = useParams();
     const navigate = useNavigate();

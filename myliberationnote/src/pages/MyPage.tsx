@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "../HOC/auth";
-import LibertyChart from "../components/LibertyChart";
+import LibertyChart from "../components/Liberty/LibertyChart";
+import LibertyStatus from "../components/Liberty/LibertyStatus";
+import LibertyCalendar from "../components/Liberty/LibertyCalendar";
+
 import { LOAD_ME } from "../reducers/user";
-import LibertyStatus from "../components/LibertyStatus";
-import LibertyCalendar from "../components/LibertyCalendar";
 import styled from "@emotion/styled";
 
 const MyPage = () => {
-      const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const [options, setOptions] = useState("liberty-calender");
     const { posts, email } = useSelector((state: any) => ({

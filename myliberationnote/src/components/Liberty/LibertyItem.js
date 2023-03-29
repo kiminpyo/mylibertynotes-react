@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Hashtag from "./Hashtag";
+import Hashtag from "../Hashtag";
 import styled from "@emotion/styled";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SmokingRooms from "@mui/icons-material/SmokingRooms";
@@ -24,36 +23,37 @@ export const LinearProgressWithLabel = (props) => {
         </Box>
     );
 };
-const LibertyItem = ({ item }) => {
+const LibertyItem = ({ post, userInfo }) => {
     const navigate = useNavigate();
-    const { userInfo } = useSelector((state) => state.user);
-    const email = item?.User?.email;
-    const { rating, drink, smoke } = item || {};
-    console.log(rating, drink);
+    const { id, content, createdAt, Hashtags } = post;
+
+    const email = post?.User?.email;
+    const { rating, drink, smoke } = post || {};
     const LinearProgressBox = styled(Box)({
         width: "80%",
         margin: "auto",
     });
 
     const onLibertyDetail = () => {
-        navigate(`/liberty/${item.id}`);
+        navigate(`/liberty/${id}`);
     };
 
     return (
         <LibertyItemWrapper>
             <LibertyItemTagWrap>
-                {item?.Hashtags?.map((tag, i) => (
+                {Hashtags?.map((tag, i) => (
                     <Hashtag key={i} {...tag} />
                 ))}
             </LibertyItemTagWrap>
             <LibertyItemContentWrapper
+                data-testid="click"
                 // className="liberty-item-content-wrap"
                 onClick={onLibertyDetail}>
                 <div style={{ width: "80%" }}>
                     {/* 내 글 일때 */}
                     {email === userInfo?.email ? <MyPostCheck /> : null}
                 </div>
-                <LibertyItemContent>{item?.content}</LibertyItemContent>
+                <LibertyItemContent>{content}</LibertyItemContent>
                 <div>
                     <LinearProgressBox>
                         <LinearProgressWithLabel
@@ -95,9 +95,7 @@ const LibertyItem = ({ item }) => {
                     {email ? (
                         <div style={{ fontSize: "0.6rem" }}>{email}</div>
                     ) : null}
-                    <LibertyItemDate>
-                        {item?.createdAt?.slice(0, 10)}
-                    </LibertyItemDate>
+                    <LibertyItemDate>{createdAt?.slice(0, 10)}</LibertyItemDate>
                 </div>
             </LibertyItemContentWrapper>
         </LibertyItemWrapper>

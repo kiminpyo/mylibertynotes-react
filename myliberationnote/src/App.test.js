@@ -1,26 +1,48 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import App from "./App";
-import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
+import { Provider, useDispatch, useSelector } from "react-redux";
 
-test("full app rendering/navigating", async () => {
-    render(<App />, { wrapper: BrowserRouter });
-    const user = userEvent.setup();
-
-    expect(screen.getByText(/hihihi/i)).toBeInTheDocument();
-});
-
-test("landing on a bad page", () => {
-    const badRoute = "/nopage";
-
-    // use <MemoryRouter> when you want to manually control the history
-    render(
-        <MemoryRouter initialEntries={[badRoute]}>
+function renderAppFunction({ path }) {
+    return render(
+        <MemoryRouter initialEntries={[path]}>
             <App />
         </MemoryRouter>
     );
+}
+const mockedUsedNavigate = jest.fn();
+jest.mock("react-redux");
+jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useNavigate: () => mockedUsedNavigate,
+}));
+describe("routing pages not using redux", () => {
+    beforeAll(() => {
+        const dispatch = jest.fn();
+        const useDispatch = jest.fn();
+        const useSelector = jest.fn();
+        useDispatch.mockImplementation(() => dispatch);
+        useSelector.mockImplementation((state) =>
+            state({
+                post: [{ id: 1 }],
+            })
+        );
+    });
+    it("routes badRoute", () => {
+        const badRoute = "/nopage";
+        const { container } = renderAppFunction({ path: badRoute });
 
-    // verify navigation to "no match" route
-    expect(screen.getByText(/nomatch/i)).toBeInTheDocument();
+        // verify navigation to "no match" route
+        expect(container).toHaveTextContent(/nomatch/);
+    });
+
+    it("routes MainPage", async () => {
+        const { getByTestId } = renderAppFunction({ path: "/" });
+        expect(getByTestId).toBeTruthy();
+    });
+    it("routes aboutPage", () => {
+        const { container } = renderAppFunction({ path: "/intro" });
+        expect(container).toHaveTextContent("INTRO");
+    });
 });

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { useTyping } from "../hooks/useTyping";
+import { useTyping } from "../../hooks/useTyping";
 
 const LibertyBanner = () => {
     const message = "오늘은 무슨 일이 있었나요?";

@@ -12,7 +12,7 @@ const Introduce = () => {
 
     return (
         <IntroContentWrap id="intro-content-wrap">
-            <IntroTitle>INTRO</IntroTitle>
+            <IntroTitle title="intro">INTRO</IntroTitle>
             <IntroContent className="intro-content">
                 살면서 마음이 정말로 편하고 좋았던 적이 얼마나 있었나? 항상
                 무언가 해야 한다는 생각에, 어떻게든 하루를 알차게 살아내야

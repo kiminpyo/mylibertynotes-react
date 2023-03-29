@@ -1,19 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { DELETE_POST, LOAD_POST_DETAIL } from "../reducers/post";
-import Auth from "../HOC/auth";
-import Hashtag from "./Hashtag";
+import { DELETE_POST, LOAD_POST_DETAIL } from "../../reducers/post";
+import Auth from "../../HOC/auth";
+import Hashtag from "./../Hashtag";
+import { LOAD_ME } from "../../reducers/user";
+import Container from "./../Container";
+
 import { Rating } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import styled from "@emotion/styled";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
-import { LOAD_ME } from "../reducers/user";
-import NoMatch from "../pages/NoMatch";
-import Loader from "./Loader";
-import Container from "./Container";
+
 const LibertyDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();

@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ADD_POST, EDIT_POST } from "../reducers/post";
-import Auth from "../HOC/auth";
+import { ADD_POST, EDIT_POST } from "../../reducers/post";
+import Auth from "../../HOC/auth";
+import Modal from "../Confirm/Confirm";
 
 import styled from "@emotion/styled";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -10,7 +11,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
 import { Rating } from "@mui/material";
-import Modal from "./Confirm/Confirm";
 
 const LibertyEdit = () => {
     const contentRef = useRef();

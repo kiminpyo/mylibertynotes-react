@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Line } from "react-chartjs-2";
-import { useTabs } from "../hooks/useTabs";
+import { useTabs } from "../../hooks/useTabs";
 import styled from "@emotion/styled";
 import {
     Chart as ChartJS,

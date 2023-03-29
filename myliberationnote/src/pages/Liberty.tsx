@@ -1,21 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import LibertyItem from "../components/LibertyItem";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_POSTS } from "../reducers/post";
 import { useNavigate } from "react-router-dom";
-import LibertyBanner from "../components/LibertyBanner";
+import LibertyBanner from "../components/Liberty/LibertyBanner";
 import Auth from "../HOC/auth";
 import styled from "@emotion/styled";
 import { LOAD_ME } from "../reducers/user";
+import LibertyItemContainer from "../components/Liberty/LiberyItemContainer";
 
 const Liberty = () => {
     let page = useRef(0);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const [target, observerTargetEl] = useState();
-
     const { posts } = useSelector((state: any) => state?.post);
+
     useEffect(() => {
         dispatch({
             type: LOAD_ME,
@@ -31,6 +29,8 @@ const Liberty = () => {
             });
         }
     }, [dispatch, posts]);
+    const [target, observerTargetEl]: [any, any] = useState();
+
     /**
      * 인피니티 스크롤
      */
@@ -62,9 +62,7 @@ const Liberty = () => {
             <LibertyWrapper>
                 <LibertyBanner />
                 <LibertyItemWrap>
-                    {posts?.map((item: object[], i: number) => (
-                        <LibertyItem item={item} key={i} />
-                    ))}
+                    <LibertyItemContainer posts={posts} />
                 </LibertyItemWrap>
                 <AddPost onClick={onCreateSelf}>+</AddPost>
                 <div ref={observerTargetEl} style={{ height: "1px" }} />

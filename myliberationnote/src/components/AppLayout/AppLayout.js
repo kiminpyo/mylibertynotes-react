@@ -29,7 +29,6 @@ const AppLayout = () => {
             </HeadContainer>
             <BackToTop id="backToTop" onClick={onClickBackToTop} />
             <Outlet />
-            {/* <Banner /> */}
         </div>
     );
 };

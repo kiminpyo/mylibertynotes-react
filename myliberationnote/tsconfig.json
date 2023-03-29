@@ -4,6 +4,7 @@
         "allowJs": true,
         "target": "ES5",
         "outDir": "./dist",
+        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "noImplicitAny": true,
         "moduleResolution": "Node",
