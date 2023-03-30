@@ -6,7 +6,7 @@ const NoMatch = ({ text }: any) => {
     const navigate: NavigateFunction = useNavigate();
     return (
         <Wrapper>
-            <NoMatchText>nomatch</NoMatchText>
+            <NoMatchText>{text ? text : "no match"}</NoMatchText>
             <Button onClick={() => navigate(-1)}>돌아가기</Button>
         </Wrapper>
     );

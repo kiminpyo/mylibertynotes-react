@@ -8,7 +8,7 @@ import {
     ModalBodyContent,
     ModalFooterWrapper,
     ModalFooterButton,
-} from "./ModalStyle";
+} from "../styles/ModalStyle";
 import useOutside from "../../hooks/useOutside";
 import Button from "../Button";
 
@@ -17,8 +17,8 @@ const Modal = ({ setShowInfo }) => {
     useOutside(ref, setShowInfo);
     return (
         <ModalWrapper ref={ref}>
-            <ModalHeaderWrapper>
-                <ModalHeaderTitle>
+            <ModalHeaderWrapper data-testid="modal">
+                <ModalHeaderTitle title="modalTitle">
                     제1조 (개인정보의 처리 목적)
                 </ModalHeaderTitle>
             </ModalHeaderWrapper>
@@ -55,7 +55,11 @@ const Modal = ({ setShowInfo }) => {
             <hr />
             <ModalFooterWrapper>
                 <ModalFooterButton>
-                    <Button onClick={() => setShowInfo(false)} text={"닫기"} />
+                    <Button
+                        onClick={() => setShowInfo(false)}
+                        text={"닫기"}
+                        data-testid="button"
+                    />
                 </ModalFooterButton>
             </ModalFooterWrapper>
         </ModalWrapper>

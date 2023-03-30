@@ -6,8 +6,13 @@ import {
     ConfirmHeaderStyle,
     ConfirmBodyStyle,
     ConfirmButtonStyle,
-} from "./style";
+} from "../styles/ConfirmStyle";
 
+export const ConfirmContainerWrapper = ({ children }) => (
+    <div style={{ width: "90%", margin: "auto", paddingTop: "1vh" }}>
+        {children}
+    </div>
+);
 export const ConfirmWrapper = ({ children }) => (
     <div style={ConfirmWrapperStyle}>{children}</div>
 );
@@ -29,8 +34,7 @@ const Confirm = ({ props }) => {
     return (
         <ConfirmProvider>
             <ConfirmContainer>
-                <div
-                    style={{ width: "90%", margin: "auto", paddingTop: "1vh" }}>
+                <ConfirmContainer.Wrapper>
                     <ConfirmContainer.Header>
                         <i className="fa-solid fa-x" />
                     </ConfirmContainer.Header>
@@ -41,13 +45,14 @@ const Confirm = ({ props }) => {
                         <ConfirmContainer.Button>확인</ConfirmContainer.Button>
                         <ConfirmContainer.Button>취소</ConfirmContainer.Button>
                     </ConfirmContainer.ButtonWrapper>
-                </div>
+                </ConfirmContainer.Wrapper>
             </ConfirmContainer>
         </ConfirmProvider>
     );
 };
 
 export const ConfirmContainer = Object.assign(ConfirmWrapper, {
+    Wrapper: ConfirmContainerWrapper,
     Header: ConfirmHeader,
     Body: ConfirmBody,
     ButtonWrapper: ConfirmButtonWrapper,

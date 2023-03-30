@@ -2,7 +2,7 @@ import produce from "../utils/produce";
 
 export const initialState = {
     loadPostDetailLoading: false,
-    loadPostDetailFailure: null,
+    loadPostDetailFailure: false,
     posts: [],
     post: {
         user: [],

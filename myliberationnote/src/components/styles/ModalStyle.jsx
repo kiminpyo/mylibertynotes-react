@@ -3,7 +3,7 @@ export const ModalWrapper = styled.div`
     animation: fadeIn 0.5s;
     border-style: groove;
     width: 80%;
-    height: 332px;
+    height: 362px;
     border-radius: 7px;
     position: absolute;
     background-color: white;
@@ -26,7 +26,7 @@ export const ModalHeaderTitle = styled.div`
     font-size: 0.9rem;
 `;
 export const ModalBodyWrapper = styled.div`
-    height: 210px;
+    height: 240px;
     padding: 5px 0px 10px 0px;
 `;
 export const ModalBodyTitle = styled.div`

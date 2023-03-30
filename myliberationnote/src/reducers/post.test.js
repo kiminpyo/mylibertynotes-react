@@ -53,7 +53,7 @@ describe("post Reducer", () => {
         const state = store.getState();
         expect(state).toEqual({
             loadPostDetailLoading: false,
-            loadPostDetailFailure: null,
+            loadPostDetailFailure: false,
             posts: [],
             post: {
                 user: [],

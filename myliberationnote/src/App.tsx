@@ -22,6 +22,7 @@ function App(): ReactJSXElement {
         <>
             <ScrollRestoration />
             <Routes>
+                {/* <Route path="/" element={<AppLayout />}> */}
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route index element={<Main />} />
@@ -32,7 +33,7 @@ function App(): ReactJSXElement {
                 <Route path="/liberty/:id" element={<LibertyDetail />} />
                 <Route path="/liberty/search/:id" element={<Search />} />
                 <Route path="*" element={<NoMatch />} />
-                {/* <Route path="/" element={<AppLayout />}></Route> */}
+                {/* </Route> */}
             </Routes>
         </>
     );

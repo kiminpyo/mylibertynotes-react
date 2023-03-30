@@ -14,7 +14,7 @@ const useOutside = (ref, handler) => {
             document.removeEventListener("mousedown", listener);
             document.removeEventListener("touchstart", listener);
         };
-    }, []);
+    }, [handler, ref]);
     return <div></div>;
 };
 

@@ -7,9 +7,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { LOG_OUT } from "../../reducers/user";
 
 const UpperSide = (userInfo) => {
+    
     const { email } = userInfo;
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const logout = () => {
         if (window.confirm("로그아웃 하실래요?")) {
             dispatch({

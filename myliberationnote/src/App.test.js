@@ -34,7 +34,7 @@ describe("routing pages not using redux", () => {
         const { container } = renderAppFunction({ path: badRoute });
 
         // verify navigation to "no match" route
-        expect(container).toHaveTextContent(/nomatch/);
+        expect(container).toHaveTextContent(/no match/);
     });
 
     it("routes MainPage", async () => {

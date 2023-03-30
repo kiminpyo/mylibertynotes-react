@@ -5,7 +5,7 @@ import { DELETE_POST, LOAD_POST_DETAIL } from "../../reducers/post";
 import Auth from "../../HOC/auth";
 import Hashtag from "./../Hashtag";
 import { LOAD_ME } from "../../reducers/user";
-import Container from "./../Container";
+import LibertyContainer from "../PageContainer";
 
 import { Rating } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -16,8 +16,10 @@ import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
 
 const LibertyDetail = () => {
     const { id } = useParams();
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const post = useSelector((state) => state.post?.post);
     const writer = useSelector((state) => state.post?.user);
     const user = useSelector((state) => state.user?.userInfo);
@@ -35,7 +37,7 @@ const LibertyDetail = () => {
             type: LOAD_POST_DETAIL,
             data: id,
         });
-    }, []);
+    }, [dispatch, id]);
     const onLibertyEdit = () => {
         navigate("/libertyedit", {
             state: {
@@ -58,9 +60,9 @@ const LibertyDetail = () => {
         } else {
             return null;
         }
-    }, [id]);
+    }, [id, dispatch, navigate]);
     return (
-        <Container
+        <LibertyContainer
             loading={loadPostDetailLoading}
             failure={loadPostDetailFailure}>
             <div className="liberty-wrapper">
@@ -125,7 +127,7 @@ const LibertyDetail = () => {
                 <section className="liberty-textarea">{post.content}</section>
                 <section>
                     <ButtonWrap>
-                        {user?.email != writer?.email ? null : (
+                        {user?.email !== writer?.email ? null : (
                             <>
                                 <CustomButton onClick={onLibertyDelete}>
                                     삭제
@@ -144,7 +146,7 @@ const LibertyDetail = () => {
                     </ButtonWrap>
                 </section>
             </div>
-        </Container>
+        </LibertyContainer>
     );
 };
 

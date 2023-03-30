@@ -2,7 +2,13 @@ import React from "react";
 import NoMatch from "../pages/NoMatch";
 import Loader from "./Loader";
 
-const Container = ({ children, loading, failure }) => {
+interface ContainerProps {
+    children: React.ReactChildren;
+    loading: boolean;
+    failure: boolean;
+}
+const PageContainer = ({ children, loading, failure }: ContainerProps) => {
+    console.log(children);
     if (loading) return <Loader />;
     return failure ? (
         <NoMatch text={"존재하지 않는 게시글입니다."} />
@@ -11,4 +17,4 @@ const Container = ({ children, loading, failure }) => {
     );
 };
 
-export default Container;
+export default PageContainer;

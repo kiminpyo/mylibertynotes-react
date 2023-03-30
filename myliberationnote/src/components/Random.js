@@ -11,14 +11,7 @@ const Random = React.memo(() => {
     return (
         <Script>
             <RandomText className="random" />
-            <div
-                style={{
-                    paddingTop: "5px",
-                    fontSize: "1rem",
-                    fontWeight: "bold",
-                }}>
-                -나의 해방일지 중-
-            </div>
+            <RandomLogo>-나의 해방일지 중-</RandomLogo>
         </Script>
     );
 });
@@ -39,4 +32,10 @@ const RandomText = styled.div`
     @media screen and (max-width: 425px) {
         font-size: 1rem;
     }
+`;
+
+const RandomLogo = styled.div`
+    padding-top: "5px";
+    font-size: "1rem";
+    font-weight: "bold";
 `;

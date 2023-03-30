@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
 import React from "react";
-
-const Button = ({ onClick, text }) => {
+interface ButtonAttribue<T> {
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
+    text: T;
+}
+const Button = ({ onClick, text }: ButtonAttribue<string>) => {
     return <CustomButton onClick={onClick}>{text}</CustomButton>;
 };
 

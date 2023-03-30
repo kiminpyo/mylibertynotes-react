@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import LibertyItem from "./LibertyItem";
+import LibertyItem from "../LibertyItem";
 
-import { USER } from "../../fixture/user";
-import { POST } from "../../fixture/post";
+import { USER } from "../../../fixture/user";
+import { POST } from "../../../fixture/post";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 const mock = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -13,7 +13,7 @@ jest.mock("react-router-dom", () => ({
 jest.mock("react-redux");
 const user = userEvent.setup();
 describe("render libertyItemComponent", () => {
-    it("renders propsData", async () => {
+    it("routes LibertyPage to postDetailPage", async () => {
         render(
             <MemoryRouter>
                 <LibertyItem post={POST} userInfo={USER} />

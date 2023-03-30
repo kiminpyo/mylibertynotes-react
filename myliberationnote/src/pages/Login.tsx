@@ -26,9 +26,10 @@ const Login = () => {
     const [showInfo, setShowInfo] = useState(false);
     const { userInfo } = useSelector((state: any) => state?.user);
 
-    useEffect(() => {
-        if (userInfo != null) return navigate(-1);
-    }, [navigate, userInfo]);
+    // useEffect(() => {
+    //     if (userInfo != null) return navigate(-1);
+    // }, [navigate, userInfo]);
+
     const onInfoHandler = () => {
         setShowInfo(() => true);
     };
@@ -100,7 +101,10 @@ const Login = () => {
                         </Button>
                         <Grid container padding={"0 5px 0 5px"}>
                             <Grid item xs>
-                                <AuthInfo onClick={onInfoHandler} />
+                                <AuthInfo
+                                    onClick={onInfoHandler}
+                                    data-testid="question"
+                                />
                             </Grid>
                             <Grid item>
                                 <Link href="/signup" variant="inherit">
