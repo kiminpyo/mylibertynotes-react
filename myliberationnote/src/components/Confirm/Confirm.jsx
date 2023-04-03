@@ -27,7 +27,12 @@ export const ConfirmButtonWrapper = ({ children }) => (
 );
 
 export const ConfirmButton = ({ children }) => {
-    return <button>{children}</button>;
+    const onSubmit = (children) => {
+        if (children.target.innerText === "확인")
+            window.location.href = "/liberty";
+        else window.history.back(0);
+    };
+    return <button onClick={onSubmit}>{children}</button>;
 };
 
 const Confirm = ({ props }) => {

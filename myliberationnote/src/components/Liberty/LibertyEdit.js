@@ -33,6 +33,7 @@ const LibertyEdit = () => {
     const removeHashtag = (e) => div.remove();
     div.addEventListener("click", removeHashtag);
     const onClickSubmit = () => {
+         
         const hashTagArr = document.querySelectorAll(".hashtag");
         for (let x of hashTagArr) {
             hashTagList.push(x.innerText);
@@ -168,7 +169,7 @@ const LibertyEdit = () => {
                     </CancelButton>
                 </ButtonWrapper>
             </section>
-            <Modal props={{ text: ["확인", "취소"] }} />
+           
         </div>
     );
 };

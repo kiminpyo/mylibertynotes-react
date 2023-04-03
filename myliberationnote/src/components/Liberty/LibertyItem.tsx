@@ -7,32 +7,21 @@ import SmokingRooms from "@mui/icons-material/SmokingRooms";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import CoffeeIcon from "@mui/icons-material/Coffee";
-export const LinearProgressWithLabel = (props) => {
-    return (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Box sx={{ minWidth: 35 }} color={props.color}>
-                {props.component}
-            </Box>
-            <Box sx={{ width: "80%" }}>
-                <BorderLinearProgress
-                    variant="determinate"
-                    {...props}
-                    color={props.barcolor}
-                />
-            </Box>
-        </Box>
-    );
-};
-const LibertyItem = ({ post, userInfo }) => {
-    const navigate = useNavigate();
-    const { id, content, createdAt, Hashtags } = post;
 
+interface Post {
+    id: number;
+    content: string;
+    createdAt: string;
+    Hashtags: object[];
+    rating?: string;
+    drink?: string;
+    smoke?: string;
+}
+const LibertyItem = ({ post, userInfo }: any) => {
+    const navigate = useNavigate();
+    const { id, content, createdAt, Hashtags }: Post = post;
     const email = post?.User?.email;
     const { rating, drink, smoke } = post || {};
-    const LinearProgressBox = styled(Box)({
-        width: "80%",
-        margin: "auto",
-    });
 
     const onLibertyDetail = () => {
         navigate(`/liberty/${id}`);
@@ -161,3 +150,23 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
     borderRadius: 5,
 }));
+export const LinearProgressWithLabel = (props: any) => {
+    return (
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ minWidth: 35 }} color={props.color}>
+                {props.component}
+            </Box>
+            <Box sx={{ width: "80%" }}>
+                <BorderLinearProgress
+                    variant="determinate"
+                    {...props}
+                    color={props.barcolor}
+                />
+            </Box>
+        </Box>
+    );
+};
+const LinearProgressBox = styled(Box)({
+    width: "80%",
+    margin: "auto",
+});

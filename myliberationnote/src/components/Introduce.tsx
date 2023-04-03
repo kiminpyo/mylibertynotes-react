@@ -3,7 +3,9 @@ import React, { useEffect } from "react";
 
 const Introduce = () => {
     useEffect(() => {
-        const introContentWrap = document.getElementById("intro-content-wrap");
+        const introContentWrap: HTMLElement | null =
+            document.getElementById("intro-content-wrap");
+        if (introContentWrap === null) throw new Error("element가 없습니다");
         introContentWrap.style.display = "none";
         setTimeout(() => {
             introContentWrap.style.display = "block";
@@ -13,7 +15,7 @@ const Introduce = () => {
     return (
         <IntroContentWrap id="intro-content-wrap">
             <IntroTitle title="intro">INTRO</IntroTitle>
-            <IntroContent className="intro-content">
+            <IntroContent className="intro-content" data-testid="introContent">
                 살면서 마음이 정말로 편하고 좋았던 적이 얼마나 있었나? 항상
                 무언가 해야 한다는 생각에, 어떻게든 하루를 알차게 살아내야
                 한다는 강박에 시달리면서도, 몸은 움직여주지 않고, 상황은 뜻대로

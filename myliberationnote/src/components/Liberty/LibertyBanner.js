@@ -5,6 +5,7 @@ import { useTyping } from "../../hooks/useTyping";
 const LibertyBanner = () => {
     const message = "오늘은 무슨 일이 있었나요?";
     const $libertyClass = ".liberty-banner-text";
+    
     useTyping(message, $libertyClass, 100);
 
     return (

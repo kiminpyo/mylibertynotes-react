@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { DELETE_POST, LOAD_POST_DETAIL } from "../../reducers/post";
 import Auth from "../../HOC/auth";
-import Hashtag from "./../Hashtag";
+import Hashtag from "../Hashtag.tsx";
 import { LOAD_ME } from "../../reducers/user";
 import LibertyContainer from "../PageContainer";
 

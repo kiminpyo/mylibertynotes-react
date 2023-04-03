@@ -2,7 +2,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import App from "./App";
 import { MemoryRouter } from "react-router-dom";
-import { Provider, useDispatch, useSelector } from "react-redux";
 
 function renderAppFunction({ path }) {
     return render(

@@ -34,7 +34,7 @@ describe("rendering LoginPage", () => {
         expect(container).toHaveTextContent("Log In");
         expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
     });
-    it("shows Modal when clicking question Mark", async () => {
+    it("shows Modal when clicking policy question Mark", async () => {
         RenderLoginPage();
         const question = screen.getByTestId("question");
         await user.click(question);

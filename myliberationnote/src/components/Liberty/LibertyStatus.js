@@ -5,7 +5,7 @@ const LibertyStatus = ({ average, total }) => {
         <LibertyStateWrap className="libertyStateWrap">
             <LibertyBubbleWrap>
                 총 글쓴 횟수는 <Bold>{total}번</Bold>이고, 마신 술은{" "}
-                <Bold>런투유</Bold>이고, 평균 하트 수는
+                <Bold>{average.toFixed(1)}병</Bold>이고, 평균 하트 수는
                 <Bold> {average?.toFixed(1)}</Bold>개입니다.
             </LibertyBubbleWrap>
         </LibertyStateWrap>

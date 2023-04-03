@@ -7,20 +7,18 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { LOG_OUT } from "../../reducers/user";
 
 const UpperSide = (userInfo) => {
-    
     const { email } = userInfo;
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    console.log(email);
     const logout = () => {
-        if (window.confirm("로그아웃 하실래요?")) {
-            dispatch({
-                type: LOG_OUT,
-            });
-            return navigate("/");
-        } else {
-            return;
-        }
+        // if (window.confirm("로그아웃 하실래요?")) {
+        dispatch({
+            type: LOG_OUT,
+        });
+        //     return navigate("/");
+        // } else return;
+        return navigate("/");
     };
     const activeStyle = ({ active }) => {
         return active ? "underline" : undefined;
@@ -64,13 +62,13 @@ const UpperSide = (userInfo) => {
                 </NavBarLeft>
             </NavBar>{" "}
             <NavBarRight className="head-navbar-right">
-                {!email ? (
+                {/* {email === undefined ? (
                     <NavStyle to="/login">Log in</NavStyle>
-                ) : (
-                    <NavStyle to="#" onClick={logout}>
-                        logout
-                    </NavStyle>
-                )}
+                ) : ( */}
+                <NavStyle to="#" onClick={logout}>
+                    logout
+                </NavStyle>
+                {/* )} */}
             </NavBarRight>
             <ReactiveHeader />
         </HeadUpperSide>

@@ -3,22 +3,24 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const MainContent = () => {
-    const onClickNegative = () => {
-        const mainTextContent = document.querySelector("div.main-text-content");
+    const onClickNavigative = () => {
+        const mainTextContent = document.querySelector(
+            "div.main-text-content"
+        ) as HTMLElement;
         mainTextContent.style.visibility = "visible";
         const mainTextPicture = document.querySelectorAll(
             ".main-text-picture > i"
         );
-        mainTextPicture.forEach((v) => (v.style.animation = "none"));
+        mainTextPicture.forEach((item: any) => (item.style.animation = "none"));
         mainTextContent.style.animation = "fadeIn 2s";
     };
     const navigate = useNavigate();
     return (
         <>
             <MainTextWrap>
-                <MainTextHead>Today's feeling</MainTextHead>
+                <MainTextHead title="mainTextTitle">Today's feeling</MainTextHead>
 
-                <MainTextPicture onClick={onClickNegative}>
+                <MainTextPicture data-testid="mainTextPicture" onClick={onClickNavigative}>
                     <MainTextPictureSide>
                         <Heart className="fa-solid fa-heart heart" />
                     </MainTextPictureSide>
@@ -26,12 +28,13 @@ const MainContent = () => {
                         <Heart className="fa-solid fa-heart-crack heart" />
                     </MainTextPictureSide>
                 </MainTextPicture>
-                <MainTextContent className="main-text-content">
+                <MainTextContent data-testid="mainTextConent" className="main-text-content">
                     들려주시겠어요?
                     <br />
                     <GoBoradButton className="fa-solid fa-circle-down go-board" />
                     <br />
                     <MainContentButton
+                        data-testid = "mainContentButton"
                         onClick={() => {
                             return navigate("/liberty");
                         }}>
