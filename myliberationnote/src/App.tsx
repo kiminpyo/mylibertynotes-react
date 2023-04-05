@@ -1,4 +1,4 @@
-import "./App.css";
+
 import React from "react";
 import "./animation.css";
 import "./fontAwesome.css";

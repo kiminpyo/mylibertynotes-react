@@ -19,7 +19,8 @@ const Wrapper = styled.div`
 `;
 const NoMatchText = styled.span`
     position: absolute;
-    font-size: 0.9rem;
+    font-family: "NotoSans";
+    font-weight: 700;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
