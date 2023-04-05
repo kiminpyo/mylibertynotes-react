@@ -1,4 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap"); */
 html,
 body {
     background-color: black;
@@ -7,12 +6,18 @@ body {
     color: white;
 }
 * {
-    /* font-family: "Gaegu", cursive; */
-    font-family: "Noto Sans KR", sans-serif;
+    font-family: "NotoSans";
+    /* font-family: "Noto Sans KR", sans-serif; */
     text-decoration: none;
     font-size: 18px;
-    font-weight: 500;
-    list-style: none;
+
+    list-style: normal;
+}
+@font-face {
+    font-family: NotoSans;
+
+    src: local("./assets/fonts/Noto+Sans+KR.otf"),
+        url("./assets/fonts/Noto+Sans+KR.woff") format("woff");
 }
 button {
     cursor: pointer;
