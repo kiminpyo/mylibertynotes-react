@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import LibertyBanner from "../components/Liberty/LibertyBanner";
 import Auth from "../HOC/auth";
 import styled from "@emotion/styled";
-import { LOAD_ME } from "../reducers/user";
+
 import LibertyItemContainer from "../components/Liberty/LiberyItemContainer";
 
 const Liberty = () => {
@@ -14,11 +14,6 @@ const Liberty = () => {
     const navigate = useNavigate();
     const { posts } = useSelector((state: any) => state?.post);
 
-    useEffect(() => {
-        dispatch({
-            type: LOAD_ME,
-        });
-    }, [dispatch]);
     useEffect(() => {
         if (posts) {
             return;
@@ -30,10 +25,6 @@ const Liberty = () => {
         }
     }, [dispatch, posts]);
     const [target, observerTargetEl]: [any, any] = useState();
-
-    /**
-     * 인피니티 스크롤
-     */
 
     useEffect(() => {
         const onIntersect = async ([entry]: any, observer: any) => {
@@ -49,7 +40,7 @@ const Liberty = () => {
         let observe: any;
         if (target) {
             console.log("렌더");
-            observe = new IntersectionObserver(onIntersect, { threshold: 1 });
+            observe = new IntersectionObserver(onIntersect, { threshold: 0.4 });
             observe.observe(target);
         }
         return () => observe && observe.disconnect();
@@ -83,10 +74,7 @@ export const LibertyWrapper = styled.div`
     }
 `;
 
-export const LibertyItemWrap = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-`;
+export const LibertyItemWrap = styled.div``;
 
 export const AddPost = styled.div`
     color: white;

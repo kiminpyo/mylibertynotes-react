@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 
 const ReactiveHeader = () => {
     const navigate = useNavigate();
-    const { userInfo } = useSelector((state) => state?.user);
+
     const onClickMenu = useCallback(() => {
         setActive((prev) => !prev);
     }, []);

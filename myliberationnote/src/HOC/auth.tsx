@@ -8,7 +8,7 @@ const Auth = (SpecificComponent: any, option: true | false | null = null) => {
         const navigate = useNavigate();
         useEffect(() => {
             AxiosInstance.get(requests.fetchAuth)
-                .then((res:any) => {
+                .then((res: any) => {
                     if (option === false) {
                         if (res.data?.email) {
                             return navigate("/");
@@ -26,7 +26,7 @@ const Auth = (SpecificComponent: any, option: true | false | null = null) => {
                 });
 
             // 로그인 권한이 필요할때,
-        }, []);
+        }, [navigate]);
 
         return <SpecificComponent />;
     };

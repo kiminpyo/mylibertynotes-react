@@ -1,25 +1,12 @@
-import styled from "@emotion/styled";
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import ReactiveHeader from "./ReactiveHeader";
-import { useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { LOG_OUT } from "../../reducers/user";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-const UpperSide = (userInfo) => {
-    const { email } = userInfo;
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    console.log(email);
-    const logout = () => {
-        // if (window.confirm("로그아웃 하실래요?")) {
-        dispatch({
-            type: LOG_OUT,
-        });
-        //     return navigate("/");
-        // } else return;
-        return navigate("/");
-    };
+import styled from "@emotion/styled";
+const UpperSide = () => {
+    const email = useSelector((state) => state.user?.userInfo);
+
     const activeStyle = ({ active }) => {
         return active ? "underline" : undefined;
     };
@@ -38,37 +25,20 @@ const UpperSide = (userInfo) => {
                             소개
                         </NavStyle>
                     </NavBarCategory>
-                    <NavBarCategory
-                    // onClick={() => {
-                    //     return navigate("/liberty");
-                    // }}
-                    >
+                    <NavBarCategory>
                         <NavStyle to="/liberty">해방</NavStyle>
                     </NavBarCategory>
-                    <NavBarCategory
-                    // className="mypage"
-                    // onClick={() => {
-                    //     if (!userInfo) {
-                    //         alert("로그인 이후에 접속이 가능해요");
-                    //         return navigate("/login");
-                    //     } else {
-                    //         navigate("/mypage");
-                    //     }
-                    //     return navigate("/mypage");
-                    // }}
-                    >
+                    <NavBarCategory>
                         <NavStyle to="/mypage"> 마이페이지</NavStyle>
                     </NavBarCategory>
                 </NavBarLeft>
             </NavBar>{" "}
-            <NavBarRight className="head-navbar-right">
-                {/* {email === undefined ? (
-                    <NavStyle to="/login">Log in</NavStyle>
-                ) : ( */}
-                <NavStyle to="#" onClick={logout}>
-                    logout
-                </NavStyle>
-                {/* )} */}
+            <NavBarRight>
+                {!email ? (
+                    <NavStyle data-testid="login" to="/login">
+                        login
+                    </NavStyle>
+                ) : undefined}
             </NavBarRight>
             <ReactiveHeader />
         </HeadUpperSide>
@@ -117,7 +87,9 @@ const NavBarLeft = styled.div`
     }
 `;
 const NavBarRight = styled.div`
+    width: 80px;
     & > div {
+        width: 100%;
         font-size: 0.7rem;
         padding: 0 10px 0 5px;
     }
@@ -130,9 +102,15 @@ const NavBarCategory = styled.div`
     cursor: pointer;
     font-size: 0.7rem;
 `;
+const NavBarLogout = styled.div`
+    font-weight: bold;
+`;
+
 const NavStyle = styled(NavLink)`
     font-size: 0.7rem;
     color: white;
     font-weight: bold;
     text-align: center;
+
+    padding: 2px;
 `;

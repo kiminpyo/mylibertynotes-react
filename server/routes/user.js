@@ -66,7 +66,14 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
                 include: [
                     {
                         model: Post,
-                        attributes: ["id"],
+                        attributes: [
+                            "id",
+                            "content",
+                            "rating",
+                            "createdAt",
+                            "drink",
+                            "smoke",
+                        ],
                     },
                 ],
             });

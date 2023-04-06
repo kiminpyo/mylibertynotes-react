@@ -6,10 +6,6 @@ const Introduce = () => {
         const introContentWrap: HTMLElement | null =
             document.getElementById("intro-content-wrap");
         if (introContentWrap === null) throw new Error("element가 없습니다");
-        introContentWrap.style.display = "none";
-        setTimeout(() => {
-            introContentWrap.style.display = "block";
-        }, 0);
     }, []);
 
     return (

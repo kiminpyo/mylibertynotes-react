@@ -4,6 +4,7 @@ import {
     LOAD_ME,
     LOAD_ME_SUCCESS,
     LOGIN,
+    LOGIN_FAILULRE,
     LOGIN_SUCCESS,
     LOG_OUT,
     SIGNUP,
@@ -19,7 +20,10 @@ function* userLogin(action) {
             data: result.data,
         });
     } catch (error) {
-        console.error(error);
+        yield put({
+            type: LOGIN_FAILULRE,
+        });
+
     }
 }
 

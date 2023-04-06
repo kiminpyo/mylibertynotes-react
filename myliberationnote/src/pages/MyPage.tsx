@@ -5,17 +5,19 @@ import LibertyChart from "../components/Liberty/LibertyChart";
 import LibertyStatus from "../components/Liberty/LibertyStatus";
 import LibertyCalendar from "../components/Liberty/LibertyCalendar";
 
-import { LOAD_ME } from "../reducers/user";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
+import { LOG_OUT } from "../reducers/user";
 
 const MyPage = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-
     const [options, setOptions] = useState("liberty-calender");
     const { posts, email } = useSelector((state: any) => ({
-        posts: state.user?.userInfo?.Posts,
-        email: state.user?.userInfo?.email,
+        posts: state.user.userInfo?.Posts,
+        email: state.user.userInfo?.email,
     }));
+    console.log(posts)
     /**
      * @rating 게시글의 별점
      *
@@ -38,12 +40,18 @@ const MyPage = () => {
             length: posts?.length,
         })
     );
+    /**
+     * 로그아웃
+     */
+    const logout = () => {
+        if (window.confirm("로그아웃?")) {
+            dispatch({
+                type: LOG_OUT,
+            });
+            return navigate("/");
+        } else return null;
+    };
     const handleOptionChange = (e: any) => setOptions(e.target.value);
-    useEffect(() => {
-        dispatch({
-            type: LOAD_ME,
-        });
-    }, [dispatch]);
 
     return (
         <MypageWrap>
@@ -52,9 +60,7 @@ const MyPage = () => {
                     {email}님의 기록
                 </h1>
             )}
-            <MypageSelect
-                name="liberty-mypage-option"
-                onChange={handleOptionChange}>
+            <MypageSelect onChange={handleOptionChange}>
                 <MypageOption value="liberty-calender">달력보기</MypageOption>
                 <MypageOption value="liberty-graph">그래프보기</MypageOption>
             </MypageSelect>
@@ -69,6 +75,7 @@ const MyPage = () => {
             ) : (
                 <LibertyCalendar events={events} />
             )}
+            <button onClick={logout}>로그아웃</button>
         </MypageWrap>
     );
 };

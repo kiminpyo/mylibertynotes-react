@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { SIGNUP } from "../reducers/user";
 import { useNavigate } from "react-router-dom";
@@ -19,13 +18,14 @@ import Auth from "../HOC/auth";
 const Signup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-   
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-   
+
     const onChangeEmail = (e: any) => setEmail(e.target.value);
     const onChangePassword = (e: any) => setPassword(e.target.value);
-    
+
+    useEffect(() => {}, []);
     const handleSubmit = (event: any): void => {
         if (!event) throw Error("error");
         event.preventDefault();
@@ -37,8 +37,6 @@ const Signup = () => {
                 password: data.get(`${password}`),
             },
         });
-        alert("회원가입이 완료 되었습니다.");
-        navigate("/login");
     };
 
     return (

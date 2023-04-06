@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { LOGIN } from "../reducers/user";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -19,31 +19,39 @@ import Modal from "../components/Modal/Modal";
 
 const Login = () => {
     const classes = useStyles();
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [showInfo, setShowInfo] = useState(false);
-    const { userInfo } = useSelector((state: any) => state?.user);
+    const { loginFailure, loginSuccess, loginLoading } = useSelector(
+        (state: any) => state.user
+    );
 
-    // useEffect(() => {
-    //     if (userInfo != null) return navigate(-1);
-    // }, [navigate, userInfo]);
-
+    useEffect(() => {
+        if (loginSuccess) return navigate("/");
+    }, [loginFailure, loginSuccess, navigate, loginLoading]);
     const onInfoHandler = () => {
         setShowInfo(() => true);
     };
     /**
      * 로그인
      */
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        dispatch({
-            type: LOGIN,
-            data: { email: data.get("email"), password: data.get("password") },
-        });
-    };
+
+    const handleSubmit = useCallback(
+        (event: any) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            dispatch({
+                type: LOGIN,
+                data: {
+                    email: data.get("email"),
+                    password: data.get("password"),
+                },
+            });
+        },
+        [dispatch]
+    );
+
     return (
         <div style={{ backgroundColor: "black", height: "100vh" }}>
             <Container component="main" maxWidth="xs">
@@ -91,12 +99,15 @@ const Login = () => {
                             size="small"
                             color="secondary"
                         />
+                        {loginFailure ? (
+                            <FailMessage>실패</FailMessage>
+                        ) : undefined}
                         <Button
                             color="secondary"
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}>
+                            sx={{ mt: 1, mb: 2 }}>
                             Log In
                         </Button>
                         <Grid container padding={"0 5px 0 5px"}>
@@ -107,7 +118,7 @@ const Login = () => {
                                 />
                             </Grid>
                             <Grid item>
-                                <Link href="/signup" variant="inherit">
+                                <Link to="/signup" style={{ color: "white " }}>
                                     {"sign up"}
                                 </Link>
                             </Grid>
@@ -199,7 +210,6 @@ const useStyles = makeStyles((theme) => ({
 const SocialButton = styled.button`
     width: 44px;
     height: 44px;
-
     align-items: center;
     justify-content: center;
     border: 0;
@@ -207,7 +217,10 @@ const SocialButton = styled.button`
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
     cursor: pointer;
 `;
-
+const FailMessage = styled.div`
+    text-align: center;
+    color: red;
+`;
 const AuthInfo = styled.div`
     border-radius: 50%;
     font-size: 0.9rem;

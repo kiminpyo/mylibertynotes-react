@@ -5,7 +5,7 @@ import LibertyItem from "./LibertyItem";
 const LibertyItemContainer = ({ posts }) => {
     const { userInfo } = useSelector((state) => state.user);
     return (
-        <div>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
             {posts.map((post) => (
                 <LibertyItem post={post} userInfo={userInfo} />
             ))}

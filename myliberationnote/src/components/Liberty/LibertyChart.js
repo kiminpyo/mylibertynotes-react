@@ -93,8 +93,7 @@ const LibertyChart = ({ events }) => {
                 },
                 display: true,
 
-                // suggestedMin: 2,
-                // suggestedMax: 5,
+               
             },
         },
     };
