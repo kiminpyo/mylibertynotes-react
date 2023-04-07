@@ -96,21 +96,8 @@ Link {
 }
 
 /* 해방 create 페이지 */
-.liberty-wrapper {
-    text-align: center;
-    width: 90%;
-    margin: auto;
-}
 .liberty-date {
-    text-align: center;
     font-size: 2rem;
-}
-
-.liberty-rating,
-.liberty-rating > span > span {
-    display: flex;
-    justify-content: space-around;
-    color: red;
 }
 
 /* 만든 태그 */

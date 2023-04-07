@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { useTyping } from "../hooks/useTyping";
-import { script } from "../store/dummyScript";
+import { script } from "../utils/dummyScript";
 const Random = React.memo(() => {
     const randonNum = Math.floor(
         Math.random() * script[script.length - 1].id + 1

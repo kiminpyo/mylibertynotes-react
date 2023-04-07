@@ -7,19 +7,11 @@ import SmokingRooms from "@mui/icons-material/SmokingRooms";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import CoffeeIcon from "@mui/icons-material/Coffee";
+import { PostData } from "../../@types/Post";
 
-interface Post {
-    id: number;
-    content: string;
-    createdAt: string;
-    Hashtags: object[];
-    rating?: string;
-    drink?: string;
-    smoke?: string;
-}
 const LibertyItem = ({ post, userInfo }: any) => {
     const navigate = useNavigate();
-    const { id, content, createdAt, Hashtags }: Post = post;
+    const { id, content, createdAt, Hashtags }: PostData = post;
     const email = post?.User?.email;
     const { rating, drink, smoke } = post || {};
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ReducerState, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "../HOC/auth";
 import LibertyChart from "../components/Liberty/LibertyChart";
@@ -8,16 +8,15 @@ import LibertyCalendar from "../components/Liberty/LibertyCalendar";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { LOG_OUT } from "../reducers/user";
+import MyPageHeader from "../components/MyPageHeader";
 
+import { PostData } from "../@types/Post";
 const MyPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [options, setOptions] = useState("liberty-calender");
-    const { posts, email } = useSelector((state: any) => ({
-        posts: state.user.userInfo?.Posts,
-        email: state.user.userInfo?.email,
-    }));
-    console.log(posts)
+    const posts = useSelector((state: any) => state.user.userInfo?.Posts);
+    console.log(posts);
     /**
      * @rating 게시글의 별점
      *
@@ -26,11 +25,13 @@ const MyPage = () => {
     const averating: number =
         posts?.reduce((acc: any, { rating }: any) => acc + Number(rating), 0) /
         posts?.length;
+
     /**
      * 내가 작성한 총 게시글들의 날짜와 inputs들을 변환시킴
      */
-    const events: object[] = posts?.map(
-        ({ createdAt, content, rating, drink, smoke, id }: any) => ({
+
+    const events: PostData[] = posts?.map(
+        ({ createdAt, content, rating, drink, smoke, id }: PostData) => ({
             date: createdAt?.slice(0, 10),
             title: content?.slice(0, 10),
             rating: Number(rating),
@@ -55,11 +56,7 @@ const MyPage = () => {
 
     return (
         <MypageWrap>
-            {email && (
-                <h1 style={{ fontSize: "0.7rem", textAlign: "center" }}>
-                    {email}님의 기록
-                </h1>
-            )}
+            <MyPageHeader />
             <MypageSelect onChange={handleOptionChange}>
                 <MypageOption value="liberty-calender">달력보기</MypageOption>
                 <MypageOption value="liberty-graph">그래프보기</MypageOption>
@@ -75,7 +72,7 @@ const MyPage = () => {
             ) : (
                 <LibertyCalendar events={events} />
             )}
-            <button onClick={logout}>로그아웃</button>
+            <MyPageLogout onClick={logout}>로그아웃</MyPageLogout>
         </MypageWrap>
     );
 };
@@ -90,12 +87,18 @@ const MypageWrap = styled.div`
     color: white;
 `;
 const MypageSelect = styled.select`
-    margin: 10px 0 10px 0;
     color: white;
     background-color: black;
-    padding: 2px;
     border-radius: 10px;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 `;
 
 const MypageOption = styled.option``;
+
+const MyPageLogout = styled.div`
+    cursor: pointer;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+`;

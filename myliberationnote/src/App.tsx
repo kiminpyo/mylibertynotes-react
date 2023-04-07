@@ -11,7 +11,7 @@ import Search from "./pages/Search";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import NoMatch from "./pages/NoMatch";
-import LibertyDetail from "./components/Liberty/LibertyDetail";
+import LibertyDetail from "./pages/LibertyDetail";
 import LibertyEdit from "./components//Liberty/LibertyEdit";
 import AppLayout from "./components/AppLayout/AppLayout";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";

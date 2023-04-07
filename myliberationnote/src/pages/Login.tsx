@@ -190,7 +190,7 @@ const Login = () => {
 
 export default Auth(Login, false);
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         "& .MuiFilledInput-root": {
             backgroundColor: "rgb(255, 255, 255)",
@@ -224,10 +224,11 @@ const FailMessage = styled.div`
 const AuthInfo = styled.div`
     border-radius: 50%;
     font-size: 0.9rem;
-    padding: 1px 9px 1px 9px;
+    padding: 3px 10px 0px 10px;
+
     display: inline-block;
     color: white;
-    background-color: #52495799;
+    background-color: #ffffff4e;
     cursor: pointer;
     ::after {
         content: "?";

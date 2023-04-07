@@ -13,12 +13,10 @@ import styled from "@emotion/styled";
 import { AxiosInstance } from "../Axios/instance";
 import requests from "../Axios/requests";
 import Auth from "../HOC/auth";
-import { useDispatch } from "react-redux";
-import { LOAD_ME } from "../reducers/user";
 
 const Search = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+
 
     const { id } = useParams();
     const { state } = useLocation();
@@ -26,15 +24,12 @@ const Search = () => {
     const observerTargetEl = useRef(null);
     const [list, setList] = useState([]);
 
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         AxiosInstance.get(`${requests.fetchHashtag}/${id}`).then((res) =>
             setList(() => res.data)
         );
-        dispatch({
-            type: LOAD_ME,
-        });
+      
     }, [id]);
     /**
      * @params 게시글 수정 페이지로 이동
@@ -58,9 +53,7 @@ const Search = () => {
                 </LibertyItemWrap>
                 <AddPost onClick={onCreateSelf}>+</AddPost>
                 <div>
-                    {loading
-                        ? "로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중로딩중"
-                        : undefined}
+                  
                 </div>
                 <div ref={observerTargetEl} />
             </LibertyWrapper>
