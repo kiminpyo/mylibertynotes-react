@@ -17,13 +17,16 @@ const LibertyEdit = () => {
     const { state } = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const [editRating, setEditRating] = useState(state?.rating || 0);
     const [editDrink, setEditDrink] = useState(state?.drink || 0);
     const [editSmoke, setEditSmoke] = useState(state?.smoke || 0);
     const [editContent, setEditContent] = useState(state?.content || "");
+  const [emptyMessage, setEmptyMessage] = useState(false);
     const [hashtag, setHashtag] = useState("");
-    const [emptyMessage, setEmptyMessage] = useState(false);
+  
     const today = new Date().toISOString().slice(0, 10);
+
     const input = document.getElementsByClassName("input");
     const hashtagListWrap = document.querySelector(".hashtag-list-wrap");
     const div = document.createElement("div");
@@ -32,8 +35,7 @@ const LibertyEdit = () => {
     const hashTagList = [];
     const removeHashtag = (e) => div.remove();
     div.addEventListener("click", removeHashtag);
-    const onClickSubmit = () => {
-         
+    const onClickSubmit = () => {    
         const hashTagArr = document.querySelectorAll(".hashtag");
         for (let x of hashTagArr) {
             hashTagList.push(x.innerText);
@@ -63,7 +65,7 @@ const LibertyEdit = () => {
         e.preventDefault();
         if (divLength >= 3) return alert("개시글은 3개까지만!");
         if (hashtag.length >= 20) return alert("20자 미만으로");
-        if (hashtag.match(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/gi) || hashtag.trim() == "")
+        if (hashtag.match(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/gi) || hashtag.trim() === "")
             return setEmptyMessage(true);
         div.innerText = hashtag;
         hashtagListWrap.append(div);
@@ -185,7 +187,6 @@ const StyledHeart = styled(Rating)({
         color: "#ff3d47",
     },
 });
-const StyledSmoke = styled(Rating)({});
 const ButtonWrapper = styled.div`
     width: 100%;
     text-align: center;

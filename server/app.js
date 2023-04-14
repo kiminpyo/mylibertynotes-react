@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(
         cors({
             /* 쿠키 관련  */
-            origin: ["http://localhost:3000", "https://mylibertynotes.site"],
+            origin: ["http://localhost:5000", "https://mylibertynotes.site"],
             credentials: true,
         })
     );
@@ -70,7 +70,7 @@ app.use(
             secure: false,
             domain:
                 // process.env.NODE_ENV === "production" && ".mylibertynotes.site",
-                process.env.NODE_ENV === "production" && "localhost:3000",
+                process.env.NODE_ENV === "production" && "localhost:5000",
         },
     })
 );

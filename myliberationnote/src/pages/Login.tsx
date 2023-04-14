@@ -23,6 +23,7 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const [showInfo, setShowInfo] = useState(false);
+
     const { loginFailure, loginSuccess, loginLoading } = useSelector(
         (state: any) => state.user
     );
@@ -54,7 +55,7 @@ const Login = () => {
 
     return (
         <div style={{ backgroundColor: "black", height: "100vh" }}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" data-testid="outside">
                 <CssBaseline />
                 <Box
                     sx={{

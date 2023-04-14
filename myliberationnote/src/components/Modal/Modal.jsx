@@ -12,21 +12,7 @@ import {
 import useOutside from "../../hooks/useOutside";
 import Button from "../Button";
 
-const Modal = ({ setShowInfo }) => {
-    const ref = useRef(null);
-    useOutside(ref, setShowInfo);
-    return (
-        <ModalWrapper ref={ref}>
-            <ModalHeaderWrapper data-testid="modal">
-                <ModalHeaderTitle title="modalTitle">
-                    제1조 (개인정보의 처리 목적)
-                </ModalHeaderTitle>
-            </ModalHeaderWrapper>
-            <hr />
-            <ModalBodyWrapper>
-                <ModalBodyTitle>공지사항</ModalBodyTitle>
-                <ModalBodyContent>
-                    '나의 해방일지'는 다음의 목적을 위하여 최소한의 개인정보를
+const Content = `     '나의 해방일지'는 다음의 목적을 위하여 최소한의 개인정보를
                     수집하여 처리합니다. 처리하고 있는 개인정보는 다음의 목적
                     이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는
                     경우에는 개인정보 보호법 제18조에 따라 별도의 동의를 받는 등
@@ -49,17 +35,26 @@ const Modal = ({ setShowInfo }) => {
                     없도록 가명처리하여 통계작성, 과학적 연구, 공익적 기록보존
                     등을 위하여 처리할 수 있습니다. 이때 가명정보는 재식별되지
                     않도록 분리하여 별도 저장·관리하고 필요한 기술적·관리적
-                    보호조치를 취합니다.
-                </ModalBodyContent>
+                    보호조치를 취합니다.`;
+const Modal = ({ setShowInfo }) => {
+    const ref = useRef(null);
+    useOutside(ref, setShowInfo);
+    return (
+        <ModalWrapper ref={ref}>
+            <ModalHeaderWrapper data-testid="modal">
+                <ModalHeaderTitle title="modalTitle">
+                    제1조 (개인정보의 처리 목적)
+                </ModalHeaderTitle>
+            </ModalHeaderWrapper>
+            <hr />
+            <ModalBodyWrapper>
+                <ModalBodyTitle>공지사항</ModalBodyTitle>
+                <ModalBodyContent>{Content}</ModalBodyContent>
             </ModalBodyWrapper>
             <hr />
             <ModalFooterWrapper>
                 <ModalFooterButton>
-                    <Button
-                        onClick={() => setShowInfo(false)}
-                        text={"닫기"}
-                        data-testid="button"
-                    />
+                    <Button onClick={() => setShowInfo(false)} text={"닫기"} />
                 </ModalFooterButton>
             </ModalFooterWrapper>
         </ModalWrapper>

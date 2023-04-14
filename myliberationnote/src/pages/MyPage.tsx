@@ -22,9 +22,12 @@ const MyPage = () => {
      *
      * 이때까지 작성한 글의 총 rating을 더해 / 전체 갯수 나눠 평균 값을 보여줌
      */
-    const averating: number =
-        posts?.reduce((acc: any, { rating }: any) => acc + Number(rating), 0) /
-        posts?.length;
+    const average: number | null = posts
+        ? posts?.reduce(
+              (acc: any, { rating }: any) => acc + Number(rating),
+              0
+          ) / posts?.length
+        : null;
 
     /**
      * 내가 작성한 총 게시글들의 날짜와 inputs들을 변환시킴
@@ -63,10 +66,7 @@ const MyPage = () => {
             </MypageSelect>
             {options === "liberty-graph" ? (
                 <>
-                    <LibertyStatus
-                        total={events?.length}
-                        average={averating ? averating : null}
-                    />
+                    <LibertyStatus total={events?.length} average={average} />
                     <LibertyChart events={events} />
                 </>
             ) : (

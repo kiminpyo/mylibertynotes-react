@@ -5,7 +5,11 @@ interface ButtonAttribue<T> {
     text: T;
 }
 const Button = ({ onClick, text }: ButtonAttribue<string>) => {
-    return <CustomButton onClick={onClick}>{text}</CustomButton>;
+    return (
+        <CustomButton data-testid="button" onClick={onClick}>
+            {text}
+        </CustomButton>
+    );
 };
 
 export default Button;

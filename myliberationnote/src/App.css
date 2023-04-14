@@ -15,8 +15,9 @@ body {
 }
 @font-face {
     font-family: NotoSans;
-    src: local("./assets/fonts/Noto+Sans+KR.otf"),
-        url("./assets/fonts/Noto+Sans+KR.woff") format("woff");
+    src: url("./assets/fonts/Noto+Sans+KR.woff2") format("woff2"),
+        url("./assets/fonts/Noto+Sans+KR.woff") format("woff"),
+        url("./assets/fonts/Noto+Sans+KR.otf") format("truetype");
 }
 button {
     cursor: pointer;

@@ -2,17 +2,30 @@ import configureStore from "redux-mock-store";
 
 import { posts } from "../fixture/posts";
 import { initialState } from "./post";
+import thunk from "redux-thunk";
 
-const middlewares = [];
+const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
-
+const store = mockStore(initialState);
 describe("post Reducer", () => {
-    const store = mockStore(initialState);
     beforeEach(() => {
         const actions = store.getState();
         expect(actions).toEqual(initialState);
     });
-    it("init posts", () => {
+    it("inits state", () => {
+        const state = store.getState();
+        expect(state).toEqual({
+            loadPostDetailLoading: false,
+            loadPostDetailFailure: false,
+            posts: [],
+            post: {
+                user: [],
+                hashtag: [],
+            },
+            postscount: undefined,
+        });
+    });
+    it("inits posts", () => {
         const addPost = () => ({
             type: "addPost",
             posts,
@@ -24,7 +37,7 @@ describe("post Reducer", () => {
             posts,
         });
     });
-    it("init user & hashtag in post object", () => {
+    it("inits user & hashtag in post object", () => {
         const initialState = {
             post: {
                 user: [],
@@ -36,7 +49,7 @@ describe("post Reducer", () => {
             type: "addPost",
             post: {
                 user: [{ id: 1, nickname: "devkim" }],
-                hashtage: [],
+                hashtag: [],
             },
         });
         store.dispatch(addPost());
@@ -45,21 +58,8 @@ describe("post Reducer", () => {
             type: "addPost",
             post: {
                 user: [{ id: 1, nickname: "devkim" }],
-                hashtage: [],
-            },
-        });
-    });
-    it("init state", () => {
-        const state = store.getState();
-        expect(state).toEqual({
-            loadPostDetailLoading: false,
-            loadPostDetailFailure: false,
-            posts: [],
-            post: {
-                user: [],
                 hashtag: [],
             },
-            postscount: undefined,
         });
     });
 });

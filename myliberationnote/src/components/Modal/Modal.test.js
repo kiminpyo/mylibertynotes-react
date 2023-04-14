@@ -3,8 +3,8 @@ import Modal from "./Modal";
 
 describe("render Modal", () => {
     it("shows Modal", () => {
-        const { container, queryByRole } = render(<Modal />);
-        expect(container).toHaveTextContent("제1조");
+        const { container } = render(<Modal />);
+        expect(container).toHaveTextContent(/제1조/i);
         expect(container).toHaveTextContent("공지사항");
         expect(container).toHaveTextContent("나의 해방일지");
     });
